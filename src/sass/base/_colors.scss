@@ -1,0 +1,44 @@
+$bgColor: (
+  'main': #ffffff,
+  'header': #000000,
+  'footer': #f7f7f7,
+);
+
+@function get-bgColor($key) {
+  @return map-get($bgColor, $key);
+}
+
+$textColor: (
+  'main': #000000,
+  'accent': #ff6b08,
+  'light': #ffffff,
+  'footer': #545454,
+  'notify': #ff001b,
+);
+
+@function get-textColor($key) {
+  @return map-get($textColor, $key);
+}
+
+$svgColor: (
+  'cinefilm': #818181,
+  'loupe': #ffffff,
+  'heart': #ff6b08,
+  'close-cross': #000000,
+);
+
+@function get-svgColor($key) {
+  @return map-get($svgColor, $key);
+}
+
+$navElColor: (
+  'button-primary': #ff6b01,
+  'button-secondary': #ffffff,
+  'button-lightbox': #000000,
+  'pagination-bgc-arrow-box': #f7f7f7,
+  'pagination-bgc-selected-page-box': #ff6b08,
+);
+
+@function get-navElColor($key) {
+  @return map-get($navElColor, $key);
+}
