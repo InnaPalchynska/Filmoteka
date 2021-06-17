@@ -34,7 +34,7 @@
 
 .movie-info {
   padding-top: 10px;
-  font-size: 12px;
+  font-size: getFont-size__tab('name-film');
 }
 
 .movie-info__title {
@@ -43,8 +43,7 @@
 }
 
 .movie-info__details {
-  //   color: get-textColor('accent');
-  color: #ff6b08;
+  color: get-textColor('accent');
 }
 
 .movie-info__genres {
