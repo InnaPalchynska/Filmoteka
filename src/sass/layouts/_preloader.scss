@@ -1,69 +1,62 @@
-.preloader {
-  /*фиксированное позиционирование*/
+.js-preloader {
   position: fixed;
-  /* координаты положения */
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  /* фоновый цвет элемента */
-  background: #e0e0e0;
-  /* размещаем блок над всеми элементами на странице (это значение должно быть больше, чем у любого другого позиционированного элемента на странице) */
+  top: 50%;
+  right: 50%;
   z-index: 1001;
 }
 
-.preloader__row {
-  position: relative;
-  top: 50%;
-  left: 50%;
-  width: 70px;
-  height: 70px;
-  margin-top: -35px;
-  margin-left: -35px;
-  text-align: center;
-  animation: preloader-rotate 2s infinite linear;
-}
-
-.preloader__item {
-  position: absolute;
+.lds-ellipsis {
   display: inline-block;
-  top: 0;
-  background-color: #337ab7;
-  border-radius: 100%;
-  width: 35px;
-  height: 35px;
-  animation: preloader-bounce 2s infinite ease-in-out;
+  position: relative;
+  width: 80px;
+  height: 80px;
 }
-
-.preloader__item:last-child {
-  top: auto;
-  bottom: 0;
-  animation-delay: -1s;
+.lds-ellipsis div {
+  position: absolute;
+  top: 33px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: get-textColor('accent');
+  animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
-
-@keyframes preloader-rotate {
-  100% {
-    transform: rotate(360deg);
-  }
+.lds-ellipsis div:nth-child(1) {
+  left: 8px;
+  animation: lds-ellipsis1 0.6s infinite;
 }
-
-@keyframes preloader-bounce {
-
-  0%,
-  100% {
+.lds-ellipsis div:nth-child(2) {
+  left: 8px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(3) {
+  left: 32px;
+  animation: lds-ellipsis2 0.6s infinite;
+}
+.lds-ellipsis div:nth-child(4) {
+  left: 56px;
+  animation: lds-ellipsis3 0.6s infinite;
+}
+@keyframes lds-ellipsis1 {
+  0% {
     transform: scale(0);
   }
-
-  50% {
+  100% {
     transform: scale(1);
   }
 }
-
-.loaded_hiding .preloader {
-  transition: 0.3s opacity;
-  opacity: 0;
+@keyframes lds-ellipsis3 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0);
+  }
 }
-
-.loaded .preloader {
-  display: none;
+@keyframes lds-ellipsis2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(24px, 0);
+  }
 }
