@@ -26,6 +26,7 @@
     "sass": "^1.32.8"
   },
   "dependencies": {
-    "basiclightbox": "^5.0.4"
+    "basiclightbox": "^5.0.4",
+    "normalize.css": "^8.0.1"
   }
 }

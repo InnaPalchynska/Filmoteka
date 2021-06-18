@@ -5,6 +5,7 @@ import * as basicLightbox from 'basiclightbox';
 import MoviesApiService from './js/apiService.js';
 import getRefs from './js/get-refs';
 import movieCardTpl from './templates/movie-card.hbs';
+import 'normalize.css';
 
 const refs = getRefs();
 const moviesApiService = new MoviesApiService();
