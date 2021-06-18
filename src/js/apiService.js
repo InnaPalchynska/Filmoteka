@@ -1,4 +1,5 @@
-const BASE_URL = 'https://api.themoviedb.org/3/search/movie';
+const BASE_URL = 'https://api.themoviedb.org/3/';
+const API_KEY = 'c27b75f2098a52933ae8847a9b55ad4e';
 
 export default class MoviesApiService {
   constructor() {
@@ -6,16 +7,26 @@ export default class MoviesApiService {
     this.page = 1;
   }
 
+  fetchPopularMovies() {
+    const searchParams = new URLSearchParams({
+      api_key: API_KEY,
+      page: this.page,
+    });
+
+    const url = `${BASE_URL}movie/popular?${searchParams}`;
+
+    return fetch(url).then(response => response.json());
+  }
+
+  // fetchMoviesBySearchQuery
   fetchMovies() {
     const searchParams = new URLSearchParams({
-      api_key: 'c27b75f2098a52933ae8847a9b55ad4e',
+      api_key: API_KEY,
       query: this.searchQuery,
       page: this.page,
     });
 
-    return fetch(`${BASE_URL}/?${searchParams}`).then(response =>
-      response.json(),
-    );
+    return fetch(`${BASE_URL}search/movie?${searchParams}`).then(response => response.json());
   }
 
   incrementPage() {

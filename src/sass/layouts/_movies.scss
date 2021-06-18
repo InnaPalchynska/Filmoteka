@@ -1,0 +1,56 @@
+.movies {
+  @media screen and (min-width: 768px) {
+    padding-top: 60px;
+  }
+}
+
+.movies-list {
+  @media screen and (min-width: 768px) {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: -30px;
+    margin-left: -30px;
+  }
+}
+
+.movies-list__item {
+  margin-top: 20px;
+
+  @media screen and (min-width: 768px) {
+    flex-basis: calc(100% / 2 - 30px);
+    margin-top: 30px;
+    margin-left: 30px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    flex-basis: calc(100% / 3 - 30px);
+  }
+}
+
+.poster-thumb {
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.movie-info {
+  padding-top: 10px;
+  font-size: getFont-size__tab('name-film');
+}
+
+.movie-info__title {
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.movie-info__details {
+  color: get-textColor('accent');
+}
+
+.movie-info__genres {
+  padding-right: 4px;
+  border-right: 1px solid #ff6b08;
+}
+
+.movie-info__year {
+  padding-left: 4px;
+}
