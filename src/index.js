@@ -1,11 +1,15 @@
 import './sass/main.scss';
+import 'normalize.css';
+
+import preloader from './js/preloader.js';
 // это образец для импортирования ваших js фич
 // import { } from './js/.....
 import * as basicLightbox from 'basiclightbox';
 import MoviesApiService from './js/apiService.js';
 import getRefs from './js/get-refs';
 import movieCardTpl from './templates/movie-card.hbs';
-import 'normalize.css';
+
+preloader();
 
 const refs = getRefs();
 const moviesApiService = new MoviesApiService();
