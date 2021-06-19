@@ -1,5 +1,6 @@
 import Pagination from 'tui-pagination';
 import MoviesApiService from './apiService';
+import renderPopularMoviesGrid from '../index';
 // import fetchPopularMovies from '../index';
 
 const moviesApiService = new MoviesApiService();
@@ -23,7 +24,7 @@ const pagination = new Pagination(container, options);
 
 function showPopularMovies(currentPage) {
   moviesApiService.setPage(currentPage);
-  moviesApiService.fetchPopularMovies();
+  renderPopularMoviesGrid();
 }
 
 pagination.on('afterMove', function (evt) {
