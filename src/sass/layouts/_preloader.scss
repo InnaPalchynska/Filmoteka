@@ -1,7 +1,8 @@
 .js-preloader {
-  position: fixed;
-  top: 50%;
-  right: 50%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  margin-top: 25vh;
   z-index: 1001;
 }
 

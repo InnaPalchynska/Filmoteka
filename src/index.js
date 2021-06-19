@@ -15,15 +15,23 @@ import movieCardTpl from './templates/movie-card.hbs';
 //   .then(movies => console.log(movies))
 //   .catch(console.error());
 
+window.onload = function () {
+  refs.moviesList.innerHTML = '';
+  refs.preloader.classList.remove('visually-hidden');
+  window.setTimeout(function () {
+    refs.preloader.classList.add('visually-hidden');
+  }, 500);
+};
+
 const refs = getRefs();
 const moviesApiService = new MoviesApiService();
 
-refs.moviesList.innerHTML = '';
-refs.preloader.classList.remove('visually-hidden');
-setTimeout(function () {
-  refs.preloader.classList.add('visually-hidden');
-  renderPopularMoviesGrid().catch(error => console.log(error));
-}, 2000);
+// refs.moviesList.innerHTML = '';
+// refs.preloader.classList.remove('visually-hidden');
+// setTimeout(function () {
+// refs.preloader.classList.add('visually-hidden');
+renderPopularMoviesGrid().catch(error => console.log(error));
+// }, 500);
 
 async function renderPopularMoviesGrid() {
   const {
