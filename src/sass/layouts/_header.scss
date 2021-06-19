@@ -28,7 +28,7 @@ header{
 
 .logo__text{
 
-    @media screen and (max-width: 767px){
+    @media screen and (max-width: $max-mobile){
         @include is-hidden;
     }
     font-size: getFont-size__tab('logo-title');
@@ -53,3 +53,24 @@ header{
     }
 }
 
+.search-field{
+    font-size:getFont-size__mob('search') ;
+}
+
+.search-field__input{
+    width: 280px;
+    border-top: transparent;
+    border-left: transparent;
+    border-right: transparent;
+    border: 0.5px solid #FFFFFF;
+    padding-bottom: 4px;
+    margin-bottom: 20px;
+
+    @media screen and (min-width: $tablet){
+        width: 336px;
+    }
+}
+
+.search-field__error-text{
+color: get-textColor('notify');
+}
