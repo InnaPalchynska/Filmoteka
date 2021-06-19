@@ -1,4 +1,5 @@
 import './sass/main.scss';
+import './js/pagination.js';
 // это образец для импортирования ваших js фич
 // import { } from './js/.....
 import * as basicLightbox from 'basiclightbox';
