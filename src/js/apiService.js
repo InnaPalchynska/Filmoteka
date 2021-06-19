@@ -18,6 +18,16 @@ export default class MoviesApiService {
     return fetch(url).then(response => response.json());
   }
 
+  fetchGenresList() {
+    const searchParams = new URLSearchParams({
+      api_key: API_KEY,
+    });
+
+    const url = `${BASE_URL}/genre/movie/list?${searchParams}`;
+
+    return fetch(url).then(response => response.json());
+  }
+
   // fetchMoviesBySearchQuery
   fetchMovies() {
     const searchParams = new URLSearchParams({

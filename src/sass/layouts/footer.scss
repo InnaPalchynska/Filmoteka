@@ -1,0 +1,32 @@
+.footer__title {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  font-size: getFont-size__desk('text-footer');
+  color: get-textColor('footer');
+}
+
+.footer__link {
+  color: get-textColor('footer');
+}
+
+
+.footer__link:hover,
+.footer__link:focus{
+  color: orangered;
+}
+
+
+.footer__box {
+  display: block;
+  align-items: center;
+  text-align: center;
+  line-height: 19px;
+ 
+}
+
+.footer{
+  background: get-bgColor('footer');
+}
