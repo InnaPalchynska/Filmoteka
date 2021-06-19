@@ -34,7 +34,7 @@ const moviesApiService = new MoviesApiService();
 renderPopularMoviesGrid().catch(error => console.log(error));
 // }, 500);
 
-async function renderPopularMoviesGrid() {
+export default async function renderPopularMoviesGrid() {
   const {
     results: movies,
     page,
