@@ -1,4 +1,5 @@
 import './sass/main.scss';
+import './js/pagination.js';
 import 'normalize.css';
 
 // это образец для импортирования ваших js фич
