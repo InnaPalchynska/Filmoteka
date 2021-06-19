@@ -1,5 +1,6 @@
 import Pagination from 'tui-pagination';
 import MoviesApiService from './apiService';
+// import fetchPopularMovies from '../index';
 
 const moviesApiService = new MoviesApiService();
 
@@ -9,7 +10,7 @@ const options = {
   itemsPerPage: 1,
   visiblePages: 5,
   page: 1,
-  centerAlign: false,
+  centerAlign: true,
   firstItemClassName: 'tui-first-child',
   lastItemClassName: 'tui-last-child',
 };
@@ -20,22 +21,15 @@ const smoothScrool = function () {
 
 const pagination = new Pagination(container, options);
 
-function chooseRender(currentPage) {
+function showPopularMovies(currentPage) {
   moviesApiService.setPage(currentPage);
-  // if (MoviesApiService.searchQuery === '') {
   moviesApiService.fetchPopularMovies();
-  // hideSpinner();
-  // } else {
-  // renderSearch();
-  // hideSpinner();
-  // }
 }
 
 pagination.on('afterMove', function (evt) {
-  // showSpinner();
   smoothScrool();
   let currentPage = evt.page;
-  chooseRender(currentPage);
+  showPopularMovies(currentPage);
 });
 
 export { pagination };
