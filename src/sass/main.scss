@@ -1,6 +1,5 @@
-@import './base/reset';
-@import './base/colors';
-@import './base/fonts';
-@import './base/typography';
+@import './base/main';
+@import './abstracts/main';
 @import './layouts/main';
 @import './components/main';
+@import './layouts/main';
