@@ -17,16 +17,37 @@ const moviesApiService = new MoviesApiService();
 //   .then(movies => console.log(movies))
 //   .catch(console.error());
 
-// moviesApiService.fetchPopularMovies().then(movies => console.log);
+renderPopularMoviesGrid();
 
-moviesApiService
-  .fetchPopularMovies()
-  .then(({ page, results: movies, total_results, total_pages }) => {
-    // console.log(movies);
-    // console.log(page);
-    // console.log(total_results);
-    // console.log(total_pages);
-    const popularMoviesMarkup = movieCardTpl(movies);
-    refs.moviesList.insertAdjacentHTML('beforeend', popularMoviesMarkup);
-  })
-  .catch(error => console.log(error));
+async function renderPopularMoviesGrid() {
+  const {
+    results: movies,
+    page,
+    total_pages,
+    total_results,
+  } = await moviesApiService.fetchPopularMovies();
+
+  //genresList - array of objects [{id: 23, name: "Drama"}, {id: 17, name: "Action"} ...]
+  const genresListObj = await moviesApiService.fetchGenresList();
+  const genresList = genresListObj.genres;
+
+  transformMoviesObjectFields(movies, genresList);
+
+  const popularMoviesMarkup = movieCardTpl(movies);
+  refs.moviesList.insertAdjacentHTML('beforeend', popularMoviesMarkup);
+}
+
+function transformMoviesObjectFields(movies, genresList) {
+  movies.forEach(movie => {
+    movie.release_date = movie.release_date.slice(0, 4);
+    //genresIdsList - array of genre's ids of one movie [23, 17]
+    const genresIdsList = movie.genre_ids;
+    //in movies.genre_ids genres ids replace with genres names
+    genresIdsList.forEach((genreId, index, array) => {
+      const genresListItem = genresList.find(genre => genre.id === genreId);
+      const idx = genresList.indexOf(genresListItem);
+      array[index] = genresList[idx].name;
+    });
+    movie.genre_ids = genresIdsList.join(', ');
+  });
+}
