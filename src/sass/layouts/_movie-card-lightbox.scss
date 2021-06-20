@@ -1,0 +1,114 @@
+.lightbox__card {
+  position: relative;
+  width: 240px;
+  height: 869px;
+  padding-top: 48px;
+  padding-bottom: 41px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: #fff;
+  color: black;
+}
+
+.lightbox__poster-thumb {
+  width: 240px;
+  margin-bottom: 30px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.lightbox__img {
+  width: 100%;
+  height: 357px;
+}
+
+.lightbox__title {
+  margin-bottom: 20px;
+
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 1.15;
+  text-transform: uppercase;
+
+  color: #000000;
+}
+
+.movie-info__param {
+  margin-bottom: 10px;
+
+  font-family: Roboto;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+
+  color: #8c8c8c;
+
+  &--about {
+    text-transform: uppercase;
+    color: #000000;
+  }
+}
+
+.movie-info__votes {
+  line-height: 1.66;
+  color: #000000;
+}
+
+.movie-info__popularity {
+  line-height: 1.66;
+  color: #000000;
+}
+
+.movie-info__title {
+  text-transform: uppercase;
+  color: #000000;
+}
+
+.movie-info__genre {
+  color: #000000;
+}
+
+.movie-info__descr {
+  line-height: 1.66;
+  text-transform: unset;
+}
+
+.lightbox__text--about {
+  margin-bottom: 10px;
+
+  text-transform: uppercase;
+  color: #000000;
+}
+
+.lightbox__text-content {
+  font-family: Roboto;
+  color: #000000;
+}
+
+.lightbox__text-content--descr {
+  margin-bottom: 20px;
+}
+
+.lightbox__descript {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.lightbox__close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+
+  box-sizing: border-box;
+  border: 1px solid black;
+  // border: none;
+  background-color: transparent;
+
+  // transition-duration: $animation-time;
+  // transition-timing-function: $animation-timing-function;
+  // transition-property: stroke;
+}
