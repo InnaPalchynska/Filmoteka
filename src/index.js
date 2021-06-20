@@ -8,8 +8,9 @@ import * as basicLightbox from 'basiclightbox';
 // import MoviesApiService from './js/apiService.js';
 import getRefs from './js/get-refs';
 // import movieCardTpl from './templates/movie-card.hbs';
-
+import preloader from './js/preloader.js';
 import renderPopularMoviesGrid from './js/renderMovies.js';
+import back_to_top from './js/back_to_top.js';
 
 // moviesApiService.query = 'Наследие';
 
@@ -18,15 +19,7 @@ import renderPopularMoviesGrid from './js/renderMovies.js';
 //   .then(movies => console.log(movies))
 //   .catch(console.error());
 
-window.onload = function () {
-  refs.moviesList.innerHTML = '';
-  refs.preloader.classList.remove('visually-hidden');
-  window.setTimeout(function () {
-    refs.preloader.classList.add('visually-hidden');
-  }, 500);
-};
-
-const refs = getRefs();
+// const refs = getRefs();
 // const moviesApiService = new MoviesApiService();
 
 // refs.moviesList.innerHTML = '';

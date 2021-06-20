@@ -1,5 +1,6 @@
 import Pagination from 'tui-pagination';
 import MoviesApiService from '../js/apiService.js';
+import smoothScrool from './smoothScrool.js';
 // import renderPopularMoviesGrid from '../index';
 // import fetchPopularMovies from '../index';
 import movieCardTpl from '../templates/movie-card.hbs';
@@ -20,12 +21,7 @@ const options = {
   lastItemClassName: 'tui-last-child',
 };
 
-const smoothScrool = function () {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};
-
 const pagination = new Pagination(container, options);
-
 let currentPage;
 
 export default async function renderPopularMoviesGrid() {
@@ -48,7 +44,9 @@ export default async function renderPopularMoviesGrid() {
 
 function transformMoviesObjectFields(movies, genresList) {
   movies.forEach(movie => {
-    // movie.release_date = movie.release_date.slice(0, 4);
+    if (movie.release_date != undefined) {
+      movie.release_date = movie.release_date.slice(0, 4);
+    }
     //genresIdsList - array of genre's ids of one movie [23, 17]
     const genresIdsList = movie.genre_ids;
     //in movies.genre_ids genres ids replace with genres names
