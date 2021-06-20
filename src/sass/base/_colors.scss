@@ -37,6 +37,7 @@ $navElColor: (
   'button-lightbox': #000000,
   'pagination-bgc-arrow-box': #f7f7f7,
   'pagination-bgc-selected-page-box': #ff6b08,
+  'line-activ-link': #ff6b08,
 );
 
 @function get-navElColor($key) {
