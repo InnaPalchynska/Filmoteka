@@ -95,5 +95,3 @@ function transformMoviesObjectFields(movies, genresList) {
 
 
 
-// console.log(1);
-
