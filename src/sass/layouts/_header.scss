@@ -1,5 +1,5 @@
 header{
-    padding: 46px 0 0;
+    padding: 46px 0 97px;
     background-color: get-bgColor('header');
 }
 
@@ -94,12 +94,16 @@ header{
     border-top: transparent;
     border-left: transparent;
     border-right: transparent;
-    
+    color: ffffff;
     background-color: transparent;
 
     @media screen and (min-width: $tablet){
         width: 336px;
     }
+}
+
+.placeholder{
+    color:ffffff
 }
 
 .search-field__error-text{
