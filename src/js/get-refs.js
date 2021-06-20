@@ -3,5 +3,6 @@ export default function getRefs() {
     moviesList: document.querySelector('.js-movies-list'),
     divPagination: document.querySelector('.tui-pagination'),
     preloader: document.querySelector('.js-preloader'),
+    goTopBtn: document.querySelector('.back_to_top'),
   };
 }
