@@ -1,6 +1,7 @@
+import 'normalize.css';
 import './sass/main.scss';
 // import './js/pagination.js';
-import 'normalize.css';
+
 import './js/render-page.js';
 import './js/render-movie-card-lightbox.js';
 
