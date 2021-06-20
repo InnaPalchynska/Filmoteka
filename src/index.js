@@ -3,10 +3,12 @@ import 'normalize.css';
 
 // это образец для импортирования ваших js фич
 // import { } from './js/.....
+import 'basiclightbox/src/styles/main.scss';
 import * as basicLightbox from 'basiclightbox';
 import MoviesApiService from './js/apiService.js';
 import getRefs from './js/get-refs';
 import movieCardTpl from './templates/movie-card.hbs';
+import movieCardLightboxTpl from './templates/movie-card-lightbox.hbs';
 
 // moviesApiService.query = 'Наследие';
 
@@ -79,3 +81,36 @@ function transformMoviesObjectFields(movies, genresList) {
 //   }, 2000);
 
 // }
+
+refs.moviesList.addEventListener('click', onMovieCardClick);
+
+async function onMovieCardClick(e) {
+  const currentMovieCard = e.target;
+  // console.log(currentMovieCard.nodeName);
+
+  if (currentMovieCard.nodeName !== 'IMG') {
+    return;
+  }
+
+  getFullInfoOfMovie(currentMovieCard).then(fullInfo => {
+    renderMovieCardLightbox(fullInfo);
+  });
+}
+
+async function getFullInfoOfMovie(currentMovieCard) {
+  const currentMovieCardId = currentMovieCard.dataset.id;
+  const fullInfoOfMovie = await moviesApiService.fetchFullInfoOfMovie(currentMovieCardId);
+  return fullInfoOfMovie;
+}
+
+function renderMovieCardLightbox(fullInfo) {
+  const genres = fullInfo.genres;
+  const movieGenres = genres
+    .map(genre => {
+      return genre.name;
+    })
+    .join(' / ');
+
+  fullInfo.movie_genres = movieGenres;
+  basicLightbox.create(movieCardLightboxTpl(fullInfo)).show();
+}
