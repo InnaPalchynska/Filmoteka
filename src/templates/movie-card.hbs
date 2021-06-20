@@ -1,17 +1,19 @@
 {{#each this}}
-<li class="movies-list__item">
-        <div class="poster-thumb">
-          <img
-            src="https://image.tmdb.org/t/p/original/{{ poster_path }}"
-            alt="{{ original_title }}"
-          />
-        </div>
-        <div class="movie-info">
-          <h2 class="movie-info__title js-movie-info__title">{{ original_title }}</h2>
-          <p class="movie-info__details">
-            <span class="movie-info__genres js-movie-info__genres">{{genre_ids}}</span
-            ><span class="movie-info__year js-movie-info__year">{{ release_date }}</span>
-          </p>
-        </div>
-      </li>
-      {{/each}}
+  <li class='movies-list__item'>
+    <div class='poster-thumb'>
+      <img
+        src='https://image.tmdb.org/t/p/original/{{poster_path}}'
+        alt='{{original_title}}'
+        data-id='{{id}}'
+      />
+    </div>
+    <div class='movie-info'>
+      <h2 class='movie-info__title js-movie-info__title'>{{original_title}}</h2>
+      <p class='movie-info__details'>
+        <span class='movie-info__genres js-movie-info__genres'>{{genre_ids}}</span><span
+          class='movie-info__year js-movie-info__year'
+        >{{release_date}}</span>
+      </p>
+    </div>
+  </li>
+{{/each}}

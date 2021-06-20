@@ -41,6 +41,14 @@ export default class MoviesApiService {
     );
   }
 
+  fetchFullInfoOfMovie(movieId) {
+    const searchParams = new URLSearchParams({
+      api_key: API_KEY,
+    });
+
+    return fetch(`${BASE_URL}/movie/${movieId}?${searchParams}`).then(response => response.json());
+  }
+
   incrementPage() {
     this.page += 1;
   }

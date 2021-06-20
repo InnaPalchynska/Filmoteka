@@ -1,0 +1,54 @@
+<div class='lightbox__card'>
+  <button type='button' class='lightbox__close-button' data-action='close-lightbox'>
+    <svg width='30' height='30'>
+      <use href='../images/SVG/symbol-defs.svg#icon-close'></use>
+    </svg>
+  </button>
+  <div class='lightbox__poster-thumb'>
+    <img
+      class='lightbox__img'
+      src='https://image.tmdb.org/t/p/original/{{poster_path}}'
+      alt='{{original_title}}'
+    />
+  </div>
+
+  <div class='lightbox__content'>
+    <h2 class='lightbox__title'>{{original_title}}</h2>
+    <ul class='movie-info'>
+      <li class='movie-info__param'>Vote / Votes
+        <p class='movie-info__votes'>
+          {{vote_average}}/{{vote_count}}
+        </p>
+      </li>
+
+      <li class='movie-info__param'>Popularity
+        <p class='movie-info__popularity'>
+          {{popularity}}
+        </p>
+      </li>
+
+      <li class='movie-info__param'>Original Title
+        <p class='movie-info__title'>
+          {{original_title}}
+        </p>
+      </li>
+
+      <li class='movie-info__param'>Genre
+        <p class='movie-info__genre'>
+          {{movie_genres}}
+        </p>
+      </li>
+
+      <li class='movie-info__param movie-info__param--about'>About
+        <p class='movie-info__descr'>
+          {{overview}}
+        </p>
+      </li>
+    </ul>
+
+  </div>
+
+  <button class='lightbox__button'>add to watched</button>
+  <button class='lightbox__button'>add to queue</button>
+
+</div>
