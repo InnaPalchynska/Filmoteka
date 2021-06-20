@@ -36,7 +36,9 @@ export default class MoviesApiService {
       page: this.page,
     });
 
-    return fetch(`${BASE_URL}search/movie?${searchParams}`).then(response => response.json());
+    return fetch(`${BASE_URL}search/movie?${searchParams}`).then(response =>
+      response.json(),
+    );
   }
 
   fetchFullInfoOfMovie(movieId) {
@@ -53,6 +55,10 @@ export default class MoviesApiService {
 
   resetPage() {
     this.page = 1;
+  }
+
+  setPage(value) {
+    this.page = value;
   }
 
   get query() {

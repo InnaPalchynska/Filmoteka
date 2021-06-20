@@ -1,0 +1,11 @@
+@mixin is-hidden {
+  position: absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+}
+
+@mixin transition($type) {
+  transition: $type $duration $timing-function;
+}
