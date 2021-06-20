@@ -2,6 +2,7 @@ import './sass/main.scss';
 // import './js/pagination.js';
 import 'normalize.css';
 import './js/render-page.js';
+import './js/render-movie-card-lightbox.js';
 
 // это образец для импортирования ваших js фич
 // import { } from './js/.....
@@ -88,37 +89,37 @@ renderPopularMoviesGrid().catch(error => console.log(error));
 
 // }
 
-refs.moviesList.addEventListener('click', onMovieCardClick);
+// refs.moviesList.addEventListener('click', onMovieCardClick);
 
-async function onMovieCardClick(e) {
-  const currentMovieCard = e.target;
-  // console.log(currentMovieCard.nodeName);
+// async function onMovieCardClick(e) {
+//   const currentMovieCard = e.target;
+//   // console.log(currentMovieCard.nodeName);
 
-  if (currentMovieCard.nodeName !== 'IMG') {
-    return;
-  }
+//   if (currentMovieCard.nodeName !== 'IMG') {
+//     return;
+//   }
 
-  getFullInfoOfMovie(currentMovieCard).then(fullInfo => {
-    renderMovieCardLightbox(fullInfo);
-  });
-}
+//   getFullInfoOfMovie(currentMovieCard).then(fullInfo => {
+//     renderMovieCardLightbox(fullInfo);
+//   });
+// }
 
-async function getFullInfoOfMovie(currentMovieCard) {
-  const currentMovieCardId = currentMovieCard.dataset.id;
-  const fullInfoOfMovie = await moviesApiService.fetchFullInfoOfMovie(
-    currentMovieCardId,
-  );
-  return fullInfoOfMovie;
-}
+// async function getFullInfoOfMovie(currentMovieCard) {
+//   const currentMovieCardId = currentMovieCard.dataset.id;
+//   const fullInfoOfMovie = await moviesApiService.fetchFullInfoOfMovie(
+//     currentMovieCardId,
+//   );
+//   return fullInfoOfMovie;
+// }
 
-function renderMovieCardLightbox(fullInfo) {
-  const genres = fullInfo.genres;
-  const movieGenres = genres
-    .map(genre => {
-      return genre.name;
-    })
-    .join(' / ');
+// function renderMovieCardLightbox(fullInfo) {
+//   const genres = fullInfo.genres;
+//   const movieGenres = genres
+//     .map(genre => {
+//       return genre.name;
+//     })
+//     .join(' / ');
 
-  fullInfo.movie_genres = movieGenres;
-  basicLightbox.create(movieCardLightboxTpl(fullInfo)).show();
-}
+//   fullInfo.movie_genres = movieGenres;
+//   basicLightbox.create(movieCardLightboxTpl(fullInfo)).show();
+// }
