@@ -5,3 +5,7 @@
   height: 1px;
   margin: -1px;
 }
+
+@mixin transition($type) {
+  transition: $type $duration $timing-function;
+}

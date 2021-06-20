@@ -1,6 +1,8 @@
 import './sass/main.scss';
 // import './js/pagination.js';
 import 'normalize.css';
+import './js/render-page.js';
+
 
 // это образец для импортирования ваших js фич
 // import { } from './js/.....
@@ -83,3 +85,8 @@ renderPopularMoviesGrid().catch(error => console.log(error));
 //   }, 2000);
 
 // }
+
+
+
+
+
