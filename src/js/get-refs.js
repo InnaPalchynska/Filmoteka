@@ -4,7 +4,7 @@ export default function getRefs() {
     divPagination: document.querySelector('.tui-pagination'),
     preloader: document.querySelector('.js-preloader'),
     home: document.querySelector('[data-header="home"]'),
-    myLibrary: document.querySelector('[data-header="home"]'),
+    myLibrary: document.querySelector('[data-header="myLiblary"]'),
     headerDynamicContainer: document.querySelector('[data-header="dynamicContainer"]'),
   };
 }
