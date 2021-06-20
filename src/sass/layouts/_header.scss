@@ -17,6 +17,7 @@ header{
 
 .logo__icon{
     margin-right: 10px;
+    color:#FFFFFF;
 }
 
 .logo__text,
@@ -24,6 +25,7 @@ header{
     font-weight: 500;
     color: get-textColor('light');
     line-height: 1.17;
+    
 }
 
 .logo__text{
@@ -39,12 +41,38 @@ header{
     display: flex;
 }
 
+.site-nav__item{
+    position: relative;
+}
+
 .site-nav__button{
     font-size: getFont-size__mob('nav-text');
     text-transform: uppercase;
     border: transparent;
     background-color: transparent;
+    cursor: pointer;
+    padding: 0;
     
+}
+
+.site-nav__button::after {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+
+  display: block;
+  width: 100%;
+  height: 3px;
+ 
+  background-color: get-navElColor('line-activ-link');
+  opacity: 0;
+  @include transition(opacity);
+}
+
+.site-nav__button--active::after,
+.site-nav__button:hover::after,
+.site-nav__button:focus::after {
+  opacity: 1;
 }
 
 .site-nav__item{
@@ -55,16 +83,19 @@ header{
 
 .search-field{
     font-size:getFont-size__mob('search') ;
+    text-align: center;   
 }
 
 .search-field__input{
     width: 280px;
+    padding-bottom: 4px;
+    margin-bottom: 20px;
+    border: 0.5px solid #FFFFFF;
     border-top: transparent;
     border-left: transparent;
     border-right: transparent;
-    border: 0.5px solid #FFFFFF;
-    padding-bottom: 4px;
-    margin-bottom: 20px;
+    
+    background-color: transparent;
 
     @media screen and (min-width: $tablet){
         width: 336px;
@@ -73,4 +104,25 @@ header{
 
 .search-field__error-text{
 color: get-textColor('notify');
+}
+
+.header__button{
+    &:not:last-child{
+        margin-right: 20px;
+    }
+    margin-bottom: 65px;
+
+}
+
+.header-buttons{
+    text-align: center;
+    
+}
+
+.button{
+    height: 44px;
+    width: 136px;
+    border-radius: 5px;
+    color: get-textColor('light');
+    text-transform: uppercase;
 }
