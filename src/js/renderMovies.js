@@ -6,13 +6,13 @@ import debounce from 'lodash.debounce';
 // import fetchPopularMovies from '../index';
 import movieCardTpl from '../templates/movie-card.hbs';
 import getRefs from '../js/get-refs.js';
-// import debounce from '../node_modules/lodash.debounce';
+// import debounce from 'debounce';
 
 const refs = getRefs();
 
 const moviesApiService = new MoviesApiService();
 
-// refs.searchInput.addEventListener('input', debounce(onSearch, 500));
+refs.searchInput.addEventListener('input', debounce(onSearch, 500));
 
 function onSearch(event) {
   refs.moviesList.innerHTML = '';
@@ -21,6 +21,7 @@ function onSearch(event) {
   if (!searchQuery) {
     return;
   }
+  moviesApiService.query = searchQuery;
   renderPopularMoviesGrid(searchQuery).catch(error => console.log(error));
 }
 
@@ -73,7 +74,7 @@ async function renderPopularMoviesGrid(searchQuery) {
   const genresList = genresListObj.genres;
 
   console.log(movies);
-  // transformMoviesObjectFields(movies, genresList);
+  transformMoviesObjectFields(movies, genresList);
 
   const popularMoviesMarkup = movieCardTpl(movies);
   refs.moviesList.insertAdjacentHTML('beforeend', popularMoviesMarkup);

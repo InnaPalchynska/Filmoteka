@@ -1,4 +1,4 @@
-import helperSvg from 'handlebars-helper-svg';
+// import helperSvg from 'handlebars-helper-svg';
 import getRefs from './get-refs';
 import searchFieldTpl from '../templates/search-field.hbs';
 import headerBtnsTpl from '../templates/header-btns.hbs';

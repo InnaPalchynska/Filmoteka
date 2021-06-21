@@ -9,6 +9,6 @@ export default function getRefs() {
       '[data-header="dynamicContainer"]',
     ),
     goTopBtn: document.querySelector('.back_to_top'),
-    searchInput: document.querySelector('.js-input-movie'),
+    searchInput: document.querySelector('.search-field__input'),
   };
 }
