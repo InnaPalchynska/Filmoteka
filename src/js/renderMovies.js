@@ -1,6 +1,7 @@
 import Pagination from 'tui-pagination';
 import MoviesApiService from '../js/apiService.js';
 import smoothScrool from './smoothScrool.js';
+import debounce from 'lodash.debounce';
 // import renderPopularMoviesGrid from '../index';
 // import fetchPopularMovies from '../index';
 import movieCardTpl from '../templates/movie-card.hbs';
@@ -21,7 +22,8 @@ const options = {
   lastItemClassName: 'tui-last-child',
   template: {
     page: '<a href="#" class="tui-page-btn">{{page}}</a>',
-    currentPage: '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
+    currentPage:
+      '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
     moveButton:
       '<a href="#" class="tui-page-btn tui-{{type}}">' +
       '<span class="tui-ico-{{type}}">{{type}}</span>' +
