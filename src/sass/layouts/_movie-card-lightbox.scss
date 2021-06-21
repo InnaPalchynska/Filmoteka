@@ -12,20 +12,25 @@
 
 .lightbox__close-button {
   position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   top: 10px;
   right: 10px;
   width: 30px;
   height: 30px;
+  padding: 0;
+
+  border: none;
+  border-radius: 50%;
+  color: get-svgColor('close-cross');
+  background-color: transparent;
   cursor: pointer;
 
-  box-sizing: border-box;
-  border: 1px solid black;
-  // border: none;
-  background-color: transparent;
-
-  // transition-duration: $animation-time;
-  // transition-timing-function: $animation-timing-function;
-  // transition-property: stroke;
+  &:hover,
+  &:focus {
+    color: get-svgColor('close-cross-hover');
+  }
 }
 
 .lightbox__poster-thumb {
