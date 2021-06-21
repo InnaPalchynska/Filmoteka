@@ -1,10 +1,12 @@
 import 'normalize.css';
 import './sass/main.scss';
-
+import 'material-icons';
 // import './js/pagination.js';
 
 import './js/render-page.js';
 import './js/render-movie-card-lightbox.js';
+
+import './js/dark-theme';
 
 // это образец для импортирования ваших js фич
 // import { } from './js/.....
