@@ -11,13 +11,14 @@ body.dark-theme {
 .toolbar {
   display: flex;
   justify-content: flex-end;
-  padding: 16px 24px;
+  padding: 11px 24px;
 }
 
 /* THEME SWITCH */
 .theme-switch {
   display: flex;
   align-items: center;
+  margin-right: 7px;
 }
 
 .theme-switch__icon {
