@@ -29,7 +29,7 @@ export default class MoviesApiService {
   }
 
   // fetchMoviesBySearchQuery
-  fetchMovies() {
+  fetchMoviesBySearch() {
     const searchParams = new URLSearchParams({
       api_key: API_KEY,
       query: this.searchQuery,
@@ -46,7 +46,9 @@ export default class MoviesApiService {
       api_key: API_KEY,
     });
 
-    return fetch(`${BASE_URL}/movie/${movieId}?${searchParams}`).then(response => response.json());
+    return fetch(`${BASE_URL}/movie/${movieId}?${searchParams}`).then(
+      response => response.json(),
+    );
   }
 
   incrementPage() {

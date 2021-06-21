@@ -5,10 +5,23 @@ import smoothScrool from './smoothScrool.js';
 // import fetchPopularMovies from '../index';
 import movieCardTpl from '../templates/movie-card.hbs';
 import getRefs from '../js/get-refs.js';
+// import debounce from '../node_modules/lodash.debounce';
 
 const refs = getRefs();
 
 const moviesApiService = new MoviesApiService();
+
+// refs.searchInput.addEventListener('input', debounce(onSearch, 500));
+
+function onSearch(event) {
+  refs.moviesList.innerHTML = '';
+  const input = event.target;
+  const searchQuery = input.value;
+  if (!searchQuery) {
+    return;
+  }
+  renderPopularMoviesGrid(searchQuery).catch(error => console.log(error));
+}
 
 const container = document.getElementById('pagination');
 const options = {
@@ -22,21 +35,35 @@ const options = {
 };
 
 const pagination = new Pagination(container, options);
-let currentPage;
+let currentPage = localStorage.getItem('currentPage');
 
-export default async function renderPopularMoviesGrid() {
-  const {
-    results: movies,
-    page,
-    total_pages,
-    total_results,
-  } = await moviesApiService.fetchPopularMovies();
+let searchQuery = 'Наследие';
+async function renderPopularMoviesGrid(searchQuery) {
+  console.log(searchQuery);
+  if (!searchQuery) {
+    const {
+      results: movies,
+      page,
+      total_pages,
+      total_results,
+    } = await moviesApiService.fetchPopularMovies();
+  }
+
+  if (searchQuery) {
+    const {
+      results: movies,
+      page,
+      total_pages,
+      total_results,
+    } = await moviesApiService.fetchMoviesBySearch();
+  }
 
   //genresList - array of objects [{id: 23, name: "Drama"}, {id: 17, name: "Action"} ...]
   const genresListObj = await moviesApiService.fetchGenresList();
   const genresList = genresListObj.genres;
 
-  transformMoviesObjectFields(movies, genresList);
+  console.log(movies);
+  // transformMoviesObjectFields(movies, genresList);
 
   const popularMoviesMarkup = movieCardTpl(movies);
   refs.moviesList.insertAdjacentHTML('beforeend', popularMoviesMarkup);
@@ -67,6 +94,14 @@ function showPopularMovies(currentPage) {
 
 pagination.on('afterMove', function (evt) {
   smoothScrool();
-  let currentPage = evt.page;
+  currentPage = evt.page;
+  localStorage.setItem('currentPage', currentPage);
   showPopularMovies(currentPage);
 });
+
+if (currentPage !== 1) {
+  moviesApiService.setPage(currentPage);
+  pagination.page = currentPage;
+
+  renderPopularMoviesGrid().catch(error => console.log(error));
+}
