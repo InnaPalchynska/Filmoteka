@@ -1,12 +1,11 @@
 $font-size__desk: (
   'logo-title': 30px,
-  'nav-text':12px,
-  'search':14px,
-  'name-film':12px,
-  'name-film-modal':30px,
-  'text-modal':12px,
-  'text-footer':16x,
-
+  'nav-text': 12px,
+  'search': 14px,
+  'name-film': 12px,
+  'name-film-modal': 30px,
+  'text-modal': 12px,
+  'text-footer': 16x,
 );
 
 @function getFont-size__desk($key) {
@@ -14,13 +13,13 @@ $font-size__desk: (
 }
 
 $font-size__tab: (
-    'logo-title': 30px,
-    'nav-text':12px,
-    'search':14px,
-    'name-film':12px,
-    'name-film-modal':20px,
-    'text-modal':12px,
-    'text-footer':16x,
+  'logo-title': 30px,
+  'nav-text': 12px,
+  'search': 14px,
+  'name-film': 12px,
+  'name-film-modal': 20px,
+  'text-modal': 12px,
+  'text-footer': 16x,
 );
 
 @function getFont-size__tab($key) {
@@ -28,12 +27,12 @@ $font-size__tab: (
 }
 
 $font-size__mob: (
-    'nav-text':12px,
-    'search':14px,
-    'name-film':12px,
-    'name-film-modal':30px,
-    'text-modal':12px,
-    'text-footer':14px,
+  'nav-text': 12px,
+  'search': 14px,
+  'name-film': 12px,
+  'name-film-modal': 20px,
+  'text-modal': 12px,
+  'text-footer': 14px,
 );
 
 @function getFont-size__mob($key) {
