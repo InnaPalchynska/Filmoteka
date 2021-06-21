@@ -2,11 +2,9 @@ import Pagination from 'tui-pagination';
 import MoviesApiService from '../js/apiService.js';
 import smoothScrool from './smoothScrool.js';
 import debounce from 'lodash.debounce';
-// import renderPopularMoviesGrid from '../index';
-// import fetchPopularMovies from '../index';
+
 import movieCardTpl from '../templates/movie-card.hbs';
 import getRefs from '../js/get-refs.js';
-// import debounce from 'debounce';
 
 const refs = getRefs();
 
@@ -57,7 +55,6 @@ const pagination = new Pagination(container, options);
 let currentPage = localStorage.getItem('currentPage');
 
 async function renderPopularMoviesGrid(searchQuery) {
-  console.log(searchQuery);
   const fetchMovies = searchQuery
     ? moviesApiService.fetchMoviesBySearch()
     : moviesApiService.fetchPopularMovies();
@@ -73,7 +70,6 @@ async function renderPopularMoviesGrid(searchQuery) {
   const genresListObj = await moviesApiService.fetchGenresList();
   const genresList = genresListObj.genres;
 
-  console.log(movies);
   transformMoviesObjectFields(movies, genresList);
 
   const popularMoviesMarkup = movieCardTpl(movies);
