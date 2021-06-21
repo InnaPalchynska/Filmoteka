@@ -1,13 +1,17 @@
 header{
-    padding: 46px 0 97px;
-    background-color: get-bgColor('header');
+   background-color: get-bgColor('header'); 
+   color: get-textColor('light');
 }
 
 .header__nav{
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    margin-bottom: 40px;
+    
+    @media screen and (max-width: $max-mobile){
+      margin-bottom: 41px;
+    }
+    margin-bottom: 37px;
 }
 
 .logo{
@@ -43,6 +47,10 @@ header{
 
 .site-nav__item{
     position: relative;
+
+    &:not(:last-child){
+        margin-right: 40px;
+    }
 }
 
 .site-nav__button{
@@ -51,7 +59,7 @@ header{
     border: transparent;
     background-color: transparent;
     cursor: pointer;
-    padding: 0;
+    padding: 14px 0 0;
     
 }
 
@@ -75,12 +83,6 @@ header{
   opacity: 1;
 }
 
-.site-nav__item{
-    &:not(:last-child){
-        margin-right: 40px;
-    }
-}
-
 .search-field{
     font-size:getFont-size__mob('search') ;
     text-align: center;   
@@ -89,44 +91,78 @@ header{
 .search-field__input{
     width: 280px;
     padding-bottom: 4px;
-    margin-bottom: 20px;
+    margin-bottom: 21px;
+    font-size: getFont-size__mob('search');;
+    color: get-textColor('light');
     border: 0.5px solid #FFFFFF;
     border-top: transparent;
     border-left: transparent;
-    border-right: transparent;
-    color: ffffff;
+    border-right: transparent;    
     background-color: transparent;
 
     @media screen and (min-width: $tablet){
         width: 336px;
     }
+
+    &::placeholder {
+    font-size: getFont-size__mob('search');
+    letter-spacing: 0.03em;
+    color: get-textColor('light');
+  }
 }
 
-.placeholder{
-    color:ffffff
-}
+
 
 .search-field__error-text{
-color: get-textColor('notify');
-}
+    font-size: getFont-size__mob('search');
+    line-height: 1.14;
+    color: get-textColor('notify');
 
-.header__button{
-    &:not:last-child{
-        margin-right: 20px;
+    height: 32px;
+    
+    @media screen and (min-width: $tablet){
+        height: 16px;
     }
-    margin-bottom: 65px;
 
 }
 
 .header-buttons{
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    padding: 8px 0 22px;
+    @media screen and (min-width: $tablet){
+        padding: 8px 0 6px;
+    }
     
 }
 
 .button{
     height: 44px;
-    width: 136px;
-    border-radius: 5px;
-    color: get-textColor('light');
+    font-size: getFont-size__mob('nav-text');
+    line-height: 1.33;
     text-transform: uppercase;
+    border-radius: 5px;
+    cursor: pointer; 
+}
+
+.button--primary{
+    border: 1px solid get-navElColor('button-primary');
+    background-color: get-navElColor('button-primary');
+    box-shadow: (0px 8px 43px rgba(255, 107, 1, 0.6));
+}
+
+.button--secondary{
+    border: 1px solid get-navElColor('button-secondary');
+    background-color: transparent;
+}
+
+.header-buttons__btn{
+   
+   width: 130px;
+   margin: 0 10px 0;
+   color: get-textColor('light');
+
+   @media screen and (min-width: $tablet){
+       width: 136px;
+   }
 }

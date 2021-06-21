@@ -10,5 +10,6 @@ export default function getRefs() {
     ),
     goTopBtn: document.querySelector('.back_to_top'),
     searchInput: document.querySelector('.search-field__input'),
+    headerBackgroundContainer: document.querySelector('.js-container-header-bg'),
   };
 }
