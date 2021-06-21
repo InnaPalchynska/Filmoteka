@@ -40,4 +40,23 @@ function renderMovieCardLightbox(fullInfo) {
   fullInfo.popularity = moviePopularity;
   fullInfo.movie_genres = movieGenres;
   basicLightbox.create(movieCardLightboxTpl(fullInfo)).show();
+
+  const closeBtn = document.querySelector('.lightbox__close-button');
+  closeBtn.addEventListener('click', onLightboxClose);
+  window.addEventListener('keydown', onEscBtnPress);
+}
+
+function onLightboxClose() {
+  const closeBtn = document.querySelector('.lightbox__close-button');
+  const lightBox = document.querySelector('.basicLightbox');
+
+  closeBtn.removeEventListener('click', onLightboxClose);
+  lightBox.classList.toggle('basicLightbox--visible');
+  window.removeEventListener('keydown', onEscBtnPress);
+}
+
+function onEscBtnPress(evt) {
+  if (evt.code === 'Escape') {
+    onLightboxClose();
+  }
 }
