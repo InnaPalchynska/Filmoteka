@@ -12,10 +12,11 @@ const moviesApiService = new MoviesApiService();
 
 refs.searchInput.addEventListener('input', debounce(onSearch, 500));
 
+let searchQuery = '';
 function onSearch(event) {
   refs.moviesList.innerHTML = '';
   const input = event.target;
-  const searchQuery = input.value;
+  searchQuery = input.value;
   if (!searchQuery) {
     return;
   }
@@ -81,6 +82,7 @@ function transformMoviesObjectFields(movies, genresList) {
     if (movie.release_date != undefined) {
       movie.release_date = movie.release_date.slice(0, 4);
     }
+    console.log(movie.id);
     //genresIdsList - array of genre's ids of one movie [23, 17]
     const genresIdsList = movie.genre_ids;
     //in movies.genre_ids genres ids replace with genres names
@@ -96,7 +98,7 @@ function transformMoviesObjectFields(movies, genresList) {
 function showPopularMovies(currentPage) {
   moviesApiService.setPage(currentPage);
   refs.moviesList.innerHTML = '';
-  renderPopularMoviesGrid().catch(error => console.log(error));
+  renderPopularMoviesGrid(searchQuery).catch(error => console.log(error));
 }
 
 pagination.on('afterMove', function (evt) {
