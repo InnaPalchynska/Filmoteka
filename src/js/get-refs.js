@@ -7,5 +7,6 @@ export default function getRefs() {
     myLibrary: document.querySelector('[data-header="myLiblary"]'),
     headerDynamicContainer: document.querySelector('[data-header="dynamicContainer"]'),
     goTopBtn: document.querySelector('.back_to_top'),
+    headerBackgroundContainer: document.querySelector('.js-container-header-bg'),
   };
 }
