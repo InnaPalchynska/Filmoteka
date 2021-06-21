@@ -1,5 +1,6 @@
 import 'normalize.css';
 import './sass/main.scss';
+import 'material-icons';
 // import './js/pagination.js';
 
 import './js/render-page.js';
