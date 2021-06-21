@@ -6,72 +6,8 @@
   padding-bottom: 41px;
   padding-left: 20px;
   padding-right: 20px;
-  background-color: #fff;
-  color: black;
-}
 
-.lightbox__poster-thumb {
-  width: 240px;
-  margin-bottom: 30px;
-  border-radius: 5px;
-  overflow: hidden;
-}
-
-.lightbox__img {
-  width: 100%;
-  height: 357px;
-}
-
-.lightbox__title {
-  margin-bottom: 20px;
-
-  font-family: Roboto;
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 1.15;
-  text-transform: uppercase;
-
-  color: #000000;
-}
-
-.movie-info__param {
-  margin-bottom: 10px;
-
-  font-family: Roboto;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 1.33;
-
-  color: #8c8c8c;
-
-  &--about {
-    text-transform: uppercase;
-    color: #000000;
-  }
-}
-
-.movie-info__votes {
-  line-height: 1.66;
-  color: #000000;
-}
-
-.movie-info__popularity {
-  line-height: 1.66;
-  color: #000000;
-}
-
-.movie-info__title {
-  text-transform: uppercase;
-  color: #000000;
-}
-
-.movie-info__genre {
-  color: #000000;
-}
-
-.movie-info__descr {
-  line-height: 1.66;
-  text-transform: unset;
+  background-color: get-bgColor('main');
 }
 
 .lightbox__close-button {
@@ -90,4 +26,140 @@
   // transition-duration: $animation-time;
   // transition-timing-function: $animation-timing-function;
   // transition-property: stroke;
+}
+
+.lightbox__poster-thumb {
+  width: 240px;
+  margin-bottom: 30px;
+
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.lightbox__img {
+  height: 357px;
+}
+
+.lightbox__title {
+  margin-bottom: 20px;
+
+  font-weight: 500;
+  font-size: getFont-size__mob('name-film-modal');
+  line-height: 1.15;
+  text-transform: uppercase;
+
+  color: get-textColor('main');
+}
+
+.movie-info {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.movie-info__item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+
+  &:nth-child(4) {
+    margin-bottom: 20px;
+  }
+
+  &:last-child {
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+}
+
+.movie-info__param {
+  font-weight: 500;
+  font-size: getFont-size__mob('text-modal');
+  line-height: 1.33;
+
+  color: get-textColor('modal');
+
+  &--about {
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    color: get-textColor('main');
+  }
+}
+
+.movie-info__text {
+  font-weight: 500;
+  color: get-textColor('main');
+  line-height: 1.66;
+  text-transform: uppercase;
+}
+
+.movie-info__votes {
+  margin-left: 41px;
+}
+
+.movie-info__votes--average {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 16px;
+  color: get-textColor('light');
+  background-color: get-navElColor('votes-avarage-lightbox');
+  border-radius: 5px;
+}
+
+.movie-info__votes--count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 16px;
+  text-align: center;
+  background-color: get-navElColor('votes-count-lightbox');
+  border-radius: 5px;
+}
+
+.movie-info__popularity {
+  margin-left: 53px;
+}
+
+.movie-info__title {
+  margin-left: 39px;
+  line-height: 1.33;
+}
+
+.movie-info__genre {
+  margin-left: 76px;
+  line-height: 1.33;
+  text-transform: unset;
+}
+
+.movie-info__descr {
+  text-transform: initial;
+}
+
+.lightbox__button {
+  width: 112px;
+  height: 44px;
+  background-color: transparent;
+  border: 1px solid get-navElColor('button-lightbox');
+  border-radius: 5px;
+
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  text-transform: uppercase;
+  color: get-textColor('main');
+
+  &:focus,
+  &:hover {
+    background-color: get-navElColor('button-primary');
+    border: none;
+    color: get-textColor('light');
+  }
+}
+
+.lightbox__buttons-overlay {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

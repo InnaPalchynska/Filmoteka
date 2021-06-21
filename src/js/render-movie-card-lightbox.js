@@ -29,13 +29,15 @@ async function getFullInfoOfMovie(currentMovieCard) {
 }
 
 function renderMovieCardLightbox(fullInfo) {
-  const genres = fullInfo.genres;
-  const movieGenres = genres
+  const movieGenres = fullInfo.genres
     .map(genre => {
       return genre.name;
     })
     .join(' / ');
 
+  const moviePopularity = fullInfo.popularity.toFixed(1);
+
+  fullInfo.popularity = moviePopularity;
   fullInfo.movie_genres = movieGenres;
   basicLightbox.create(movieCardLightboxTpl(fullInfo)).show();
 }
