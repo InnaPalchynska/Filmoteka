@@ -2,6 +2,7 @@
 import getRefs from './get-refs';
 import searchFieldTpl from '../templates/search-field.hbs';
 import headerBtnsTpl from '../templates/header-btns.hbs';
+import renderLibrary from './renderLibrary';
 
 // console.log(searchFieldTpl());
 // console.log(headerBtnsTpl());
@@ -31,6 +32,7 @@ function onMyLibraryClick(event) {
   changeOnSecondaryBg();
   clearContainer(refs.headerDynamicContainer);
   insertContent(refs.headerDynamicContainer, headerBtnsTpl);
+  // renderLibrary();
 }
 
 function insertContent(nameContainer, fnTemplates) {

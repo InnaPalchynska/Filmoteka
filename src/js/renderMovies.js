@@ -82,7 +82,6 @@ function transformMoviesObjectFields(movies, genresList) {
     if (movie.release_date != undefined) {
       movie.release_date = movie.release_date.slice(0, 4);
     }
-    console.log(movie.id);
     //genresIdsList - array of genre's ids of one movie [23, 17]
     const genresIdsList = movie.genre_ids;
     //in movies.genre_ids genres ids replace with genres names
