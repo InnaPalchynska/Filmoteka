@@ -2,6 +2,7 @@ import 'normalize.css';
 import './sass/main.scss';
 import 'material-icons';
 // import './js/pagination.js';
+import debounce from 'lodash.debounce';
 
 import './js/render-page.js';
 import './js/render-movie-card-lightbox.js';

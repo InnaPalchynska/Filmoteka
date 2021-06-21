@@ -2,17 +2,15 @@ import Pagination from 'tui-pagination';
 import MoviesApiService from '../js/apiService.js';
 import smoothScrool from './smoothScrool.js';
 import debounce from 'lodash.debounce';
-// import renderPopularMoviesGrid from '../index';
-// import fetchPopularMovies from '../index';
+
 import movieCardTpl from '../templates/movie-card.hbs';
 import getRefs from '../js/get-refs.js';
-// import debounce from '../node_modules/lodash.debounce';
 
 const refs = getRefs();
 
 const moviesApiService = new MoviesApiService();
 
-// refs.searchInput.addEventListener('input', debounce(onSearch, 500));
+refs.searchInput.addEventListener('input', debounce(onSearch, 500));
 
 function onSearch(event) {
   refs.moviesList.innerHTML = '';
@@ -21,6 +19,7 @@ function onSearch(event) {
   if (!searchQuery) {
     return;
   }
+  moviesApiService.query = searchQuery;
   renderPopularMoviesGrid(searchQuery).catch(error => console.log(error));
 }
 
@@ -56,7 +55,6 @@ const pagination = new Pagination(container, options);
 let currentPage = localStorage.getItem('currentPage');
 
 async function renderPopularMoviesGrid(searchQuery) {
-  console.log(searchQuery);
   const fetchMovies = searchQuery
     ? moviesApiService.fetchMoviesBySearch()
     : moviesApiService.fetchPopularMovies();
@@ -72,8 +70,7 @@ async function renderPopularMoviesGrid(searchQuery) {
   const genresListObj = await moviesApiService.fetchGenresList();
   const genresList = genresListObj.genres;
 
-  console.log(movies);
-  // transformMoviesObjectFields(movies, genresList);
+  transformMoviesObjectFields(movies, genresList);
 
   const popularMoviesMarkup = movieCardTpl(movies);
   refs.moviesList.insertAdjacentHTML('beforeend', popularMoviesMarkup);
