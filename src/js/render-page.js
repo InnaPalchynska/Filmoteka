@@ -19,40 +19,17 @@ insertContent(refs.headerDynamicContainer, searchFieldTpl);
 
 function onHomeClick(event) {
   // console.log(event.target);
-  const activClass = event.target.classList.contains('site-nav__button--active');
-  if (!activClass) {
-    event.target.classList.add('site-nav__button--active');
-  }
-  refs.myLibrary.classList.remove('site-nav__button--active');
-
-  const activBgClass = refs.headerBackgroundContainer.classList.contains(
-    'header__container--home-bg',
-  );
-  // console.log(refs.headerBackgroundContainer.classList);
-  if (!activBgClass) {
-    refs.headerBackgroundContainer.classList.add('header__container--home-bg');
-  }
-  refs.headerBackgroundContainer.classList.remove('header__container--my-library-bg');
+  
+  toggleClassOnMainPage(event);
+  changeOnMainBg(); 
   clearContainer(refs.headerDynamicContainer);
   insertContent(refs.headerDynamicContainer, searchFieldTpl);
 }
 
 function onMyLibraryClick(event) {
   // console.log(event.target);
-  const activClass = event.target.classList.contains('site-nav__button--active');
-  // console.log(activClass);
-  if (!activClass) {
-    event.target.classList.add('site-nav__button--active');
-  }
-  refs.home.classList.remove('site-nav__button--active');
-
-  const activBgClass = refs.headerBackgroundContainer.classList.contains(
-    'header__container--my-library-bg',
-  );
-  if (!activBgClass) {
-    refs.headerBackgroundContainer.classList.add('header__container--my-library-bg');
-  }
-  refs.headerBackgroundContainer.classList.remove('header__container--home-bg');
+  toggleClassOnSecondPage(event);
+  changeOnSecondaryBg();
   clearContainer(refs.headerDynamicContainer);
   insertContent(refs.headerDynamicContainer, headerBtnsTpl);
 }
@@ -65,3 +42,41 @@ function clearContainer(nameContainer) {
   nameContainer.innerHTML = '';
 }
 
+
+function changeOnMainBg() {
+  const activBgClass = refs.headerBackgroundContainer.classList.contains(
+    'header__container--home-bg',
+  );
+  // console.log(refs.headerBackgroundContainer.classList);
+  if (!activBgClass) {
+    refs.headerBackgroundContainer.classList.add('header__container--home-bg');
+  }
+  refs.headerBackgroundContainer.classList.remove('header__container--my-library-bg');
+}
+
+function toggleClassOnMainPage(e) {
+  const activClass = e.target.classList.contains('site-nav__button--active');
+  if (!activClass) {
+    e.target.classList.add('site-nav__button--active');
+  }
+  refs.myLibrary.classList.remove('site-nav__button--active');
+}
+
+function changeOnSecondaryBg() {
+  const activBgClass = refs.headerBackgroundContainer.classList.contains(
+    'header__container--my-library-bg',
+  );
+  if (!activBgClass) {
+    refs.headerBackgroundContainer.classList.add('header__container--my-library-bg');
+  }
+  refs.headerBackgroundContainer.classList.remove('header__container--home-bg');
+}
+
+function toggleClassOnSecondPage(e) {
+  const activClass = e.target.classList.contains('site-nav__button--active');
+  // console.log(activClass);
+  if (!activClass) {
+    e.target.classList.add('site-nav__button--active');
+  }
+  refs.home.classList.remove('site-nav__button--active');
+}
