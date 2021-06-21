@@ -3,6 +3,7 @@ body {
   background-color: get-bgColor('main');
   font-family: 'Roboto', sans-serif;
   font-style: normal;
+  line-height: 1.17;
   //   letter-spacing: 0.04em;
 }
 
@@ -41,9 +42,9 @@ input {
   padding: 0;
 }
 
-button {
-  outline: none;
-}
+// button {
+//   // outline: none;
+// }
 
 .visually-hidden {
   position: absolute;
