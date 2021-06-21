@@ -2,6 +2,7 @@
 import getRefs from './get-refs';
 import searchFieldTpl from '../templates/search-field.hbs';
 import headerBtnsTpl from '../templates/header-btns.hbs';
+import renderLibrary from './renderLibrary';
 
 // console.log(searchFieldTpl());
 // console.log(headerBtnsTpl());
@@ -18,9 +19,9 @@ insertContent(refs.headerDynamicContainer, searchFieldTpl);
 
 function onHomeClick(event) {
   // console.log(event.target);
-  
+
   toggleClassOnMainPage(event);
-  changeOnMainBg(); 
+  changeOnMainBg();
   clearContainer(refs.headerDynamicContainer);
   insertContent(refs.headerDynamicContainer, searchFieldTpl);
 }
@@ -31,9 +32,10 @@ function onMyLibraryClick(event) {
   changeOnSecondaryBg();
   clearContainer(refs.headerDynamicContainer);
   insertContent(refs.headerDynamicContainer, headerBtnsTpl);
+  // renderLibrary();
 }
 
-function insertContent(nameContainer,fnTemplates) {
+function insertContent(nameContainer, fnTemplates) {
   nameContainer.insertAdjacentHTML('beforeend', fnTemplates());
 }
 
@@ -41,16 +43,16 @@ function clearContainer(nameContainer) {
   nameContainer.innerHTML = '';
 }
 
-
 function changeOnMainBg() {
   const activBgClass = refs.headerBackgroundContainer.classList.contains(
     'header__container--home-bg',
   );
-  // console.log(refs.headerBackgroundContainer.classList);
   if (!activBgClass) {
     refs.headerBackgroundContainer.classList.add('header__container--home-bg');
   }
-  refs.headerBackgroundContainer.classList.remove('header__container--my-library-bg');
+  refs.headerBackgroundContainer.classList.remove(
+    'header__container--my-library-bg',
+  );
 }
 
 function toggleClassOnMainPage(e) {
@@ -66,14 +68,15 @@ function changeOnSecondaryBg() {
     'header__container--my-library-bg',
   );
   if (!activBgClass) {
-    refs.headerBackgroundContainer.classList.add('header__container--my-library-bg');
+    refs.headerBackgroundContainer.classList.add(
+      'header__container--my-library-bg',
+    );
   }
   refs.headerBackgroundContainer.classList.remove('header__container--home-bg');
 }
 
 function toggleClassOnSecondPage(e) {
   const activClass = e.target.classList.contains('site-nav__button--active');
-  // console.log(activClass);
   if (!activClass) {
     e.target.classList.add('site-nav__button--active');
   }

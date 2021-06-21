@@ -12,10 +12,11 @@ const moviesApiService = new MoviesApiService();
 
 refs.searchInput.addEventListener('input', debounce(onSearch, 500));
 
+let searchQuery = '';
 function onSearch(event) {
   refs.moviesList.innerHTML = '';
   const input = event.target;
-  const searchQuery = input.value;
+  searchQuery = input.value;
   if (!searchQuery) {
     return;
   }
@@ -96,7 +97,7 @@ function transformMoviesObjectFields(movies, genresList) {
 function showPopularMovies(currentPage) {
   moviesApiService.setPage(currentPage);
   refs.moviesList.innerHTML = '';
-  renderPopularMoviesGrid().catch(error => console.log(error));
+  renderPopularMoviesGrid(searchQuery).catch(error => console.log(error));
 }
 
 pagination.on('afterMove', function (evt) {
