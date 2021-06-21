@@ -18,7 +18,8 @@ import movieCardTpl from './templates/movie-card.hbs';
 import movieCardLightboxTpl from './templates/movie-card-lightbox.hbs';
 // import movieCardTpl from './templates/movie-card.hbs';
 import preloader from './js/preloader.js';
-import renderPopularMoviesGrid from './js/renderMovies.js';
+// import renderPopularMoviesGrid from './js/renderMovies.js';
+import './js/renderMovies.js';
 import back_to_top from './js/back_to_top.js';
 
 // moviesApiService.query = 'Наследие';
@@ -35,7 +36,7 @@ import back_to_top from './js/back_to_top.js';
 // refs.preloader.classList.remove('visually-hidden');
 // setTimeout(function () {
 // refs.preloader.classList.add('visually-hidden');
-renderPopularMoviesGrid().catch(error => console.log(error));
+// renderPopularMoviesGrid().catch(error => console.log(error));
 // }, 500);
 
 // export default async function renderPopularMoviesGrid() {
