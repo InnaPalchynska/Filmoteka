@@ -1,12 +1,12 @@
+// import helperSvg from 'handlebars-helper-svg';
 import getRefs from './get-refs';
 import searchFieldTpl from '../templates/search-field.hbs';
-import headerBtnsTpl from '../templates/header-btns.hbs'
+import headerBtnsTpl from '../templates/header-btns.hbs';
 
 // console.log(searchFieldTpl());
 // console.log(headerBtnsTpl());
 
 const refs = getRefs();
-
 
 refs.home.addEventListener('click', onHomeClick);
 refs.myLibrary.addEventListener('click', onMyLibraryClick);
@@ -15,7 +15,6 @@ insertContent(refs.headerDynamicContainer, searchFieldTpl);
 // console.log(refs.home);
 // console.log(refs.myLibrary);
 // console.log(refs.headerDynamicContainer);
-
 
 function onHomeClick(event) {
   // console.log(event.target);

@@ -1,14 +1,28 @@
 import Pagination from 'tui-pagination';
 import MoviesApiService from '../js/apiService.js';
 import smoothScrool from './smoothScrool.js';
+import debounce from 'lodash.debounce';
 // import renderPopularMoviesGrid from '../index';
 // import fetchPopularMovies from '../index';
 import movieCardTpl from '../templates/movie-card.hbs';
 import getRefs from '../js/get-refs.js';
+// import debounce from '../node_modules/lodash.debounce';
 
 const refs = getRefs();
 
 const moviesApiService = new MoviesApiService();
+
+// refs.searchInput.addEventListener('input', debounce(onSearch, 500));
+
+function onSearch(event) {
+  refs.moviesList.innerHTML = '';
+  const input = event.target;
+  const searchQuery = input.value;
+  if (!searchQuery) {
+    return;
+  }
+  renderPopularMoviesGrid(searchQuery).catch(error => console.log(error));
+}
 
 const container = document.getElementById('pagination');
 const options = {
@@ -21,7 +35,8 @@ const options = {
   lastItemClassName: 'tui-last-child',
   template: {
     page: '<a href="#" class="tui-page-btn">{{page}}</a>',
-    currentPage: '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
+    currentPage:
+      '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
     moveButton:
       '<a href="#" class="tui-page-btn tui-{{type}}">' +
       '<span class="tui-ico-{{type}}">{{type}}</span>' +
@@ -38,21 +53,27 @@ const options = {
 };
 
 const pagination = new Pagination(container, options);
-let currentPage;
+let currentPage = localStorage.getItem('currentPage');
 
-export default async function renderPopularMoviesGrid() {
+async function renderPopularMoviesGrid(searchQuery) {
+  console.log(searchQuery);
+  const fetchMovies = searchQuery
+    ? moviesApiService.fetchMoviesBySearch()
+    : moviesApiService.fetchPopularMovies();
+
   const {
     results: movies,
     page,
     total_pages,
     total_results,
-  } = await moviesApiService.fetchPopularMovies();
+  } = await fetchMovies;
 
   //genresList - array of objects [{id: 23, name: "Drama"}, {id: 17, name: "Action"} ...]
   const genresListObj = await moviesApiService.fetchGenresList();
   const genresList = genresListObj.genres;
 
-  transformMoviesObjectFields(movies, genresList);
+  console.log(movies);
+  // transformMoviesObjectFields(movies, genresList);
 
   const popularMoviesMarkup = movieCardTpl(movies);
   refs.moviesList.insertAdjacentHTML('beforeend', popularMoviesMarkup);
@@ -83,6 +104,14 @@ function showPopularMovies(currentPage) {
 
 pagination.on('afterMove', function (evt) {
   smoothScrool();
-  let currentPage = evt.page;
+  currentPage = evt.page;
+  localStorage.setItem('currentPage', currentPage);
   showPopularMovies(currentPage);
 });
+
+if (currentPage !== 1) {
+  moviesApiService.setPage(currentPage);
+  pagination.page = currentPage;
+
+  renderPopularMoviesGrid().catch(error => console.log(error));
+}

@@ -5,8 +5,11 @@ export default function getRefs() {
     preloader: document.querySelector('.js-preloader'),
     home: document.querySelector('[data-header="home"]'),
     myLibrary: document.querySelector('[data-header="myLiblary"]'),
-    headerDynamicContainer: document.querySelector('[data-header="dynamicContainer"]'),
+    headerDynamicContainer: document.querySelector(
+      '[data-header="dynamicContainer"]',
+    ),
     goTopBtn: document.querySelector('.back_to_top'),
     headerBackgroundContainer: document.querySelector('.js-container-header-bg'),
+    searchInput: document.querySelector('.js-input-movie'),
   };
 }
