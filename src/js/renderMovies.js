@@ -37,26 +37,18 @@ const options = {
 const pagination = new Pagination(container, options);
 let currentPage = localStorage.getItem('currentPage');
 
-let searchQuery = 'Наследие';
 async function renderPopularMoviesGrid(searchQuery) {
   console.log(searchQuery);
-  if (!searchQuery) {
-    const {
-      results: movies,
-      page,
-      total_pages,
-      total_results,
-    } = await moviesApiService.fetchPopularMovies();
-  }
+  const fetchMovies = searchQuery
+    ? moviesApiService.fetchMoviesBySearch()
+    : moviesApiService.fetchPopularMovies();
 
-  if (searchQuery) {
-    const {
-      results: movies,
-      page,
-      total_pages,
-      total_results,
-    } = await moviesApiService.fetchMoviesBySearch();
-  }
+  const {
+    results: movies,
+    page,
+    total_pages,
+    total_results,
+  } = await fetchMovies;
 
   //genresList - array of objects [{id: 23, name: "Drama"}, {id: 17, name: "Action"} ...]
   const genresListObj = await moviesApiService.fetchGenresList();
