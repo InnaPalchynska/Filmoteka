@@ -31,6 +31,11 @@
   border-radius: 5px;
   overflow: hidden;
   background-color: get-bgColor('header');
+
+  background-image: url(../images/SVG/image-off-outline.svg);  
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 200px;
 }
 
 .movie-data {
