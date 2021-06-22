@@ -1,13 +1,28 @@
 .lightbox__card {
   position: relative;
   width: 240px;
-  height: 869px;
+  max-height: 869px;
   padding-top: 48px;
-  padding-bottom: 41px;
+  padding-bottom: 40px;
   padding-left: 20px;
   padding-right: 20px;
 
   background-color: get-bgColor('main');
+
+  @media screen and(min-width: $tablet) {
+    display: flex;
+    align-items: flex-start;
+    width: 558px;
+    height: 480px;
+    padding-top: 42px;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
+  @media screen and(min-width: $desktop) {
+    width: 822px;
+    padding-top: 50px;
+  }
 }
 
 .lightbox__close-button {
@@ -39,10 +54,38 @@
 
   border-radius: 5px;
   overflow: hidden;
+
+  @media screen and(min-width: $tablet) {
+    width: 50%;
+    min-width: 264px;
+    margin-bottom: 0px;
+  }
+
+  @media screen and(min-width: $desktop) {
+    min-width: 396px;
+  }
+}
+
+.lightbox__content {
+  // display: flex;
+  // flex-wrap: wrap;
+  @media screen and(min-width: $tablet) {
+    width: 50%;
+    min-width: 264px;
+    margin-left: 30px;
+  }
 }
 
 .lightbox__img {
   height: 357px;
+
+  @media screen and(min-width: $tablet) {
+    height: 374px;
+  }
+
+  @media screen and(min-width: $desktop) {
+    height: 478px;
+  }
 }
 
 .lightbox__title {
@@ -54,6 +97,11 @@
   text-transform: uppercase;
 
   color: get-textColor('main');
+
+  @media screen and(min-width: $desktop) {
+    font-size: getFont-size__desk('name-film-modal');
+    line-height: 1.17;
+  }
 }
 
 .movie-info {
@@ -93,7 +141,7 @@
 .movie-info__text {
   font-weight: 500;
   color: get-textColor('main');
-  line-height: 1.66;
+  line-height: 1.16;
   text-transform: uppercase;
 }
 
@@ -105,7 +153,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 30px;
+  width: 36px;
   height: 16px;
   color: get-textColor('light');
   background-color: get-navElColor('votes-avarage-lightbox');
@@ -140,6 +188,7 @@
 
 .movie-info__descr {
   text-transform: initial;
+  line-height: 1.67;
 }
 
 .lightbox__button {
@@ -155,6 +204,18 @@
   text-transform: uppercase;
   color: get-textColor('main');
 
+  @media screen and(min-width: $tablet) {
+    width: 125px;
+  }
+
+  @media screen and(min-width: $desktop) {
+    width: 136px;
+  }
+
+  &:not(:first-child) {
+    margin-left: 15px;
+  }
+
   &:focus,
   &:hover {
     background-color: get-navElColor('button-primary');
@@ -166,5 +227,4 @@
 .lightbox__buttons-overlay {
   display: flex;
   align-items: center;
-  justify-content: space-between;
 }

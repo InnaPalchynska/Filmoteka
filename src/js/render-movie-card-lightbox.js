@@ -39,7 +39,8 @@ function renderMovieCardLightbox(fullInfo) {
 
   fullInfo.popularity = moviePopularity;
   fullInfo.movie_genres = movieGenres;
-  basicLightbox.create(movieCardLightboxTpl(fullInfo)).show();
+  const lightbox = basicLightbox.create(movieCardLightboxTpl(fullInfo));
+  lightbox.show();
 
   const closeBtn = document.querySelector('.lightbox__close-button');
   closeBtn.addEventListener('click', onLightboxClose);
@@ -50,8 +51,9 @@ function onLightboxClose() {
   const closeBtn = document.querySelector('.lightbox__close-button');
   const lightBox = document.querySelector('.basicLightbox');
 
-  closeBtn.removeEventListener('click', onLightboxClose);
+  // lightBox.close();
   lightBox.classList.toggle('basicLightbox--visible');
+  closeBtn.removeEventListener('click', onLightboxClose);
   window.removeEventListener('keydown', onEscBtnPress);
 }
 
