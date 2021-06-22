@@ -28,9 +28,15 @@
 }
 
 .poster-thumb {
+  height: 398px;
   border-radius: 5px;
   overflow: hidden;
   background-color: get-bgColor('header');
+}
+
+.poster-thumb img {
+  height: inherit;
+  object-fit: cover;
 }
 
 .movie-data {
@@ -49,13 +55,7 @@
   font-size: getFont-size__mob('name-film');
 }
 
-.movie-data__genres {
-  padding-right: 4px;
-  border-right: 1px solid #ff6b08;
-}
-
 .movie-data__year {
-  padding-left: 4px;
   padding-right: 7px;
 }
 
