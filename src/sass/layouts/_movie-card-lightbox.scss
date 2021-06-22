@@ -56,6 +56,10 @@
   border-radius: 5px;
   overflow: hidden;
 
+  background-image: url(../images/SVG/image-off-outline.svg);  
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 200px;
   @media screen and(min-width: $tablet) {
     width: 50%;
     min-width: 264px;
