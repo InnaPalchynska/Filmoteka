@@ -6,6 +6,7 @@ import './js/render-page.js';
 import './js/render-movie-card-lightbox.js';
 
 import './js/dark-theme';
+import './js/localStorage.js'
 
 // это образец для импортирования ваших js фич
 // import { } from './js/.....
@@ -19,6 +20,8 @@ import movieCardLightboxTpl from './templates/movie-card-lightbox.hbs';
 import preloader from './js/preloader.js';
 import renderPopularMoviesGrid from './js/renderMovies.js';
 import back_to_top from './js/back_to_top.js';
+
+
 
 // moviesApiService.query = 'Наследие';
 

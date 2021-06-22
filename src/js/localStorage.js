@@ -1,10 +1,9 @@
-import movieCardTpl from '../templates/movie-card-lightbox.hbs';
-
 
 const modalButtonWatched = document.querySelector('.js-modal-btn-watched');
 const modalButtonQueue = document.querySelector('.js-modal-btn-queue');
 
 modalButtonWatched.addEventListener('click', onWatchedButton);
+modalButtonQueue.addEventListener('click', onQueueButton);
 
 
 if (!localStorage.getItem('filmWatched')) {
@@ -31,7 +30,36 @@ function onWatchedButton(event) {
     event.target.textContent = 'Add to watched';
     event.target.classList.remove('active');
     const index = filmsStorageArray.indexOf(event.target.id);
+
     filmsStorageArray.splice(index, 1);
     localStorage.setItem('filmWatched', JSON.stringify(filmsStorageArray));
+  }
+}
+
+if (!localStorage.getItem('filmQueue')) {
+  localStorage.setItem('filmQueue', JSON.stringify([]));
+}
+if (localStorage.getItem('filmQueue')) {
+  const filmsStorage = localStorage.getItem('filmQueue');
+  const filmsStorageArray = JSON.parse(filmsStorage);
+  if (filmsStorageArray.includes(modalButtonWatched.Id)) {
+    refs.modalButtonQueue.textContent = 'Remove from queue';
+    refs.modalButtonQueue.classList.add('active');
+  }
+}
+function onQueueButton(event) {
+  const filmsStorage = localStorage.getItem('filmQueue');
+  const filmsStorageArray = JSON.parse(filmsStorage);
+  if (!filmsStorageArray.includes(event.target.Id)) {
+    filmsStorageArray.push(event.target.Id);
+    event.target.textContent = 'Remove from queue';
+    event.target.classList.add('active');
+    localStorage.setItem('filmQueue', JSON.stringify(filmsStorageArray));
+  } else {
+    event.target.textContent = 'Add to queue';
+    event.target.classList.remove('active');
+    const index = filmsStorageArray.indexOf(event.target.Id);
+    filmsStorageArray.splice(index, 1);
+    localStorage.setItem('filmQueue', JSON.stringify(filmsStorageArray));
   }
 }

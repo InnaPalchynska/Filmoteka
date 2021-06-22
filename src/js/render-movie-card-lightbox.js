@@ -4,6 +4,7 @@ import MoviesApiService from '../js/apiService.js';
 import getRefs from '../js/get-refs';
 import movieCardLightboxTpl from '../templates/movie-card-lightbox.hbs';
 
+
 const refs = getRefs();
 const moviesApiService = new MoviesApiService();
 
@@ -39,3 +40,5 @@ function renderMovieCardLightbox(fullInfo) {
   fullInfo.movie_genres = movieGenres;
   basicLightbox.create(movieCardLightboxTpl(fullInfo)).show();
 }
+
+
