@@ -64,7 +64,6 @@ function renderLibraryMovies(movies) {
 }
 
 function transformMovieObjectFields(movie) {
-  console.log(movie);
   let genresList = [];
   movie.genres.map(genre => {
     genresList.push(genre.name);
@@ -72,4 +71,5 @@ function transformMovieObjectFields(movie) {
   movie.genres = genresList.join(', ');
 
   movie.release_date = null ? '' : movie.release_date.slice(0, 4);
+  movie.vote_average = movie.vote_average.toFixed(1);
 }
