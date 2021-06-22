@@ -3,15 +3,16 @@
     <div class='poster-thumb'>
       <img
         src='https://image.tmdb.org/t/p/original/{{poster_path}}'
+        height="410"
         alt='{{original_title}}'
         data-id='{{id}}'
       />
     </div>
-    <div class='movie-info'>
-      <h2 class='movie-info__title js-movie-info__title'>{{original_title}}</h2>
-      <p class='movie-info__details'>
-        <span class='movie-info__genres js-movie-info__genres'>{{genre_ids}}</span><span
-          class='movie-info__year js-movie-info__year'
+    <div class='movie-data'>
+      <h2 class='movie-data__title'>{{original_title}}</h2>
+      <p class='movie-data__details'>
+        <span class='movie-data__genres'>{{genre_ids}}</span><span
+          class='movie-data__year'
         >{{release_date}}</span>
       </p>
     </div>

@@ -32,25 +32,36 @@
   overflow: hidden;
 }
 
-.movie-info {
+.movie-data {
   padding-top: 10px;
-  font-size: getFont-size__tab('name-film');
+  line-height: 1.33;
 }
 
-.movie-info__title {
+.movie-data__title {
   text-transform: uppercase;
   font-weight: 500;
+  font-size: getFont-size__mob('name-film');
 }
 
-.movie-info__details {
+.movie-data__details {
   color: get-textColor('accent');
+  font-size: getFont-size__mob('name-film');
 }
 
-.movie-info__genres {
+.movie-data__genres {
   padding-right: 4px;
   border-right: 1px solid #ff6b08;
 }
 
-.movie-info__year {
+.movie-data__year {
   padding-left: 4px;
+  padding-right: 7px;
+}
+
+.movie-data__rating {
+  padding: 1px 10px;
+  border-radius: 5px;
+  color: get-textColor('light');
+  background-color: get-textColor('accent');
+  line-height: 1.17;
 }
