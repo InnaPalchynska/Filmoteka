@@ -3,7 +3,7 @@
     <i class='material-icons-outlined'>close</i>
   </button>
 
-  <div class='lightbox__poster-thumb'>
+  <div class='lightbox__poster'>
     <img
       class='lightbox__img'
       src='https://image.tmdb.org/t/p/original/{{poster_path}}'
@@ -16,10 +16,10 @@
     <ul class='movie-info'>
       <li class='movie-info__item'>
         <h3 class='movie-info__param'>Vote / Votes</h3>
-        <p class='movie-info__text movie-info__votes'>
-          <div class='movie-info__votes--average'>{{vote_average}}</div>
+        <p class='movie-info__votes'>
+          <div class='movie-info__text movie-info__votes--average'>{{vote_average}}</div>
           <span>/</span>
-          <div class='movie-info__votes--count'>{{vote_count}}</div>
+          <div class='movie-info__text movie-info__votes--count'>{{vote_count}}</div>
         </p>
       </li>
 
@@ -51,11 +51,12 @@
         </p>
       </li>
     </ul>
-  </div>
 
-  <div class='lightbox__buttons-overlay'>
-    <button class='lightbox__button'>add to watched</button>
-    <button class='lightbox__button'>add to queue</button>
+    <div class='lightbox__buttons-overlay'>
+      <button class='lightbox__button'>add to watched</button>
+      <button class='lightbox__button'>add to queue</button>
+    </div>
+
   </div>
 
 </div>
