@@ -2,7 +2,7 @@ const modalButtonWatched = document.querySelector('.js-modal-btn-watched');
 const modalButtonQueue = document.querySelector('.js-modal-btn-queue');
 
 modalButtonWatched.addEventListener('click', onWatchedButton);
-modalButtonQueue.addEventListener('click', onQueueButton);
+
 
 if (!localStorage.getItem('filmWatched')) {
   localStorage.setItem('filmWatched', JSON.stringify([]));
@@ -21,11 +21,11 @@ function onWatchedButton(event) {
   const filmsStorageArray = JSON.parse(filmsStorage);
   if (!filmsStorageArray.includes(event.target.id)) {
     filmsStorageArray.push(event.target.id);
-    event.target.textContent = 'REMOVE FROM WATCHED';
+    event.target.textContent = 'Remove from watched';
     event.target.classList.add('active');
     localStorage.setItem('filmWatched', JSON.stringify(filmsStorageArray));
   } else {
-    event.target.textContent = 'ADD TO WATCHED';
+    event.target.textContent = 'Add to watched';
     event.target.classList.remove('active');
     const index = filmsStorageArray.indexOf(event.target.id);
     filmsStorageArray.splice(index, 1);
