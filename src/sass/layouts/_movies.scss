@@ -30,6 +30,7 @@
 .poster-thumb {
   border-radius: 5px;
   overflow: hidden;
+  background-color: get-bgColor('header');
 }
 
 .movie-data {

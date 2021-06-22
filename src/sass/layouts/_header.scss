@@ -17,9 +17,19 @@ header{
 .logo{
     display: inline-flex;
     align-items: baseline;
+    outline: none;
+}
+
+.logo:focus{
+    @include transition(outline);
+    outline: 4px solid get-navElColor('line-activ-link');
+    outline-style: groove;
+    // outline-width: 4px; padding: 5px;
 }
 
 .logo__icon{
+    padding: 5px 0 0;
+    margin-bottom: 8px;
     margin-right: 10px;
     color:#FFFFFF;
 }
@@ -63,6 +73,10 @@ header{
     
 }
 
+.site-nav__button:focus{
+    outline: none;   
+}
+
 .site-nav__button::after {
   content: '';
   position: absolute;
@@ -92,13 +106,15 @@ header{
     width: 280px;
     padding-bottom: 4px;
     margin-bottom: 21px;
+
     font-size: getFont-size__mob('search');;
     color: get-textColor('light');
-    border: 0.5px solid #FFFFFF;
-    border-top: transparent;
-    border-left: transparent;
-    border-right: transparent;    
+    
+    border: none;
+    border-bottom: 0.5px solid #FFFFFF;
+       
     background-color: transparent;
+    outline:none;
 
     @media screen and (min-width: $tablet){
         width: 336px;
@@ -109,6 +125,18 @@ header{
     letter-spacing: 0.03em;
     color: get-textColor('light');
   }
+}
+
+.search-field__input:hover{
+    @include transition(border-color);
+    border-color: get-navElColor('line-activ-link');
+}
+
+.search-field__input:focus{
+    @include transition(outline);
+    outline: 4px solid get-navElColor('line-activ-link');
+    outline-style: groove;
+    outline-width: 4px; padding: 5px;
 }
 
 
