@@ -1,3 +1,6 @@
+import movieCardTpl from '../templates/movie-card-lightbox.hbs';
+
+
 const modalButtonWatched = document.querySelector('.js-modal-btn-watched');
 const modalButtonQueue = document.querySelector('.js-modal-btn-queue');
 
