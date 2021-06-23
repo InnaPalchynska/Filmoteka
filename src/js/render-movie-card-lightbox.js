@@ -41,6 +41,12 @@ function renderMovieCardLightbox(fullInfo) {
   fullInfo.movie_genres = movieGenres;
   const lightbox = basicLightbox.create(movieCardLightboxTpl(fullInfo));
   lightbox.show();
+  const visibleLightbox = basicLightbox.visible();
+  console.log(visibleLightbox);
+
+  if (visibleLightbox === true) {
+    refs.body.classList.toggle('inactive');
+  }
 
   const closeBtn = document.querySelector('.lightbox__close-button');
   closeBtn.addEventListener('click', onLightboxClose);
