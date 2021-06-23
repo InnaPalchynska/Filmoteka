@@ -16,10 +16,18 @@
 .movies-list__item {
   margin-top: 20px;
 
+  &:first-child {
+    margin-top: 0;
+  }
+
   @media screen and (min-width: 768px) {
     flex-basis: calc(100% / 2 - 30px);
     margin-top: 30px;
     margin-left: 30px;
+
+    &:first-child {
+      margin-top: 30px;
+    }
   }
 
   @media screen and (min-width: 1024px) {
@@ -31,12 +39,12 @@
   height: 398px;
   border-radius: 5px;
   overflow: hidden;
-  background-color: get-bgColor('header');
+  // background-color: get-bgColor('header');
 
-  background-image: url(../images/SVG/image-off-outline.svg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 200px;
+  // background-image: url(../images/SVG/image-off-outline.svg);
+  // background-position: center;
+  // background-repeat: no-repeat;
+  // background-size: 200px;
 }
 
 .poster-thumb img {
