@@ -1,4 +1,4 @@
-import 'basiclightbox/src/styles/main.scss';
+import '../sass/components/basic-lightbox';
 import * as basicLightbox from 'basiclightbox';
 import MoviesApiService from '../js/apiService.js';
 import getRefs from '../js/get-refs';
@@ -39,7 +39,9 @@ function renderMovieCardLightbox(fullInfo) {
 
   fullInfo.popularity = moviePopularity;
   fullInfo.movie_genres = movieGenres;
-  const lightbox = basicLightbox.create(movieCardLightboxTpl(fullInfo));
+
+  const lightbox = basicLightbox.create(movieCardLightboxTpl(fullInfo), {});
+
   lightbox.show();
   const visibleLightbox = basicLightbox.visible();
   console.log(visibleLightbox);
