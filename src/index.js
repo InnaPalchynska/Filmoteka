@@ -1,4 +1,4 @@
-import 'modern-normalize.css';
+import 'modern-normalize';
 import './sass/main.scss';
 import 'material-icons';
 // import './js/pagination.js';
