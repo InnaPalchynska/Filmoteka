@@ -53,3 +53,9 @@ input {
   height: 1px;
   margin: -1px;
 }
+
+.inactive {
+  position: static;
+  height: auto;
+  overflow-y: hidden;
+}
