@@ -1,5 +1,8 @@
 .lightbox__card {
-  position: relative;
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
   width: 240px;
   max-height: 869px;
   padding-top: 48px;
@@ -10,6 +13,7 @@
   background-color: get-bgColor('main');
 
   @media screen and(min-width: $tablet) {
+    top: 230px;
     display: flex;
     align-items: flex-start;
     width: 558px;
@@ -20,6 +24,7 @@
   }
 
   @media screen and(min-width: $desktop) {
+    top: 100px;
     width: 822px;
     padding-top: 50px;
   }
