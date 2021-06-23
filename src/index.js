@@ -1,12 +1,12 @@
 import 'normalize.css';
 import './sass/main.scss';
 // import './js/pagination.js';
-
+//import './js/localStorage.js'
 import './js/render-page.js';
 import './js/render-movie-card-lightbox.js';
 
 import './js/dark-theme';
-import './js/localStorage.js'
+
 
 // это образец для импортирования ваших js фич
 // import { } from './js/.....

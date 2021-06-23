@@ -4,6 +4,8 @@ import MoviesApiService from '../js/apiService.js';
 import getRefs from '../js/get-refs';
 import movieCardLightboxTpl from '../templates/movie-card-lightbox.hbs';
 
+import  './localStorage';
+
 
 const refs = getRefs();
 const moviesApiService = new MoviesApiService();
@@ -25,8 +27,10 @@ async function onMovieCardClick(e) {
 
 async function getFullInfoOfMovie(currentMovieCard) {
   const currentMovieCardId = currentMovieCard.dataset.id;
+  //console.log(currentMovieCardId);
   const fullInfoOfMovie = await moviesApiService.fetchFullInfoOfMovie(currentMovieCardId);
   return fullInfoOfMovie;
+  
 }
 
 function renderMovieCardLightbox(fullInfo) {

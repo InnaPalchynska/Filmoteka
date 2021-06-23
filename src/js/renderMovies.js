@@ -6,6 +6,7 @@ import smoothScrool from './smoothScrool.js';
 import movieCardTpl from '../templates/movie-card.hbs';
 import getRefs from '../js/get-refs.js';
 
+
 const refs = getRefs();
 
 const moviesApiService = new MoviesApiService();
