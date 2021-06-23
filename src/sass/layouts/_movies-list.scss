@@ -33,15 +33,17 @@
   overflow: hidden;
   background-color: get-bgColor('header');
 
-  background-image: url(../images/SVG/image-off-outline.svg);  
+  background-image: url(../images/SVG/image-off-outline.svg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: 200px;
 }
 
 .poster-thumb img {
+  width: 100%;
   height: inherit;
   object-fit: cover;
+  object-position: center;
 }
 
 .movie-data {
