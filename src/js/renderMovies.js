@@ -103,7 +103,7 @@ function showPopularMovies(currentPage) {
 pagination.on('afterMove', function (evt) {
   smoothScrool();
   currentPage = evt.page;
-  localStorage.setItem('currentPage', currentPage);
+
   showPopularMovies(currentPage);
 });
 
@@ -113,3 +113,5 @@ if (currentPage !== 1) {
 
   renderPopularMoviesGrid().catch(error => console.log(error));
 }
+
+renderPopularMoviesGrid().catch(error => console.log(error));
