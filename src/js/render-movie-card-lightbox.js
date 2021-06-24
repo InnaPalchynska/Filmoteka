@@ -25,6 +25,7 @@ async function onMovieCardClick(e) {
 
 async function getFullInfoOfMovie(currentMovieCard) {
   const currentMovieCardId = currentMovieCard.dataset.id;
+  console.log(currentMovieCardId)
   addsToLibrary(currentMovieCardId);
   
   const fullInfoOfMovie = await moviesApiService.fetchFullInfoOfMovie(currentMovieCardId);

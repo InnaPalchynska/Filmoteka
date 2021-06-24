@@ -30,34 +30,34 @@ function addsToLibrary() {
     }
   }
 }
-function onWatchedButton(event) {
+function onWatchedButton(e) {
   const filmsStorage = localStorage.getItem('filmWatched');
   const filmsStorageArray = JSON.parse(filmsStorage);
-  if (!filmsStorageArray.includes(event.target.id)) {
-    filmsStorageArray.push(event.target.id);
-    event.target.textContent = 'Remove from watched';
-    event.target.classList.add('active');
+  if (!filmsStorageArray.includes(e.target.id)) {
+    filmsStorageArray.push(e.target.id);
+    e.target.textContent = 'Remove from watched';
+    e.target.classList.add('active');
     localStorage.setItem('filmWatched', JSON.stringify(filmsStorageArray));
   } else {
-    event.target.textContent = 'Add to watched';
-    event.target.classList.remove('active');
-    const index = filmsStorageArray.indexOf(event.target.id);
+    e.target.textContent = 'Add to watched';
+    e.target.classList.remove('active');
+    const index = filmsStorageArray.indexOf(e.target.id);
     filmsStorageArray.splice(index, 1);
     localStorage.setItem('filmWatched', JSON.stringify(filmsStorageArray));
   }
 }
-function onQueueButton(event) {
+function onQueueButton(e) {
   const filmsStorage = localStorage.getItem('filmQueue');
   const filmsStorageArray = JSON.parse(filmsStorage);
-  if (!filmsStorageArray.includes(event.target.id)) {
-    filmsStorageArray.push(event.target.id);
-    event.target.textContent = 'Remove from queue';
-    event.target.classList.add('active');
+  if (!filmsStorageArray.includes(e.target.id)) {
+    filmsStorageArray.push(e.target.id);
+    e.target.textContent = 'Remove from queue';
+    e.target.classList.add('active');
     localStorage.setItem('filmQueue', JSON.stringify(filmsStorageArray));
   } else {
-    event.target.textContent = 'Add to queue';
-    event.target.classList.remove('active');
-    const index = filmsStorageArray.indexOf(event.target.id);
+    e.target.textContent = 'Add to queue';
+    e.target.classList.remove('active');
+    const index = filmsStorageArray.indexOf(e.target.id);
     filmsStorageArray.splice(index, 1);
     localStorage.setItem('filmQueue', JSON.stringify(filmsStorageArray));
   }
