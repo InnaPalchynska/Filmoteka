@@ -6,7 +6,6 @@ import smoothScrool from './smoothScrool.js';
 import movieCardTpl from '../templates/movie-card.hbs';
 import getRefs from '../js/get-refs.js';
 
-
 const refs = getRefs();
 
 const moviesApiService = new MoviesApiService();
@@ -69,7 +68,9 @@ function transformMoviesObjectFields(movies, genresList) {
     //in movies.genre_ids genres ids replace with genres names
     genresIdsList.forEach((genreId, index, array) => {
       const genresListItem = genresList.find(genre => genre.id === genreId);
+
       const idx = genresList.indexOf(genresListItem);
+
       array[index] = genresList[idx].name;
     });
     movie.genre_ids = genresIdsList.join(', ');

@@ -1,11 +1,7 @@
 {{#each this}}
-  <li class='movies-list__item'>
+  <li class='movies-list__item' >
     <div class='poster-thumb'>
-      <img
-        src='https://image.tmdb.org/t/p/original/{{poster_path}}'
-        alt='{{original_title}}'
-        data-id='{{id}}'
-      />
+      <img src='https://image.tmdb.org/t/p/original/{{poster_path}}' alt='{{original_title}}' data-id='{{id}}'/>
     </div>
     <div class='movie-info'>
       <h2 class='movie-info__title js-movie-info__title'>{{original_title}}</h2>
