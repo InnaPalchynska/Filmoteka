@@ -3,32 +3,55 @@
 }
 
 .footer__box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   padding-top: 30px;
   padding-bottom: 30px;
+  text-align: center;
+
+  @media screen and(min-width: $tablet) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .footer__title {
+  display: inline-block;
   font-weight: 400;
-  font-size: getFont-size__desk('text-footer');
-  line-height: 1.19;
+  font-size: getFont-size__mob('text-footer');
+  line-height: 1.14;
   color: get-textColor('footer');
+
+  @media screen and(min-width: $tablet) {
+    font-size: getFont-size__tab('text-footer');
+    line-height: 1.19;
+  }
 }
 
 .footer__button {
-  line-height: 19px;
+  font-weight: 400;
+  font-size: getFont-size__mob('text-footer');
+  line-height: 1.14;
   color: get-textColor('accent');
   background-color: transparent;
   border: none;
   cursor: pointer;
+
+  @media screen and(min-width: $tablet) {
+    font-size: getFont-size__tab('text-footer');
+    line-height: 1.19;
+  }
 }
 
 .footer-lightbox__card {
+  max-height: 2200px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+
   @media screen and(min-width: $tablet) {
     width: 668px;
     height: 500px;
+    padding-top: 40px;
+    padding-bottom: 40px;
   }
 
   @media screen and(min-width: $desktop) {
@@ -54,17 +77,18 @@
 }
 
 .team__member {
-  width: 30%;
+  position: relative;
   height: 320px;
+  margin-top: 25px;
 
   background-color: get-bgColor('footer');
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
-    0px 2px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.1),
+    1px 4px 6px rgba(0, 0, 0, 0.2);
   border-radius: 0px 0px 4px 4px;
 
   @media screen and (min-width: $tablet) {
+    width: 30%;
     // height: 374px;
-    margin-top: 25px;
     margin-left: 25px;
   }
 
@@ -74,4 +98,6 @@
 }
 
 .team__photo {
+  position: absolute;
+  overflow: hidden;
 }
