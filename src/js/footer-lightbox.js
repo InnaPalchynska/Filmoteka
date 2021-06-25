@@ -30,6 +30,17 @@ function onLightboxOpen(e) {
 
   lightbox.show();
 
+  const photo1 = document.querySelector('[data-photo="photo--Inna"]');
+  const photo2 = document.querySelector('[data-photo="photo--Anastasia"]');
+  const photo3 = document.querySelector('[data-photo="photo--Halyna"]');
+  const photo4 = document.querySelector('[data-photo="photo--Dariia"]');
+  const photo5 = document.querySelector('[data-photo="photo--Kateryna"]');
+  const photo6 = document.querySelector('[data-photo="photo--Sergiy"]');
+
+  console.log(photo1);
+  photo1.src = '../images/team/team__2__mob.jpg';
+  console.log(photo1.src);
+
   const closeBtn = document.querySelector('.footer-lightbox__close-btn');
 
   closeBtn.addEventListener('click', onLightboxClose);
