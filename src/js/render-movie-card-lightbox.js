@@ -52,49 +52,12 @@ async function renderMovieCardLightbox(fullInfo) {
   addsToLibrary();
 
 
-   
-   modalButtonWatched.addEventListener('click', onWatchedButton);
-   modalButtonQueue.addEventListener('click', onQueueButton);
+  modalButtonWatched.addEventListener('click', onWatchedButton);
+  modalButtonQueue.addEventListener('click', onQueueButton);
   
  
 
-  //const modalButtonWatched = document.querySelector('.lightbox__button--watched');
-//   //const modalButtonQueue = document.querySelector('.lightbox__button--queue');
-
- //modalButtonWatched.addEventListener('click', onWatchedButton);
-//   //modalButtonQueue.addEventListener('click', onQueueButton);
-  
-
-//   function addsToLibrary(){
-//      if (!localStorage.getItem('filmWatched')) {
-//     localStorage.setItem('filmWatched', JSON.stringify([]));
-//   }
-//   if (localStorage.getItem('filmWatched')) {
-//     const filmsStorage = localStorage.getItem('filmWatched');
-//     const filmsStorageArray = JSON.parse(filmsStorage);
-//     if (filmsStorageArray.includes(modalButtonWatched.id)) {
-//       modalButtonWatched.textContent = 'Remove from watched';
-//       modalButtonWatched.classList.add('active');
-//     }
-//   }
-//   }
-
-//   function onWatchedButton(e) {
-//   const filmsStorage = localStorage.getItem('filmWatched');
-//   const filmsStorageArray = JSON.parse(filmsStorage);
-//   if (!filmsStorageArray.includes(e.target.id)) {
-//     filmsStorageArray.push(e.target.id);
-//     e.target.textContent = 'Remove from watched';
-//     e.target.classList.add('active');
-//     localStorage.setItem('filmWatched', JSON.stringify(filmsStorageArray));
-//   } else {
-//     e.target.textContent = 'Add to watched';
-//     e.target.classList.remove('active');
-//     const index = filmsStorageArray.indexOf(e.target.id);
-//     filmsStorageArray.splice(index, 1);
-//     localStorage.setItem('filmWatched', JSON.stringify(filmsStorageArray));
-//   }
-// }
+ 
 
 
   const closeBtn = document.querySelector('.lightbox__close-button');
