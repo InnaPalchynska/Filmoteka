@@ -46,7 +46,7 @@ async function renderMovieCardLightbox(fullInfo) {
 
   lightbox.show();
 
-  const closeBtn = document.querySelector('.lightbox__close-button');
+  const closeBtn = document.querySelector('.lightbox__close-btn');
 
   closeBtn.addEventListener('click', onLightboxClose);
   window.addEventListener('keydown', onEscBtnPress);
