@@ -32,7 +32,6 @@ async function getFullInfoOfMovie(currentMovieCard) {
 async function renderMovieCardLightbox(fullInfo) {
   getMovieGenres(fullInfo);
   getMoviePopularity(fullInfo);
-  // getMovieOverview(fullInfo);
 
   const lightbox = basicLightbox.create(movieCardLightboxTpl(fullInfo), {
     onShow() {
@@ -46,7 +45,7 @@ async function renderMovieCardLightbox(fullInfo) {
 
   lightbox.show();
 
-  const closeBtn = document.querySelector('.lightbox__close-button');
+  const closeBtn = document.querySelector('.lightbox__close-btn');
 
   closeBtn.addEventListener('click', onLightboxClose);
   window.addEventListener('keydown', onEscBtnPress);
@@ -83,21 +82,3 @@ function getMoviePopularity(fullInfo) {
 
   return moviePopularity;
 }
-
-// function getMovieOverview(fullInfo) {
-//   const movieOverview = fullInfo.overview;
-//   console.log(typeof movieOverview);
-
-//   // const length =
-//   // console.log(length);
-
-//   if (movieOverview.length > 500) {
-//     movieOverview.slice(500);
-//     console.log(movieOverview);
-//   }
-
-//   console.log(movieOverview);
-//   fullInfo.overview = movieOverview;
-
-//   return movieOverview;
-// }

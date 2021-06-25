@@ -17,6 +17,7 @@ $basicLightbox__timing: ease !default;
   transition: opacity $basicLightbox__duration $basicLightbox__timing;
   z-index: $basicLightbox__zIndex;
   will-change: opacity;
+  overflow-y: scroll;
 
   &--visible {
     opacity: 2;
