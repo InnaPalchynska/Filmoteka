@@ -1448,6 +1448,11 @@ body.dark-theme {
   vertical-align: top;
 }
 
+.tui-pagination .tui-first,
+.tui-pagination .tui-last {
+  display: none;
+}
+
 .tui-page-btn .tui-next-is-ellip .tui-last-child {
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
@@ -1477,6 +1482,10 @@ body.dark-theme {
   .tui-page-btn .tui-next-is-ellip .tui-last-child {
     margin-right: 0px;
   }
+}
+
+.hidden-tui {
+  display: none;
 }
 
 @media screen and (min-width: 768px) {
