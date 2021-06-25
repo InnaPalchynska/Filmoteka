@@ -13,12 +13,14 @@ const moviesApiService = new MoviesApiService();
 refs.searchInput.addEventListener('input', debounce(onSearch, 500));
 
 let searchQuery = '';
-let currentPage = localStorage.getItem('currentPage');
 function onSearch(event) {
+  event.preventDefault();
   refs.moviesList.innerHTML = '';
-  // pagination.movePageTo(1);
 
-  pagination.reset();
+  //
+  pagination.movePageTo(1);
+  // pagination.reset();
+
   const input = event.target;
   searchQuery = input.value;
   if (!searchQuery) {
@@ -70,8 +72,13 @@ async function renderPopularMoviesGrid(searchQuery) {
   const genresList = genresListObj.genres;
 
   transformMoviesObjectFields(movies, genresList);
-  localStorage.getItem('currentPage', 1);
-  pagination.setTotalItems(total_pages);
+
+  if (total_pages < 1) {
+    refs.divPagination.classList.add('hidden-tui');
+  } else {
+    refs.divPagination.classList.remove('hidden-tui');
+    pagination.setTotalItems(total_pages);
+  }
 
   const popularMoviesMarkup = movieCardTpl(movies);
   refs.moviesList.insertAdjacentHTML('beforeend', popularMoviesMarkup);
@@ -109,7 +116,7 @@ pagination.on('afterMove', function (evt) {
 
 if (currentPage !== 1) {
   moviesApiService.setPage(currentPage);
-  // pagination.movePageTo(currentPage);
+  pagination.page = currentPage;
 
   renderPopularMoviesGrid().catch(error => console.log(error));
 }
