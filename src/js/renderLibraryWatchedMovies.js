@@ -64,6 +64,16 @@ function renderLibraryMovies(movies) {
 }
 
 function transformMovieObjectFields(movie) {
+  if (!movie.poster_path) {
+    movie.poster_path = 'optimized-png/outline_image_not_supported.png';
+    movie.placeholder = true;
+  } else {
+    movie.poster_path = `https://image.tmdb.org/t/p/original/${movie.poster_path}`;
+    movie.placeholder = false;
+  }
+  console.log(movie.placeholder);
+  console.log(movie);
+
   let genresList = [];
   movie.genres.map(genre => {
     genresList.push(genre.name);

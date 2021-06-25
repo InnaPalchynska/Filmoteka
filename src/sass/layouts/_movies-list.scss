@@ -31,17 +31,28 @@
   height: 398px;
   border-radius: 5px;
   overflow: hidden;
-  background-color: get-bgColor('header');
+}
 
-  background-image: url(../images/SVG/image-off-outline.svg);  
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 200px;
+.poster-thumb.placeholder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #dcdcdc;
+}
+
+.placeholder .material-icons-outlined {
+  font-size: 48px;
 }
 
 .poster-thumb img {
   height: inherit;
   object-fit: cover;
+}
+
+.poster-thumb .poster-placeholder {
+  width: 70px;
+  height: 70px;
+  object-fit: unset;
 }
 
 .movie-data {
