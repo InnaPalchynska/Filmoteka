@@ -5,7 +5,7 @@ $font-size__desk: (
   'name-film': 12px,
   'name-film-modal': 30px,
   'text-modal': 12px,
-  'text-footer': 16x,
+  'text-footer': 16px,
 );
 
 @function getFont-size__desk($key) {
@@ -18,7 +18,7 @@ $font-size__tab: (
   'search': 14px,
   'name-film': 12px,
   'text-modal': 12px,
-  'text-footer': 16x,
+  'text-footer': 16px,
 );
 
 @function getFont-size__tab($key) {
