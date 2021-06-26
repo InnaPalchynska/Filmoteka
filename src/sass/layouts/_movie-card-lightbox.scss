@@ -1,31 +1,36 @@
 .lightbox__card {
-  position: relative;
-  width: 240px;
-  max-height: 869px;
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 280px;
+  max-height: 958px;
   padding-top: 48px;
   padding-bottom: 40px;
   padding-left: 20px;
   padding-right: 20px;
-
   background-color: get-bgColor('main');
 
   @media screen and(min-width: $tablet) {
+    top: 230px;
     display: flex;
     align-items: flex-start;
-    width: 558px;
-    height: 480px;
+    width: 618px;
+    height: 562px;
     padding-top: 42px;
     padding-left: 30px;
     padding-right: 30px;
   }
 
   @media screen and(min-width: $desktop) {
+    top: 100px;
     width: 822px;
+    height: 568px;
     padding-top: 50px;
   }
 }
 
-.lightbox__close-button {
+.lightbox__close-btn {
   position: absolute;
   display: flex;
   align-items: center;
@@ -52,16 +57,12 @@
   width: 240px;
   margin-bottom: 30px;
 
-  border-radius: 5px;
-  overflow: hidden;
-
   background-image: url(../images/SVG/image-off-outline.svg);
   background-position: center;
   background-repeat: no-repeat;
   background-size: 200px;
 
   @media screen and(min-width: $tablet) {
-    width: 50%;
     min-width: 264px;
     margin-bottom: 0px;
   }
@@ -71,9 +72,15 @@
   }
 }
 
+.lightbox__contant-overlay {
+  @media screen and(min-width: $tablet) {
+    display: flex;
+  }
+}
+
 .lightbox__content {
   @media screen and(min-width: $tablet) {
-    width: 50%;
+    // width: 50%;
     min-width: 264px;
     margin-left: 30px;
   }

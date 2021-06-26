@@ -36,9 +36,7 @@ export default class MoviesApiService {
       page: this.page,
     });
 
-    return fetch(`${BASE_URL}search/movie?${searchParams}`).then(response =>
-      response.json(),
-    );
+    return fetch(`${BASE_URL}search/movie?${searchParams}`).then(response => response.json());
   }
 
   fetchFullInfoOfMovie(movieId) {
@@ -46,9 +44,7 @@ export default class MoviesApiService {
       api_key: API_KEY,
     });
 
-    return fetch(`${BASE_URL}/movie/${movieId}?${searchParams}`).then(
-      response => response.json(),
-    );
+    return fetch(`${BASE_URL}/movie/${movieId}?${searchParams}`).then(response => response.json());
   }
 
   incrementPage() {

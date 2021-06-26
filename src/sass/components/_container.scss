@@ -1,23 +1,14 @@
 .container {
-  box-sizing: border-box; //це тимчасово
+  // box-sizing: border-box; //це тимчасово
+  width: 280px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 20px;
-  padding-right: 20px;
-
-  @media screen and (min-width: $mobile) {
-    width: 480px;
-  }
 
   @media screen and (min-width: $tablet) {
-    width: 768px;
-    padding-left: 75px;
-    padding-right: 75px;
+    width: 618px;
   }
 
   @media screen and (min-width: $desktop) {
-    width: 1024px;
-    padding-left: 71px;
-    padding-right: 71px;
+    width: 882px;
   }
 }

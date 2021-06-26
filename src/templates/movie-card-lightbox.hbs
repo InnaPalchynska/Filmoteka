@@ -1,5 +1,5 @@
 <div class='lightbox__card' data-id='{{id}}'>
-  <button type='button' class='lightbox__close-button' data-action='close-lightbox'>
+  <button type='button' class='lightbox__close-btn' data-action='close-lightbox'>
     <i class='material-icons-outlined'>close</i>
   </button>
 
@@ -53,10 +53,56 @@
     </ul>
 
     <div class='lightbox__buttons-overlay'>
-      <button class='lightbox__button'>add to watched</button>
-      <button class='lightbox__button'>add to queue</button>
+      <button class='lightbox__button lightbox__button--watched' id='{{id}}'>add to watched</button>
+      <button class='lightbox__button lightbox__button--queue' id='{{id}}'>add to queue</button>
     </div>
 
-  </div>
+    <div class='lightbox__content'>
+      <h2 class='lightbox__title'>{{original_title}}</h2>
+      <ul class='movie-info'>
+        <li class='movie-info__item'>
+          <h3 class='movie-info__param'>Vote / Votes</h3>
+          <p class='movie-info__votes'>
+            <div class='movie-info__text movie-info__votes--average'>{{vote_average}}</div>
+            <span>/</span>
+            <div class='movie-info__text movie-info__votes--count'>{{vote_count}}</div>
+          </p>
+        </li>
 
+        <li class='movie-info__item'>
+          <h3 class='movie-info__param'>Popularity</h3>
+          <p class='movie-info__text movie-info__popularity'>
+            {{popularity}}
+          </p>
+        </li>
+
+        <li class='movie-info__item'>
+          <h3 class='movie-info__param'>Original Title</h3>
+          <p class='movie-info__text movie-info__orig-title'>
+            {{original_title}}
+          </p>
+        </li>
+
+        <li class='movie-info__item'>
+          <h3 class='movie-info__param'>Genre</h3>
+          <p class='movie-info__text movie-info__genre'>
+            {{movie_genres}}
+          </p>
+        </li>
+
+        <li class='movie-info__item'>
+          <h3 class='movie-info__param movie-info__param--about'>About</h3>
+          <p class='movie-info__text movie-info__descr'>
+            {{overview}}
+          </p>
+        </li>
+      </ul>
+
+      <div class='lightbox__buttons-overlay'>
+        <button class='lightbox__button'>add to watched</button>
+        <button class='lightbox__button'>add to queue</button>
+      </div>
+
+    </div>
+  </div>
 </div>

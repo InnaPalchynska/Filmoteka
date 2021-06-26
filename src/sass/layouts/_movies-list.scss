@@ -14,12 +14,23 @@
 }
 
 .movies-list__item {
+  position: relative;
   margin-top: 20px;
+  transform: scale(1);
+  z-index: 0;
+
+  &:first-child {
+    margin-top: 0;
+  }
 
   @media screen and (min-width: 768px) {
     flex-basis: calc(100% / 2 - 30px);
     margin-top: 30px;
     margin-left: 30px;
+
+    &:first-child {
+      margin-top: 30px;
+    }
   }
 
   @media screen and (min-width: 1024px) {
@@ -45,8 +56,13 @@
 }
 
 .poster-thumb img {
+  position: absolute;
+  width: 100%;
   height: inherit;
   object-fit: cover;
+  object-position: center;
+  border-radius: 5px;
+  overflow: hidden;
 }
 
 .poster-thumb .poster-placeholder {
