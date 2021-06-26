@@ -84,6 +84,8 @@ async function renderPopularMoviesGrid(searchQuery) {
 
 function transformMoviesObjectFields(movies, genresList) {
   movies.forEach(movie => {
+    movie.placeholder = !movie.poster_path ? true : false;
+
     if (movie.release_date != undefined) {
       movie.release_date = movie.release_date.slice(0, 4);
     }

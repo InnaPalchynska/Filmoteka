@@ -19,12 +19,9 @@ export default function renderLibrary() {
     //     ? moviesApiService.fetchMoviesBySearch()
     //     : moviesApiService.fetchPopularMovies();
 
-    const {
-      results: movies,
-      page,
-      total_pages,
-      total_results,
-    } = await fetchFullInfoOfMovie(iterator);
+    const { results: movies, page, total_pages, total_results } = await fetchFullInfoOfMovie(
+      iterator,
+    );
 
     //genresList - array of objects [{id: 23, name: "Drama"}, {id: 17, name: "Action"} ...]
     const genresListObj = await moviesApiService.fetchGenresList();
@@ -38,6 +35,7 @@ export default function renderLibrary() {
 
   function transformMoviesObjectFields(movies, genresList) {
     movies.forEach(movie => {
+      movie.placeholder = !movie.poster_path ? true : false;
       if (movie.release_date != undefined) {
         movie.release_date = movie.release_date.slice(0, 4);
       }
