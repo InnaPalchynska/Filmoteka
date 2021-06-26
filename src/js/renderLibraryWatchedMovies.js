@@ -4,27 +4,12 @@ import libraryMovieCardTpl from '../templates/library-movie-card.hbs';
 
 const movieApiService = new MovieApiService();
 
-const data = JSON.stringify([
-  581726,
-  817451,
-  399566,
-  508943,
-  726429,
-  527774,
-  632357,
-  337404,
-  423108,
-  520763,
-  637649,
-  615658,
-]);
-localStorage.setItem('watched', data);
-
 const refs = getRefs();
+console.log(refs);
 refs.myLibrary.addEventListener('click', onBtnMyLibraryClick);
 
 async function onBtnMyLibraryClick(e) {
-  const allWatchedMoviesIds = getDatafromLocalStorage('watched');
+  const allWatchedMoviesIds = getDataFromLocalStorage('filmWatched');
 
   const watchedMoviesIds = getMoviesIdsByMediaQuery(allWatchedMoviesIds);
 
@@ -35,7 +20,7 @@ async function onBtnMyLibraryClick(e) {
   renderLibraryMovies(watchedMovies);
 }
 
-function getDatafromLocalStorage(item) {
+function getDataFromLocalStorage(item) {
   return JSON.parse(localStorage.getItem(item));
 }
 
@@ -64,15 +49,7 @@ function renderLibraryMovies(movies) {
 }
 
 function transformMovieObjectFields(movie) {
-  if (!movie.poster_path) {
-    movie.poster_path = 'optimized-png/outline_image_not_supported.png';
-    movie.placeholder = true;
-  } else {
-    movie.poster_path = `https://image.tmdb.org/t/p/original/${movie.poster_path}`;
-    movie.placeholder = false;
-  }
-  console.log(movie.placeholder);
-  console.log(movie);
+  movie.placeholder = !movie.poster_path ? true : false;
 
   let genresList = [];
   movie.genres.map(genre => {
