@@ -5,7 +5,7 @@
 // }
 
 .movies-list {
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: $tablet) {
     display: flex;
     flex-wrap: wrap;
     margin-top: -30px;
@@ -16,13 +16,21 @@
 .movies-list__item {
   margin-top: 20px;
 
-  @media screen and (min-width: 768px) {
+  &:first-child {
+    margin-top: 0;
+  }
+
+  @media screen and (min-width: $tablet) {
     flex-basis: calc(100% / 2 - 30px);
     margin-top: 30px;
     margin-left: 30px;
+
+    &:first-child {
+      margin-top: 30px;
+    }
   }
 
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: $desktop) {
     flex-basis: calc(100% / 3 - 30px);
   }
 }
@@ -30,29 +38,37 @@
 .poster-thumb {
   height: 398px;
   border-radius: 5px;
+  cursor: pointer;
   overflow: hidden;
+
+  transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+
+  &:hover,
+  &:focus {
+    transform: scale(1.04);
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.1),
+      1px 4px 6px rgba(0, 0, 0, 0.2);
+  }
 }
 
 .poster-thumb.placeholder {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #dcdcdc;
 }
 
 .placeholder .material-icons-outlined {
   font-size: 48px;
+  box-shadow: none;
 }
 
 .poster-thumb img {
+  width: 100%;
   height: inherit;
   object-fit: cover;
-}
-
-.poster-thumb .poster-placeholder {
-  width: 70px;
-  height: 70px;
-  object-fit: unset;
+  object-position: center;
 }
 
 .movie-data {
