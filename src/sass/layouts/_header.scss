@@ -1,6 +1,6 @@
 header{
     background-color: black; 
-    color: get-textColor('light');
+   color: get-textColor('light');
 }
 
 .header__nav{
@@ -16,35 +16,34 @@ header{
         margin-bottom: 37px; 
         align-items: baseline;
     }
+   
+   
 }
 
 .logo{
     display: flex;
     align-items: center;
     outline: none;
-    transform: scale(1, 1);
     
     @media screen and (min-width: $tablet){
       align-items: baseline;
     }
-    @include transition(transform);
 }
 
 .logo:focus{
    outline: 1px solid get-navElColor('line-activ-link');
 }
-.logo:hover{
-    transform: scale(1.1,1.1);
-}
+
 .logo__icon{
     display: block;
-}
-
-.scena--card{
-     @media screen and (min-width: $tablet){
-         margin-right: 10px;
+    
+    @media screen and (min-width: $tablet){
+    //   padding: 5px 0 0;
+    //   margin-bottom: 8px;
+      margin-right: 10px;
+      color:#FFFFFF;
     }
-
+    
 }
 
 .logo__text{
