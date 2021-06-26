@@ -49,9 +49,9 @@ firebase.initializeApp(firebaseConfig);
 // });
 
 // // Initialize the FirebaseUI Widget using Firebase.
-// var ui = new firebaseui.auth.AuthUI(firebase.auth());
+// const ui = new firebaseui.auth.AuthUI(firebase.auth());
 
-// var uiConfig = {
+// const uiConfig = {
 //   callbacks: {
 //     signInSuccessWithAuthResult: function (authResult, redirectUrl) {
 //       // User successfully signed in.
@@ -93,8 +93,8 @@ function toggleSignIn() {
   if (firebase.auth().currentUser) {
     firebase.auth().signOut();
   } else {
-    var email = document.getElementById('email').value;
-    var password = document.getElementById('password').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
     if (email.length < 4) {
       alert('Please enter an email address.');
       return;
@@ -109,8 +109,8 @@ function toggleSignIn() {
       .signInWithEmailAndPassword(email, password)
       .catch(function (error) {
         // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
+        const errorCode = error.code;
+        const errorMessage = error.message;
         if (errorCode === 'auth/wrong-password') {
           alert('Wrong password.');
         } else {
@@ -127,8 +127,8 @@ function toggleSignIn() {
  * Handles the sign up button press.
  */
 function handleSignUp() {
-  var email = document.getElementById('email').value;
-  var password = document.getElementById('password').value;
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
   if (email.length < 4) {
     alert('Please enter an email address.');
     return;
@@ -143,8 +143,8 @@ function handleSignUp() {
     .createUserWithEmailAndPassword(email, password)
     .catch(function (error) {
       // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
+      const errorCode = error.code;
+      const errorMessage = error.message;
       if (errorCode == 'auth/weak-password') {
         alert('The password is too weak.');
       } else {
@@ -168,7 +168,7 @@ function sendEmailVerification() {
 }
 
 function sendPasswordReset() {
-  var email = document.getElementById('email').value;
+  const email = document.getElementById('email').value;
   firebase
     .auth()
     .sendPasswordResetEmail(email)
@@ -178,8 +178,8 @@ function sendPasswordReset() {
     })
     .catch(function (error) {
       // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
+      const errorCode = error.code;
+      const errorMessage = error.message;
       if (errorCode == 'auth/invalid-email') {
         alert(errorMessage);
       } else if (errorCode == 'auth/user-not-found') {
@@ -200,13 +200,13 @@ function initApp() {
     document.getElementById('quickstart-verify-email').disabled = true;
     if (user) {
       // User is signed in.
-      var displayName = user.displayName;
-      var email = user.email;
-      var emailVerified = user.emailVerified;
-      var photoURL = user.photoURL;
-      var isAnonymous = user.isAnonymous;
-      var uid = user.uid;
-      var providerData = user.providerData;
+      const displayName = user.displayName;
+      const email = user.email;
+      const emailVerified = user.emailVerified;
+      const photoURL = user.photoURL;
+      const isAnonymous = user.isAnonymous;
+      const uid = user.uid;
+      const providerData = user.providerData;
       document.getElementById('quickstart-sign-in-status').textContent =
         'Signed in';
       document.getElementById('quickstart-sign-in').textContent = 'Sign out';
