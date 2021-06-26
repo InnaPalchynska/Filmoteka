@@ -1,16 +1,17 @@
- 
-  function addsToLibrary(){
-    const modalButtonWatched = document.querySelector('.lightbox__button--watched');
-    const modalButtonQueue = document.querySelector('.lightbox__button--queue');
-     if (!localStorage.getItem('filmWatched')) {
+import getRefs from './get-refs';
+
+const refs = getRefs();
+
+function addsToLibrary() {
+  if (!localStorage.getItem('filmWatched')) {
     localStorage.setItem('filmWatched', JSON.stringify([]));
-  } 
+  }
   if (localStorage.getItem('filmWatched')) {
     const filmsStorage = localStorage.getItem('filmWatched');
     const filmsStorageArray = JSON.parse(filmsStorage);
-    if (filmsStorageArray.includes(modalButtonWatched.id)) {
-      modalButtonWatched.textContent = 'Remove from watched';
-      modalButtonWatched.classList.add('active');
+    if (filmsStorageArray.includes(refs.modalButtonWatched.id)) {
+      refs.modalButtonWatched.textContent = 'Remove from watched';
+      refs.modalButtonWatched.classList.add('active');
     }
   }
   if (!localStorage.getItem('filmQueue')) {
@@ -19,15 +20,14 @@
   if (localStorage.getItem('filmQueue')) {
     const filmsStorage = localStorage.getItem('filmQueue');
     const filmsStorageArray = JSON.parse(filmsStorage);
-    if (filmsStorageArray.includes(modalButtonWatched.id)) {
-      modalButtonQueue.textContent = 'Remove from queue';
-      modalButtonQueue.classList.add('active');
+    if (filmsStorageArray.includes(refs.modalButtonWatched.id)) {
+      refs.modalButtonQueue.textContent = 'Remove from queue';
+      refs.modalButtonQueue.classList.add('active');
     }
   }
-  }
+}
 
-  function onWatchedButton(e) {
-
+function onWatchedButton(e) {
   const filmsStorage = localStorage.getItem('filmWatched');
   const filmsStorageArray = JSON.parse(filmsStorage);
   if (!filmsStorageArray.includes(e.target.id)) {
@@ -60,4 +60,4 @@ function onQueueButton(e) {
   }
 }
 
-export {addsToLibrary, onWatchedButton, onQueueButton}
+export { addsToLibrary, onWatchedButton, onQueueButton };

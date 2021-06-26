@@ -6,10 +6,16 @@ export default function getRefs() {
     preloader: document.querySelector('.js-preloader'),
     home: document.querySelector('[data-header="home"]'),
     myLibrary: document.querySelector('[data-header="myLiblary"]'),
-    headerDynamicContainer: document.querySelector('[data-header="dynamicContainer"]'),
+    headerDynamicContainer: document.querySelector(
+      '[data-header="dynamicContainer"]',
+    ),
     goTopBtn: document.querySelector('.back_to_top'),
     searchInput: document.querySelector('.search-field__input'),
-    headerBackgroundContainer: document.querySelector('.js-container-header-bg'),
+    headerBackgroundContainer: document.querySelector(
+      '.js-container-header-bg',
+    ),
     footerBtn: document.querySelector('.footer__button'),
+    modalButtonWatched: document.querySelector('.lightbox__button--watched'),
+    modalButtonQueue: document.querySelector('.lightbox__button--queue'),
   };
 }

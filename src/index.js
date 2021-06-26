@@ -12,3 +12,7 @@ import './js/render-movie-card-lightbox.js';
 import './js/renderLibraryWatchedMovies.js';
 import './js/renderMovies.js';
 import './js/footer-lightbox.js';
+
+import './js/auth.js';
+
+import './js/fileBase.js';
