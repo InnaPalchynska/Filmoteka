@@ -4,6 +4,7 @@ import movieCardLightboxTpl from '../templates/movie-card-lightbox.hbs';
 
 import '../sass/components/_basic-lightbox';
 import * as basicLightbox from 'basiclightbox';
+import {addsToLibrary, onWatchedButton, onQueueButton} from './localStorage'
 
 const refs = getRefs();
 const moviesApiService = new MoviesApiService();
@@ -45,7 +46,20 @@ async function renderMovieCardLightbox(fullInfo) {
 
   lightbox.show();
 
-  const closeBtn = document.querySelector('.lightbox__close-btn');
+  const modalButtonWatched = document.querySelector('.lightbox__button--watched');
+  const modalButtonQueue = document.querySelector('.lightbox__button--queue');
+  addsToLibrary();
+
+
+  modalButtonWatched.addEventListener('click', onWatchedButton);
+  modalButtonQueue.addEventListener('click', onQueueButton);
+  
+ 
+
+ 
+
+
+  const closeBtn = document.querySelector('.lightbox__close-button');
 
   closeBtn.addEventListener('click', onLightboxClose);
   window.addEventListener('keydown', onEscBtnPress);
@@ -82,3 +96,22 @@ function getMoviePopularity(fullInfo) {
 
   return moviePopularity;
 }
+
+// function getMovieOverview(fullInfo) {
+//   const movieOverview = fullInfo.overview;
+//   console.log(typeof movieOverview);
+
+//   // const length =
+//   // console.log(length);
+
+//   if (movieOverview.length > 500) {
+//     movieOverview.slice(500);
+//     console.log(movieOverview);
+//   }
+
+//   console.log(movieOverview);
+//   fullInfo.overview = movieOverview;
+
+//   return movieOverview;
+// }
+
