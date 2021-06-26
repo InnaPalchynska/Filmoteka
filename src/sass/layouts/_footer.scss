@@ -1,32 +1,103 @@
-.footer__title {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 400;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  font-size: getFont-size__desk('text-footer');
-  color: get-textColor('footer');
+.footer {
+  background: get-bgColor('footer');
 }
-
-.footer__link {
-  color: get-textColor('footer');
-}
-
-
-.footer__link:hover,
-.footer__link:focus{
-  color: orangered;
-}
-
 
 .footer__box {
-  display: block;
-  align-items: center;
+  padding-top: 30px;
+  padding-bottom: 30px;
   text-align: center;
-  line-height: 19px;
- 
+
+  @media screen and(min-width: $tablet) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
-.footer{
-  background: get-bgColor('footer');
+.footer__title {
+  display: inline-block;
+  font-weight: 400;
+  font-size: getFont-size__mob('text-footer');
+  line-height: 1.14;
+  color: get-textColor('footer');
+
+  @media screen and(min-width: $tablet) {
+    font-size: getFont-size__tab('text-footer');
+    line-height: 1.19;
+  }
+}
+
+.footer__button {
+  font-weight: 400;
+  font-size: getFont-size__mob('text-footer');
+  line-height: 1.14;
+  color: get-textColor('accent');
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
+  @media screen and(min-width: $tablet) {
+    font-size: getFont-size__tab('text-footer');
+    line-height: 1.19;
+  }
+}
+
+.footer-lightbox__card {
+  max-height: 2200px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+
+  @media screen and(min-width: $tablet) {
+    width: 668px;
+    height: 500px;
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+
+  @media screen and(min-width: $desktop) {
+    top: 50px;
+    width: 920px;
+    height: 750px;
+  }
+}
+
+.footer-lightbox__content {
+}
+
+.footer-lightbox__heading {
+}
+
+.team__list {
+  @media screen and (min-width: $tablet) {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: -25px;
+    margin-left: -25px;
+  }
+}
+
+.team__member {
+  position: relative;
+  height: 320px;
+  margin-top: 25px;
+
+  background-color: get-bgColor('footer');
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.1),
+    1px 4px 6px rgba(0, 0, 0, 0.2);
+  border-radius: 0px 0px 4px 4px;
+
+  @media screen and (min-width: $tablet) {
+    width: 30%;
+    // height: 374px;
+    margin-left: 25px;
+  }
+
+  @media screen and(min-width: $desktop) {
+    // height: 478px;
+  }
+}
+
+.team__photo {
+  position: absolute;
+  overflow: hidden;
 }

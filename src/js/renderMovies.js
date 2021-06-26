@@ -14,7 +14,11 @@ refs.searchInput.addEventListener('input', debounce(onSearch, 500));
 
 let searchQuery = '';
 function onSearch(event) {
+  // event.preventDefault();
+
+  pagination.movePageTo(1);
   refs.moviesList.innerHTML = '';
+
   const input = event.target;
   searchQuery = input.value;
   if (!searchQuery) {
@@ -35,8 +39,7 @@ const options = {
   lastItemClassName: 'tui-last-child',
   template: {
     page: '<a href="#" class="tui-page-btn">{{page}}</a>',
-    currentPage:
-      '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
+    currentPage: '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
     moveButton:
       '<a href="#" class="tui-page-btn tui-{{type}}">' +
       '<span class="tui-ico-{{type}}">{{type}}</span>' +
@@ -60,12 +63,7 @@ async function renderPopularMoviesGrid(searchQuery) {
     ? moviesApiService.fetchMoviesBySearch()
     : moviesApiService.fetchPopularMovies();
 
-  const {
-    results: movies,
-    page,
-    total_pages,
-    total_results,
-  } = await fetchMovies;
+  const { results: movies, page, total_pages, total_results } = await fetchMovies;
 
   //genresList - array of objects [{id: 23, name: "Drama"}, {id: 17, name: "Action"} ...]
   const genresListObj = await moviesApiService.fetchGenresList();
@@ -73,6 +71,13 @@ async function renderPopularMoviesGrid(searchQuery) {
 
   transformMoviesObjectFields(movies, genresList);
 
+  if (total_pages <= 1) {
+    refs.divPagination.classList.add('hidden-tui');
+  } else {
+    refs.divPagination.classList.remove('hidden-tui');
+    pagination.setTotalItems(total_pages);
+  }
+  refs.moviesList.innerHTML = '';
   const popularMoviesMarkup = movieCardTpl(movies);
   refs.moviesList.insertAdjacentHTML('beforeend', popularMoviesMarkup);
 }
@@ -103,15 +108,13 @@ function showPopularMovies(currentPage) {
 pagination.on('afterMove', function (evt) {
   smoothScrool();
   currentPage = evt.page;
-
+  localStorage.setItem('currentPage', currentPage);
   showPopularMovies(currentPage);
 });
 
 if (currentPage !== 1) {
   moviesApiService.setPage(currentPage);
   pagination.page = currentPage;
-
+  refs.moviesList.innerHTML = '';
   renderPopularMoviesGrid().catch(error => console.log(error));
 }
-
-renderPopularMoviesGrid().catch(error => console.log(error));
