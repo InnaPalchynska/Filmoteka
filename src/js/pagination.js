@@ -1,36 +1,58 @@
 import Pagination from 'tui-pagination';
-import MoviesApiService from './apiService';
-import renderPopularMoviesGrid from '../index';
-// import fetchPopularMovies from '../index';
+import smoothScrool from './smoothScrool.js';
 
-const moviesApiService = new MoviesApiService();
+import movieCardTpl from '../templates/movie-card.hbs';
+import getRefs from '../js/get-refs.js';
+
+const refs = getRefs();
 
 const container = document.getElementById('pagination');
 const options = {
-  totalItems: 1000,
+  totalItems: 500,
   itemsPerPage: 1,
   visiblePages: 5,
   page: 1,
   centerAlign: true,
   firstItemClassName: 'tui-first-child',
   lastItemClassName: 'tui-last-child',
-};
-
-const smoothScrool = function () {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  template: {
+    page: '<a href="#" class="tui-page-btn">{{page}}</a>',
+    currentPage:
+      '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
+    moveButton:
+      '<a href="#" class="tui-page-btn tui-{{type}}">' +
+      '<span class="tui-ico-{{type}}">{{type}}</span>' +
+      '</a>',
+    disabledMoveButton:
+      '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
+      '<span class="tui-ico-{{type}}">{{type}}</span>' +
+      '</span>',
+    moreButton:
+      '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
+      '<span class="tui-ico-ellip">...</span>' +
+      '</a>',
+  },
 };
 
 const pagination = new Pagination(container, options);
+// let currentPage = localStorage.getItem('currentPage');
 
 function showPopularMovies(currentPage) {
-  moviesApiService.setPage(currentPage);
-  renderPopularMoviesGrid();
+  // moviesApiService.setPage(currentPage);
+  refs.moviesList.innerHTML = '';
+  renderPopularMoviesGrid(searchQuery).catch(error => console.log(error));
 }
 
 pagination.on('afterMove', function (evt) {
   smoothScrool();
-  let currentPage = evt.page;
+  currentPage = evt.page;
+  localStorage.setItem('currentPage', currentPage);
   showPopularMovies(currentPage);
 });
 
-export { pagination };
+if (currentPage !== 1) {
+  // moviesApiService.setPage(currentPage);
+  pagination.page = currentPage;
+  refs.moviesList.innerHTML = '';
+  renderPopularMoviesGrid().catch(error => console.log(error));
+}

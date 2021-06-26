@@ -1,10 +1,10 @@
-import Pagination from 'tui-pagination';
 import MoviesApiService from '../js/apiService.js';
-import smoothScrool from './smoothScrool.js';
 import debounce from 'lodash.debounce';
 
 import movieCardTpl from '../templates/movie-card.hbs';
 import getRefs from '../js/get-refs.js';
+
+import pagination from './pagination.js';
 
 const refs = getRefs();
 
@@ -28,42 +28,20 @@ function onSearch(event) {
   renderPopularMoviesGrid(searchQuery).catch(error => console.log(error));
 }
 
-const container = document.getElementById('pagination');
-const options = {
-  totalItems: 500,
-  itemsPerPage: 1,
-  visiblePages: 5,
-  page: 1,
-  centerAlign: true,
-  firstItemClassName: 'tui-first-child',
-  lastItemClassName: 'tui-last-child',
-  template: {
-    page: '<a href="#" class="tui-page-btn">{{page}}</a>',
-    currentPage: '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
-    moveButton:
-      '<a href="#" class="tui-page-btn tui-{{type}}">' +
-      '<span class="tui-ico-{{type}}">{{type}}</span>' +
-      '</a>',
-    disabledMoveButton:
-      '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
-      '<span class="tui-ico-{{type}}">{{type}}</span>' +
-      '</span>',
-    moreButton:
-      '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
-      '<span class="tui-ico-ellip">...</span>' +
-      '</a>',
-  },
-};
-
-const pagination = new Pagination(container, options);
 let currentPage = localStorage.getItem('currentPage');
 
 async function renderPopularMoviesGrid(searchQuery) {
+  console.log(pagination);
   const fetchMovies = searchQuery
     ? moviesApiService.fetchMoviesBySearch()
     : moviesApiService.fetchPopularMovies();
 
-  const { results: movies, page, total_pages, total_results } = await fetchMovies;
+  const {
+    results: movies,
+    page,
+    total_pages,
+    total_results,
+  } = await fetchMovies;
 
   //genresList - array of objects [{id: 23, name: "Drama"}, {id: 17, name: "Action"} ...]
   const genresListObj = await moviesApiService.fetchGenresList();
@@ -101,22 +79,23 @@ function transformMoviesObjectFields(movies, genresList) {
   });
 }
 
-function showPopularMovies(currentPage) {
-  moviesApiService.setPage(currentPage);
-  refs.moviesList.innerHTML = '';
-  renderPopularMoviesGrid(searchQuery).catch(error => console.log(error));
-}
+// function showPopularMovies(currentPage) {
+//   moviesApiService.setPage(currentPage);
+//   refs.moviesList.innerHTML = '';
+//   renderPopularMoviesGrid(searchQuery).catch(error => console.log(error));
+// }
 
-pagination.on('afterMove', function (evt) {
-  smoothScrool();
-  currentPage = evt.page;
-  localStorage.setItem('currentPage', currentPage);
-  showPopularMovies(currentPage);
-});
+// pagination.on('afterMove', function (evt) {
+//   smoothScrool();
+//   currentPage = evt.page;
+//   localStorage.setItem('currentPage', currentPage);
+//   showPopularMovies(currentPage);
+// });
 
-if (currentPage !== 1) {
-  moviesApiService.setPage(currentPage);
-  pagination.page = currentPage;
-  refs.moviesList.innerHTML = '';
-  renderPopularMoviesGrid().catch(error => console.log(error));
-}
+// if (currentPage !== 1) {
+//   moviesApiService.setPage(currentPage);
+//   pagination.page = currentPage;
+//   refs.moviesList.innerHTML = '';
+//   renderPopularMoviesGrid().catch(error => console.log(error));
+// }
+renderPopularMoviesGrid(searchQuery).catch(error => console.log(error));
