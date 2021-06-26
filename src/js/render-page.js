@@ -13,9 +13,9 @@ refs.home.addEventListener('click', onHomeClick);
 refs.myLibrary.addEventListener('click', onMyLibraryClick);
 
 insertContent(refs.headerDynamicContainer, searchFieldTpl);
-// console.log(refs.home);
-// console.log(refs.myLibrary);
-// console.log(refs.headerDynamicContainer);
+  // console.log(refs.home);
+  // console.log(refs.myLibrary);
+  // console.log(refs.headerDynamicContainer);
 
 function onHomeClick(event) {
   // console.log(event.target);
