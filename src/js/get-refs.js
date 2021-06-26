@@ -11,5 +11,6 @@ export default function getRefs() {
     searchInput: document.querySelector('.search-field__input'),
     headerBackgroundContainer: document.querySelector('.js-container-header-bg'),
     footerBtn: document.querySelector('.footer__button'),
+    logoLink: document.querySelector('[data-header="logo"]'),
   };
 }
