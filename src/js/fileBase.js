@@ -25,7 +25,9 @@ if (!firebase.apps.length) {
   firebase.app(); // if already initialized, use that one
 }
 
-const movieId = 5555;
+const movieId = 'iteamMovie';
+const moviesCollection = 'queue';
+
 const db = firebase.firestore();
 
 const user = firebase.auth().currentUser;
@@ -40,23 +42,23 @@ if (user) {
   console.log('No found');
 }
 
-function fireBaseLibrary() {
-  firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-      const uid = user.uid;
-      const docRef = db.collection('watched').doc(uid);
-    } else {
-      console.log('User is signed out');
-    }
-  });
-}
+// function fireBaseLibrary() {
+//   firebase.auth().onAuthStateChanged(user => {
+//     if (user) {
+//       const uid = user.uid;
+//       const docRef = db.collection(moviesCollection).doc(uid);
+//     } else {
+//       console.log('User is signed out');
+//     }
+//   });
+// }
 
 //add
-function addMovieToLibrary(movieId) {
+function addMovieToLibrary(moviesCollection, movieId) {
   firebase.auth().onAuthStateChanged(user => {
     if (user) {
       const uid = user.uid;
-      const docRef = db.collection('watched').doc(uid);
+      const docRef = db.collection(moviesCollection).doc(uid);
       docRef
         .get()
         .then(doc => {
@@ -94,49 +96,62 @@ function addMovieToLibrary(movieId) {
   });
 }
 // get
-function getMovieFromLibrary() {
-  docRef
-    .get()
-    .then(doc => {
-      if (doc.exists) {
-        const watchedMovies = doc.data().movieId;
-        console.log('Document data:', watchedMovies);
-      } else {
-        // doc.data() will be undefined in this case
-        console.log('No such document!');
-      }
-    })
-    .catch(error => {
-      console.log('Error getting document:', error);
-    });
+function getMovieFromLibrary(moviesCollection) {
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      const uid = user.uid;
+      const docRef = db.collection(moviesCollection).doc(uid);
+      docRef
+        .get()
+        .then(doc => {
+          if (doc.exists) {
+            const watchedMovies = doc.data().movieId;
+            console.log('Document data:', watchedMovies);
+          } else {
+            // doc.data() will be undefined in this case
+            console.log('No such document!');
+          }
+        })
+        .catch(error => {
+          console.log('Error getting document:', error);
+        });
+    } else {
+      console.log('User is signed out');
+    }
+  });
 }
 // delete
-function deleteMovieFromLibrary() {
-  docRef
-    .get()
-    .then(doc => {
-      if (doc.exists) {
-        docRef
-          .update({
-            movieId:
-              firebase.firestore.FieldValue.arrayRemove('greater_virginia1'),
-          })
-          .then(function () {
-            console.log('Document delete.');
-          })
-          .catch(error => {
-            console.error('Error delete document: ', error);
-          });
-      } else {
-        // doc.data() will be undefined in this case
-        console.log('No such document!');
-      }
-    })
-    .catch(error => {
-      console.log('Error getting document:', error);
-    });
+function deleteMovieFromLibrary(moviesCollection, movieId) {
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      const uid = user.uid;
+      const docRef = db.collection(moviesCollection).doc(uid);
+      docRef
+        .get()
+        .then(doc => {
+          if (doc.exists) {
+            docRef
+              .update({
+                movieId: firebase.firestore.FieldValue.arrayRemove(movieId),
+              })
+              .then(function () {
+                console.log('Document delete.');
+              })
+              .catch(error => {
+                console.error('Error delete document: ', error);
+              });
+          } else {
+            // doc.data() will be undefined in this case
+            console.log('No such document!');
+          }
+        })
+        .catch(error => {
+          console.log('Error getting document:', error);
+        });
+    } else {
+      console.log('User is signed out');
+    }
+  });
 }
 
-// fireBaseLibrary.addMovieToLibrary();
-
-addMovieToLibrary(movieId);
+export { addMovieToLibrary, getMovieFromLibrary, deleteMovieFromLibrary };
