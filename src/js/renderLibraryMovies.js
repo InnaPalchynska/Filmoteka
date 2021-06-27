@@ -3,17 +3,19 @@ import MovieApiService from './apiService';
 import libraryMovieCardTpl from '../templates/library-movie-card.hbs';
 
 const movieApiService = new MovieApiService();
-
 const refs = getRefs();
-refs.myLibrary.addEventListener('click', onBtnMyLibraryClick);
 
-async function onBtnMyLibraryClick(e) {
-  const allWatchedMoviesIds = getDataFromLocalStorage('watched');
+async function renderLibraryMovies(filterName = 'watched') {
+  const isNotifyHidden = refs.notify.classList.contains('visually-hidden');
+  if (!isNotifyHidden) {
+    refs.notify.classList.add('visually-hidden');
+  }
+  const allWatchedMoviesIds = getDataFromLocalStorage(filterName);
   if (!allWatchedMoviesIds || allWatchedMoviesIds.length === 0) {
     refs.moviesList.innerHTML = '';
     refs.divPagination.innerHTML = '';
     refs.notify.classList.remove('visually-hidden');
-    refs.notify.textContent = 'There is no one watched film yet :(';
+    refs.notify.textContent = `There is no one ${filterName} film yet :(`;
     return;
   }
 
@@ -23,7 +25,7 @@ async function onBtnMyLibraryClick(e) {
     watchedMoviesIds.map(async id => await movieApiService.fetchFullInfoOfMovie(id)),
   );
 
-  renderLibraryMovies(watchedMovies);
+  renderMovies(watchedMovies);
 }
 
 function getDataFromLocalStorage(itemName) {
@@ -48,7 +50,7 @@ function getMoviesIdsByMediaQuery(moviesIds, startIndex) {
   }
 }
 
-function renderLibraryMovies(movies) {
+function renderMovies(movies) {
   movies.map(transformMovieObjectFields);
   const watchedMoviesMarkup = libraryMovieCardTpl(movies);
   refs.moviesList.innerHTML = watchedMoviesMarkup;
@@ -66,3 +68,5 @@ function transformMovieObjectFields(movie) {
   movie.release_date = null ? '' : movie.release_date.slice(0, 4);
   movie.vote_average = movie.vote_average.toFixed(1);
 }
+
+export { renderLibraryMovies };

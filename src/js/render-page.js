@@ -1,5 +1,6 @@
 // import helperSvg from 'handlebars-helper-svg';
 import getRefs from './get-refs';
+import { renderLibraryMovies } from './renderLibraryMovies';
 import searchFieldTpl from '../templates/search-field.hbs';
 import headerBtnsTpl from '../templates/header-btns.hbs';
 // import renderLibrary from './renderLibrary';
@@ -34,11 +35,13 @@ function onMyLibraryClick(event) {
   const queueMoviesBtn = document.querySelector("[data-header='queue']");
   watchedMoviesBtn.addEventListener('click', onHeaderBtnsClick);
   queueMoviesBtn.addEventListener('click', onHeaderBtnsClick);
+  renderLibraryMovies();
 }
 
 function onHeaderBtnsClick(e) {
   switchActiveClass(e, 'header-buttons__btn--active');
   const itemName = e.target.dataset.header;
+  renderLibraryMovies(itemName);
 }
 
 function switchActiveClass(e, className) {
