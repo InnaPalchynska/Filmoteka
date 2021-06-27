@@ -1,10 +1,15 @@
-import getRefs from '../js/get-refs';
-import MoviesApiService from '../js/apiService.js';
+import getRefs from './get-refs';
+import MoviesApiService from './apiService';
 import movieCardLightboxTpl from '../templates/movie-card-lightbox.hbs';
 
 import 'basiclightbox/src/styles/main.scss';
 import * as basicLightbox from 'basiclightbox';
-import { addsToLibrary, onWatchedButton, onQueueButton } from './localStorage';
+import {
+  initialSaveToLocalStorage,
+  checkBtnTextContent,
+  onWatchedButton,
+  onQueueButton,
+} from './local-storage';
 
 const refs = getRefs();
 const moviesApiService = new MoviesApiService();
@@ -46,12 +51,17 @@ async function renderMovieCardLightbox(fullInfo) {
 
   lightbox.show();
 
-  const modalButtonWatched = document.querySelector('.lightbox__button--watched');
-  const modalButtonQueue = document.querySelector('.lightbox__button--queue');
-  addsToLibrary();
+  initialSaveToLocalStorage('watched');
+  initialSaveToLocalStorage('queue');
 
-  modalButtonWatched.addEventListener('click', onWatchedButton);
-  modalButtonQueue.addEventListener('click', onQueueButton);
+  const modalBtnWatched = document.querySelector('.lightbox__button--watched');
+  const modalBtnQueue = document.querySelector('.lightbox__button--queue');
+
+  checkBtnTextContent(modalBtnWatched, 'watched');
+  checkBtnTextContent(modalBtnQueue, 'queue');
+
+  modalBtnWatched.addEventListener('click', onWatchedButton);
+  modalBtnQueue.addEventListener('click', onQueueButton);
 
   const closeBtn = document.querySelector('.lightbox__close-btn');
 
