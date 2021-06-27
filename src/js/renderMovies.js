@@ -11,6 +11,8 @@ const refs = getRefs();
 const moviesApiService = new MoviesApiService();
 
 refs.searchInput.addEventListener('input', debounce(onSearch, 500));
+refs.home.addEventListener('click', onLogoAndHomeClikc);
+refs.logoLink.addEventListener('click', onLogoAndHomeClikc);
 
 let searchQuery = '';
 function onSearch(event) {
@@ -106,6 +108,14 @@ function showPopularMovies(currentPage) {
   moviesApiService.setPage(currentPage);
   refs.moviesList.innerHTML = '';
   renderPopularMoviesGrid(searchQuery).catch(error => console.log(error));
+}
+
+function onLogoAndHomeClikc() {
+  searchQuery = '';
+  moviesApiService.query = searchQuery;
+  currentPage = 1;
+  localStorage.setItem('currentPage', currentPage);
+  showPopularMovies(currentPage);
 }
 
 pagination.on('afterMove', function (evt) {

@@ -12,5 +12,6 @@ export default function getRefs() {
     headerBackgroundContainer: document.querySelector('.js-container-header-bg'),
     footerBtn: document.querySelector('.footer__button'),
     notify: document.querySelector('.js-notify'),
+    logoLink: document.querySelector('[data-header="logo"]'),
   };
 }
