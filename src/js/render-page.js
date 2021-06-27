@@ -2,10 +2,7 @@
 import getRefs from './get-refs';
 import searchFieldTpl from '../templates/search-field.hbs';
 import headerBtnsTpl from '../templates/header-btns.hbs';
-import renderLibrary from './renderLibrary';
-
-// console.log(searchFieldTpl());
-// console.log(headerBtnsTpl());
+// import renderLibrary from './renderLibrary';
 
 const refs = getRefs();
 
@@ -32,7 +29,21 @@ function onMyLibraryClick(event) {
   changeOnSecondaryBg();
   clearContainer(refs.headerDynamicContainer);
   insertContent(refs.headerDynamicContainer, headerBtnsTpl);
-  // renderLibrary();
+
+  const watchedMoviesBtn = document.querySelector("[data-header='watched']");
+  const queueMoviesBtn = document.querySelector("[data-header='queue']");
+  watchedMoviesBtn.addEventListener('click', onHeaderBtnsClick);
+  queueMoviesBtn.addEventListener('click', onHeaderBtnsClick);
+}
+
+function onHeaderBtnsClick(e) {
+  switchActiveClass(e, 'header-buttons__btn--active');
+  const itemName = e.target.dataset.header;
+}
+
+function switchActiveClass(e, className) {
+  document.querySelector(`.${className}`).classList.remove(className);
+  e.target.classList.add(className);
 }
 
 function insertContent(nameContainer, fnTemplates) {
@@ -50,9 +61,7 @@ function changeOnMainBg() {
   if (!activBgClass) {
     refs.headerBackgroundContainer.classList.add('header__container--home-bg');
   }
-  refs.headerBackgroundContainer.classList.remove(
-    'header__container--my-library-bg',
-  );
+  refs.headerBackgroundContainer.classList.remove('header__container--my-library-bg');
 }
 
 function toggleClassOnMainPage(e) {
@@ -68,9 +77,7 @@ function changeOnSecondaryBg() {
     'header__container--my-library-bg',
   );
   if (!activBgClass) {
-    refs.headerBackgroundContainer.classList.add(
-      'header__container--my-library-bg',
-    );
+    refs.headerBackgroundContainer.classList.add('header__container--my-library-bg');
   }
   refs.headerBackgroundContainer.classList.remove('header__container--home-bg');
 }

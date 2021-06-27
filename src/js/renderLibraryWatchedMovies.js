@@ -5,13 +5,19 @@ import libraryMovieCardTpl from '../templates/library-movie-card.hbs';
 const movieApiService = new MovieApiService();
 
 const refs = getRefs();
-console.log(refs);
 refs.myLibrary.addEventListener('click', onBtnMyLibraryClick);
 
 async function onBtnMyLibraryClick(e) {
-  const allWatchedMoviesIds = getDataFromLocalStorage('filmWatched');
+  const allWatchedMoviesIds = getDataFromLocalStorage('watched');
+  if (!allWatchedMoviesIds || allWatchedMoviesIds.length === 0) {
+    refs.moviesList.innerHTML = '';
+    refs.divPagination.innerHTML = '';
+    refs.notify.classList.remove('visually-hidden');
+    refs.notify.textContent = 'There is no one watched film yet :(';
+    return;
+  }
 
-  const watchedMoviesIds = getMoviesIdsByMediaQuery(allWatchedMoviesIds);
+  const watchedMoviesIds = getMoviesIdsByMediaQuery(allWatchedMoviesIds, 0);
 
   const watchedMovies = await Promise.all(
     watchedMoviesIds.map(async id => await movieApiService.fetchFullInfoOfMovie(id)),
@@ -20,25 +26,25 @@ async function onBtnMyLibraryClick(e) {
   renderLibraryMovies(watchedMovies);
 }
 
-function getDataFromLocalStorage(item) {
-  return JSON.parse(localStorage.getItem(item));
+function getDataFromLocalStorage(itemName) {
+  return JSON.parse(localStorage.getItem(itemName));
 }
 
-function getMoviesIdsByMediaQuery(moviesIds) {
+function getMoviesIdsByMediaQuery(moviesIds, startIndex) {
   const mobileMediaQuery = window.matchMedia('(max-width: 767px)');
   const tabletMediaQuery = window.matchMedia('(min-width: 768px) and (max-width: 1023px)');
   const desktopMediaQuery = window.matchMedia('(min-width: 1024px)');
 
   if (mobileMediaQuery.matches) {
-    return moviesIds.slice(0, 4);
+    return moviesIds.slice(startIndex, 4);
   }
 
   if (tabletMediaQuery.matches) {
-    return moviesIds.slice(0, 8);
+    return moviesIds.slice(startIndex, 8);
   }
 
   if (desktopMediaQuery.matches) {
-    return moviesIds.slice(0, 9);
+    return moviesIds.slice(startIndex, 9);
   }
 }
 
