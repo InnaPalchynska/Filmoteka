@@ -18,7 +18,7 @@ insertContent(refs.headerDynamicContainer, searchFieldTpl);
 function onHomeClick(event) {
   // console.log(event.target);
 
-  toggleClassOnMainPage(event);
+  toggleActivClassOnMainPage(event);
   changeOnMainBg();
   clearContainer(refs.headerDynamicContainer);
   insertContent(refs.headerDynamicContainer, searchFieldTpl);
@@ -26,7 +26,7 @@ function onHomeClick(event) {
 
 function onMyLibraryClick(event) {
   // console.log(event.target);
-  toggleClassOnSecondPage(event);
+  toggleActivClassOnSecondPage(event);
   changeOnSecondaryBg();
   clearContainer(refs.headerDynamicContainer);
   insertContent(refs.headerDynamicContainer, headerBtnsTpl);
@@ -67,7 +67,7 @@ function changeOnMainBg() {
   refs.headerBackgroundContainer.classList.remove('header__container--my-library-bg');
 }
 
-function toggleClassOnMainPage(e) {
+function toggleActivClassOnMainPage(e) {
   const activClass = e.target.classList.contains('site-nav__button--active');
   if (!activClass) {
     e.target.classList.add('site-nav__button--active');
@@ -85,7 +85,7 @@ function changeOnSecondaryBg() {
   refs.headerBackgroundContainer.classList.remove('header__container--home-bg');
 }
 
-function toggleClassOnSecondPage(e) {
+function toggleActivClassOnSecondPage(e) {
   const activClass = e.target.classList.contains('site-nav__button--active');
   if (!activClass) {
     e.target.classList.add('site-nav__button--active');
