@@ -1,6 +1,6 @@
 // import helperSvg from 'handlebars-helper-svg';
 import getRefs from './get-refs';
-import { renderLibraryMovies } from './renderLibraryMovies';
+import { renderLibraryMovies } from './render-library-movies';
 import searchFieldTpl from '../templates/search-field.hbs';
 import headerBtnsTpl from '../templates/header-btns.hbs';
 // import renderLibrary from './renderLibrary';

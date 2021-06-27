@@ -6,6 +6,10 @@ const movieApiService = new MovieApiService();
 const refs = getRefs();
 
 async function renderLibraryMovies(filterName = 'watched') {
+  const isLibraryPage = refs.myLibrary.classList.contains('site-nav__button--active');
+  if (!isLibraryPage) {
+    return;
+  }
   const isNotifyHidden = refs.notify.classList.contains('visually-hidden');
   if (!isNotifyHidden) {
     refs.notify.classList.add('visually-hidden');
@@ -15,7 +19,7 @@ async function renderLibraryMovies(filterName = 'watched') {
     refs.moviesList.innerHTML = '';
     refs.divPagination.innerHTML = '';
     refs.notify.classList.remove('visually-hidden');
-    refs.notify.textContent = `There is no one ${filterName} film yet :(`;
+    refs.notify.textContent = `There are no ${filterName} films yet :(`;
     return;
   }
 
