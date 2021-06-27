@@ -10,7 +10,9 @@ const refs = getRefs();
 
 const moviesApiService = new MoviesApiService();
 
-refs.searchInput.addEventListener('input', debounce(onSearch, 500));
+function addSearchListener() {
+  refs.searchInput.addEventListener('input', debounce(onSearch, 500));
+}
 
 let searchQuery = '';
 function onSearch(event) {
@@ -59,6 +61,7 @@ const pagination = new Pagination(container, options);
 let currentPage = localStorage.getItem('currentPage');
 
 async function renderPopularMoviesGrid(searchQuery) {
+  refs.notify.innerHTML = '';
   const fetchMovies = searchQuery
     ? moviesApiService.fetchMoviesBySearch()
     : moviesApiService.fetchPopularMovies();
@@ -120,3 +123,5 @@ if (currentPage !== 1) {
   refs.moviesList.innerHTML = '';
   renderPopularMoviesGrid().catch(error => console.log(error));
 }
+
+export { showPopularMovies, addSearchListener };
