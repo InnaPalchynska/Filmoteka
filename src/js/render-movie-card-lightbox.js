@@ -2,7 +2,7 @@ import getRefs from '../js/get-refs';
 import MoviesApiService from '../js/apiService.js';
 import movieCardLightboxTpl from '../templates/movie-card-lightbox.hbs';
 
-import '../sass/components/_basic-lightbox';
+import 'basiclightbox/src/styles/main.scss';
 import * as basicLightbox from 'basiclightbox';
 import { addsToLibrary, onWatchedButton, onQueueButton } from './localStorage';
 
