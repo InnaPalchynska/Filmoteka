@@ -40,12 +40,11 @@ firebase.auth().onAuthStateChanged(user => {
     // User is signed in, see docs for a list of available properties
     // https://firebase.google.com/docs/reference/js/firebase.User
     const uid = user.uid;
-    console.log(uid);
     db.collection('watched')
-      .doc('user')
-      .set({
-        userUid: user.uid,
-        movieId: 1222325,
+      .doc(uid)
+      .update({
+        // userUid: user.uid,
+        movieId: firebase.firestore.FieldValue.arrayUnion('greater_virginia1'),
       })
       .then(function () {
         console.log('Document written.');
@@ -55,25 +54,36 @@ firebase.auth().onAuthStateChanged(user => {
       });
     // get
 
+    const docRef = db.collection('watched').doc(uid);
+
+    docRef
+      .get()
+      .then(doc => {
+        if (doc.exists) {
+          console.log('Document data:', doc.data().movieId);
+        } else {
+          // doc.data() will be undefined in this case
+          console.log('No such document!');
+        }
+      })
+      .catch(error => {
+        console.log('Error getting document:', error);
+      });
+
+    // delete
     db.collection('watched')
-      .where('userUid', '==', user.uid)
-      .onSnapshot(querySnapshot => {
-        const watchedMovies = [];
-        querySnapshot.forEach(doc => {
-          watchedMovies.push(doc.data().movieId);
-        });
-        console.log('Current user watched movies: ', watchedMovies.join(', '));
+      .doc(uid)
+      .update({
+        // userUid: user.uid,
+        movieId: firebase.firestore.FieldValue.arrayRemove('greater_virginia1'),
+      })
+      .then(function () {
+        console.log('Document written.');
+      })
+      .catch(error => {
+        console.error('Error adding document: ', error);
       });
   } else {
     console.log('User is signed out');
   }
-
-  // delete
-  const movieRef = db.collection('watched').doc('user');
-
-  // Remove the 'movieId' field from the document
-  const removeMovie = movieRef.update({
-    movieId: 1222325,
-    movieId: firebase.firestore.FieldValue.delete(),
-  });
 });

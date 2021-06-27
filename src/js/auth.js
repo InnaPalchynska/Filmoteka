@@ -212,7 +212,6 @@ function initApp() {
       document.getElementById('quickstart-sign-in').textContent = 'Sign out';
       document.getElementById('quickstart-account-details').textContent =
         JSON.stringify(user, null, '  ');
-      console.log('user', user.uid);
       if (!emailVerified) {
         document.getElementById('quickstart-verify-email').disabled = false;
       }
