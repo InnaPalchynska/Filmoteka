@@ -1,7 +1,6 @@
 // import helperSvg from 'handlebars-helper-svg';
 import getRefs from './get-refs';
 import { renderLibraryMovies } from './render-library-movies';
-import { showPopularMovies, addSearchListener } from './renderMovies';
 import searchFieldTpl from '../templates/search-field.hbs';
 import headerBtnsTpl from '../templates/header-btns.hbs';
 // import renderLibrary from './renderLibrary';
@@ -12,19 +11,17 @@ refs.home.addEventListener('click', onHomeClick);
 refs.myLibrary.addEventListener('click', onMyLibraryClick);
 
 insertContent(refs.headerDynamicContainer, searchFieldTpl);
-addSearchListener();
-
 // console.log(refs.home);
 // console.log(refs.myLibrary);
 // console.log(refs.headerDynamicContainer);
 
 function onHomeClick(event) {
   // console.log(event.target);
+
   toggleClassOnMainPage(event);
   changeOnMainBg();
   clearContainer(refs.headerDynamicContainer);
   insertContent(refs.headerDynamicContainer, searchFieldTpl);
-  showPopularMovies(1);
 }
 
 function onMyLibraryClick(event) {

@@ -10,9 +10,7 @@ const refs = getRefs();
 
 const moviesApiService = new MoviesApiService();
 
-function addSearchListener() {
-  refs.searchInput.addEventListener('input', debounce(onSearch, 500));
-}
+refs.searchInput.addEventListener('input', debounce(onSearch, 500));
 
 let searchQuery = '';
 function onSearch(event) {
@@ -30,12 +28,14 @@ function onSearch(event) {
   renderPopularMoviesGrid(searchQuery).catch(error => console.log(error));
 }
 
+let currentPage = localStorage.getItem('currentPage');
+
 const container = document.getElementById('pagination');
 const options = {
   totalItems: 500,
   itemsPerPage: 1,
   visiblePages: 5,
-  page: 1,
+  page: parseInt(currentPage, 10) || 1,
   centerAlign: true,
   firstItemClassName: 'tui-first-child',
   lastItemClassName: 'tui-last-child',
@@ -58,10 +58,8 @@ const options = {
 };
 
 const pagination = new Pagination(container, options);
-let currentPage = localStorage.getItem('currentPage');
 
 async function renderPopularMoviesGrid(searchQuery) {
-  refs.notify.innerHTML = '';
   const fetchMovies = searchQuery
     ? moviesApiService.fetchMoviesBySearch()
     : moviesApiService.fetchPopularMovies();
@@ -117,11 +115,15 @@ pagination.on('afterMove', function (evt) {
   showPopularMovies(currentPage);
 });
 
-if (currentPage !== 1) {
-  moviesApiService.setPage(currentPage);
-  pagination.page = currentPage;
+if (currentPage === null) {
+  moviesApiService.setPage(1);
+  // pagination.page = 1;
   refs.moviesList.innerHTML = '';
   renderPopularMoviesGrid().catch(error => console.log(error));
+} else {
+  moviesApiService.setPage(currentPage);
+  // pagination.page = currentPage;
+  refs.moviesList.innerHTML = '';
+  showPopularMovies(currentPage);
+  // renderPopularMoviesGrid().catch(error => console.log(error));
 }
-
-export { showPopularMovies, addSearchListener };
