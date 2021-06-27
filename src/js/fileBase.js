@@ -1,6 +1,9 @@
 // Firebase App (the core Firebase SDK) is always required and must be listed first
 import firebase from 'firebase/app';
 import 'firebase/firestore';
+// import 'firebase/auth';
+
+// import { doc, getDoc } from 'firebase/firestore';
 
 // TODO: Replace the following with your app's Firebase project configuration
 // For Firebase JavaScript SDK v7.20.0 and later, `measurementId` is an optional field
@@ -22,54 +25,118 @@ if (!firebase.apps.length) {
   firebase.app(); // if already initialized, use that one
 }
 
+const movieId = 5555;
 const db = firebase.firestore();
 
-firebase.auth().onAuthStateChanged(user => {
-  if (user) {
-    //add
-    const uid = user.uid;
-    db.collection('watched')
-      .doc(uid)
-      .update({
-        movieId: firebase.firestore.FieldValue.arrayUnion('greater_virginia1'),
-      })
-      .then(function () {
-        console.log('Document written.');
-      })
-      .catch(error => {
-        console.error('Error adding document: ', error);
-      });
+const user = firebase.auth().currentUser;
 
-    // get
-    db.collection('watched')
-      .doc(uid)
-      .get()
-      .then(doc => {
-        if (doc.exists) {
-          const watchedMovies = doc.data().movieId;
-          console.log('Document data:', watchedMovies);
-        } else {
-          // doc.data() will be undefined in this case
-          console.log('No such document!');
-        }
-      })
-      .catch(error => {
-        console.log('Error getting document:', error);
-      });
+if (user) {
+  // User is signed in, see docs for a list of available properties
+  // https://firebase.google.com/docs/reference/js/firebase.User
+  // ...
+  console.log(user);
+} else {
+  // No user is signed in.
+  console.log('No found');
+}
 
-    // delete
-    db.collection('watched')
-      .doc(uid)
-      .update({
-        movieId: firebase.firestore.FieldValue.arrayRemove('greater_virginia1'),
-      })
-      .then(function () {
-        console.log('Document written.');
-      })
-      .catch(error => {
-        console.error('Error adding document: ', error);
-      });
-  } else {
-    console.log('User is signed out');
-  }
-});
+function fireBaseLibrary() {
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      const uid = user.uid;
+      const docRef = db.collection('watched').doc(uid);
+    } else {
+      console.log('User is signed out');
+    }
+  });
+}
+
+//add
+function addMovieToLibrary(movieId) {
+  firebase.auth().onAuthStateChanged(user => {
+    if (user) {
+      const uid = user.uid;
+      const docRef = db.collection('watched').doc(uid);
+      docRef
+        .get()
+        .then(doc => {
+          if (doc.exists) {
+            docRef
+              .update({
+                movieId: firebase.firestore.FieldValue.arrayUnion(movieId),
+              })
+              .then(function () {
+                console.log('Document written.');
+              })
+              .catch(error => {
+                console.error('Error adding document: ', error);
+              });
+          } else {
+            docRef
+              .set({
+                movieId: firebase.firestore.FieldValue.arrayUnion(movieId),
+              })
+              .then(function () {
+                console.log('Document written.');
+              })
+              .catch(error => {
+                console.error('Error adding document: ', error);
+              });
+            console.log('Create new document!');
+          }
+        })
+        .catch(error => {
+          console.log('Error getting document:', error);
+        });
+    } else {
+      console.log('User is signed out');
+    }
+  });
+}
+// get
+function getMovieFromLibrary() {
+  docRef
+    .get()
+    .then(doc => {
+      if (doc.exists) {
+        const watchedMovies = doc.data().movieId;
+        console.log('Document data:', watchedMovies);
+      } else {
+        // doc.data() will be undefined in this case
+        console.log('No such document!');
+      }
+    })
+    .catch(error => {
+      console.log('Error getting document:', error);
+    });
+}
+// delete
+function deleteMovieFromLibrary() {
+  docRef
+    .get()
+    .then(doc => {
+      if (doc.exists) {
+        docRef
+          .update({
+            movieId:
+              firebase.firestore.FieldValue.arrayRemove('greater_virginia1'),
+          })
+          .then(function () {
+            console.log('Document delete.');
+          })
+          .catch(error => {
+            console.error('Error delete document: ', error);
+          });
+      } else {
+        // doc.data() will be undefined in this case
+        console.log('No such document!');
+      }
+    })
+    .catch(error => {
+      console.log('Error getting document:', error);
+    });
+}
+
+// fireBaseLibrary.addMovieToLibrary();
+
+addMovieToLibrary(movieId);
