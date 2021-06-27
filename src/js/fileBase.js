@@ -1,17 +1,6 @@
 // Firebase App (the core Firebase SDK) is always required and must be listed first
 import firebase from 'firebase/app';
-// If you are using v7 or any earlier version of the JS SDK, you should import firebase using namespace import
-// import * as firebase from "firebase/app"
-
-// If you enabled Analytics in your project, add the Firebase SDK for Analytics
-// import 'firebase/analytics';
-
-// Add the Firebase products that you want to use
-// import 'firebase/auth';
 import 'firebase/firestore';
-// import { collection, query, where, onSnapshot } from 'firebase/firestore';
-// const firebase = require('firebase');
-// const firebaseui = require('firebaseui');
 
 // TODO: Replace the following with your app's Firebase project configuration
 // For Firebase JavaScript SDK v7.20.0 and later, `measurementId` is an optional field
@@ -37,13 +26,11 @@ const db = firebase.firestore();
 
 firebase.auth().onAuthStateChanged(user => {
   if (user) {
-    // User is signed in, see docs for a list of available properties
-    // https://firebase.google.com/docs/reference/js/firebase.User
+    //add
     const uid = user.uid;
     db.collection('watched')
       .doc(uid)
       .update({
-        // userUid: user.uid,
         movieId: firebase.firestore.FieldValue.arrayUnion('greater_virginia1'),
       })
       .then(function () {
@@ -52,15 +39,15 @@ firebase.auth().onAuthStateChanged(user => {
       .catch(error => {
         console.error('Error adding document: ', error);
       });
+
     // get
-
-    const docRef = db.collection('watched').doc(uid);
-
-    docRef
+    db.collection('watched')
+      .doc(uid)
       .get()
       .then(doc => {
         if (doc.exists) {
-          console.log('Document data:', doc.data().movieId);
+          const watchedMovies = doc.data().movieId;
+          console.log('Document data:', watchedMovies);
         } else {
           // doc.data() will be undefined in this case
           console.log('No such document!');
@@ -74,7 +61,6 @@ firebase.auth().onAuthStateChanged(user => {
     db.collection('watched')
       .doc(uid)
       .update({
-        // userUid: user.uid,
         movieId: firebase.firestore.FieldValue.arrayRemove('greater_virginia1'),
       })
       .then(function () {
