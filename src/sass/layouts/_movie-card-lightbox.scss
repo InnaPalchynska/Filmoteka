@@ -1,15 +1,10 @@
 .lightbox__card {
-  position: relative;
   width: 280px;
   padding-top: 48px;
   padding-bottom: 40px;
   padding-left: 20px;
   padding-right: 20px;
   background-color: get-bgColor('main');
-
-  @media screen and(max-width: 767px) {
-    margin-top: 10px;
-  }
 
   @media screen and(min-width: $tablet) {
     display: flex;
@@ -38,21 +33,25 @@
   padding: 0;
 
   border: none;
-  border-radius: 50px;
-  color: get-svgColor('dark-color');
+  border-radius: 50%;
+  color: get-svgColor('close-cross');
   background-color: transparent;
   cursor: pointer;
 
   &:hover,
   &:focus {
-    box-shadow: 0 5px 40px 5px rgb(220 51 24 / 40%);
-    color: get-svgColor('accent-color');
+    color: get-svgColor('close-cross-hover');
   }
 }
 
 .lightbox__poster {
   width: 240px;
   margin-bottom: 30px;
+
+  background-image: url(../images/SVG/image-off-outline.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 200px;
 
   @media screen and(min-width: $tablet) {
     min-width: 264px;
@@ -85,22 +84,6 @@
   }
 }
 
-.lightbox__img.placeholder {
-  width: 100%;
-  margin-right: auto;
-  margin-left: auto;
-  border: 1px solid #cdc8c8;
-  border-radius: 5px;
-
-  @media screen and (min-width: $tablet) {
-    width: 90%;
-  }
-
-  @media screen and (min-width: $desktop) {
-    width: 80%;
-  }
-}
-
 .lightbox__title {
   margin-bottom: 20px;
 
@@ -117,12 +100,12 @@
   }
 }
 
-.film-info {
+.movie-info {
   padding-top: 0px;
   padding-bottom: 0px;
 }
 
-.film-info__item {
+.movie-info__item {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
@@ -137,7 +120,7 @@
   }
 }
 
-.film-info__param {
+.movie-info__param {
   font-weight: 500;
   font-size: getFont-size__mob('text-modal');
   line-height: 1.33;
@@ -151,19 +134,19 @@
   }
 }
 
-.film-info__text {
+.movie-info__text {
   font-size: getFont-size__mob('text-modal');
   font-weight: 500;
   color: get-textColor('main');
-  line-height: 1.67;
+  line-height: 1.16;
   text-transform: uppercase;
 }
 
-.film-info__votes {
+.movie-info__votes {
   margin-left: 41px;
 }
 
-.film-info__votes--average {
+.movie-info__votes--average {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -174,7 +157,7 @@
   border-radius: 5px;
 }
 
-.film-info__votes--count {
+.movie-info__votes--count {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -185,22 +168,22 @@
   border-radius: 5px;
 }
 
-.film-info__popularity {
+.movie-info__popularity {
   margin-left: 53px;
 }
 
-.film-info__orig-title {
+.movie-info__orig-title {
   margin-left: 39px;
   line-height: 1.33;
 }
 
-.film-info__genre {
+.movie-info__genre {
   margin-left: 76px;
   line-height: 1.33;
   text-transform: unset;
 }
 
-.film-info__descr {
+.movie-info__descr {
   text-transform: initial;
   line-height: 1.67;
 }
