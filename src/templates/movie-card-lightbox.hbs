@@ -5,7 +5,7 @@
 
   <div class='lightbox__poster'>
     <img
-      class='lightbox__img {{#if placeholder}}placeholder{{/if}}'
+      class='lightbox__img'
       {{#if placeholder}}
       src='./optimized-png/image-not-found.png'
       {{else}}
@@ -17,40 +17,37 @@
 
   <div class='lightbox__content'>
     <h2 class='lightbox__title'>{{original_title}}</h2>
-    <ul class='film-info'>
-      <li class='film-info__item'>
-        <h3 class='film-info__param'>Vote / Votes</h3>
-        <p class='film-info__votes'>
-          <div class='film-info__text film-info__votes--average'>{{vote_average}}</div>
+    <ul class='movie-info'>
+      <li class='movie-info__item'>
+        <h3 class='movie-info__param'>Vote / Votes</h3>
+        <p class='movie-info__votes'>
+          <div class='movie-info__text movie-info__votes--average'>{{vote_average}}</div>
           <span>/</span>
-          <div class='film-info__text film-info__votes--count'>{{vote_count}}</div>
+          <div class='movie-info__text movie-info__votes--count'>{{vote_count}}</div>
         </p>
       </li>
 
-      <li class='film-info__item'>
-        <h3 class='film-info__param'>Popularity</h3>
-        <p class='film-info__text film-info__popularity'>
+      <li class='movie-info__item'>
+        <h3 class='movie-info__param'>Popularity</h3>
+        <p class='movie-info__text movie-info__popularity'>
           {{popularity}}
         </p>
       </li>
 
-      <li class='film-info__item'>
-        <h3 class='film-info__param'>Original Title</h3>
-        <p class='film-info__text film-info__orig-title'>
+      <li class='movie-info__item'>
+        <h3 class='movie-info__param'>Original Title</h3>
+        <p class='movie-info__text movie-info__orig-title'>
           {{original_title}}
         </p>
       </li>
 
-      <li class='film-info__item'>
-        <h3 class='film-info__param'>Genre</h3>
-        <p class='film-info__text film-info__genre'>
+      <li class='movie-info__item'>
+        <h3 class='movie-info__param'>Genre</h3>
+        <p class='movie-info__text movie-info__genre'>
           {{movie_genres}}
         </p>
       </li>
 
-      <li class='film-info__item'>
-        <h3 class='film-info__param film-info__param--about'>About</h3>
-        <p class='film-info__text film-info__descr'>
       {{!-- <li><button class="trailer">show the trailer</button></li> --}}
 
       <li class='movie-info__item'>
@@ -59,7 +56,7 @@
           <button class="trailer">
             <div class="align-item__trailer">
               <span>play</span>
-              <svg class="trailer-play__icon" version="1.0" xmlns="http://www.w3.org/2000/svg" width="" height="20px"
+              <svg class="trailer-play__icon" version="1.0" xmlns="http://www.w3.org/2000/svg" width="10px" height="20px"
                 viewBox="0 0 512.000000 512.000000" preserveAspectRatio="xMidYMid meet">
               
                 <g transform="translate(0.000000,512.000000) scale(0.100000,-0.100000)" stroke="none">

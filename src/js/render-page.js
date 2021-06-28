@@ -3,26 +3,17 @@ import getRefs from './get-refs';
 import { renderLibraryMovies } from './render-library-movies';
 import searchFieldTpl from '../templates/search-field.hbs';
 import headerBtnsTpl from '../templates/header-btns.hbs';
-import renderLibrary from './renderLibrary';
-import debounce from 'lodash.debounce';
-import {onSearch} from './renderMovies'
-// console.log(onSearch);
-// console.log(searchFieldTpl());
-// console.log(headerBtnsTpl());
+// import renderLibrary from './renderLibrary';
 
 const refs = getRefs();
 
 refs.home.addEventListener('click', onHomeClick);
 refs.myLibrary.addEventListener('click', onMyLibraryClick);
 
-
-insertContentTpl(refs.headerDynamicContainer, searchFieldTpl);
-const searchInputRef = document.querySelector('.js-search-field__input');
-  // console.log(searchInputRef);
-searchInputRef.addEventListener('input', debounce(onSearch, 500));
-  // console.log(refs.home);
-  // console.log(refs.myLibrary);
-  // console.log(refs.headerDynamicContainer);
+insertContent(refs.headerDynamicContainer, searchFieldTpl);
+// console.log(refs.home);
+// console.log(refs.myLibrary);
+// console.log(refs.headerDynamicContainer);
 
 function onHomeClick(event) {
   // console.log(event.target);
@@ -30,24 +21,35 @@ function onHomeClick(event) {
   toggleActivClassOnMainPage(event);
   changeOnMainBg();
   clearContainer(refs.headerDynamicContainer);
-  insertContentTpl(refs.headerDynamicContainer, searchFieldTpl);
-  const searchInputRef = document.querySelector('.js-search-field__input');
-  searchInputRef.addEventListener('input', debounce(onSearch, 500));
-  
+  insertContent(refs.headerDynamicContainer, searchFieldTpl);
 }
 
 function onMyLibraryClick(event) {
   // console.log(event.target);
   toggleActivClassOnSecondPage(event);
   changeOnSecondaryBg();
-  searchInputRef.removeEventListener('input', debounce(onSearch, 500));
   clearContainer(refs.headerDynamicContainer);
-  insertContentTpl(refs.headerDynamicContainer, headerBtnsTpl);
-  // renderLibrary();
-  
+  insertContent(refs.headerDynamicContainer, headerBtnsTpl);
+
+  const watchedMoviesBtn = document.querySelector("[data-header='watched']");
+  const queueMoviesBtn = document.querySelector("[data-header='queue']");
+  watchedMoviesBtn.addEventListener('click', onHeaderBtnsClick);
+  queueMoviesBtn.addEventListener('click', onHeaderBtnsClick);
+  renderLibraryMovies();
 }
 
-function insertContentTpl(nameContainer, fnTemplates) {
+function onHeaderBtnsClick(e) {
+  switchActiveClass(e, 'header-buttons__btn--active');
+  const itemName = e.target.dataset.header;
+  renderLibraryMovies(itemName);
+}
+
+function switchActiveClass(e, className) {
+  document.querySelector(`.${className}`).classList.remove(className);
+  e.target.classList.add(className);
+}
+
+function insertContent(nameContainer, fnTemplates) {
   nameContainer.insertAdjacentHTML('beforeend', fnTemplates());
 }
 
