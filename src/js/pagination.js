@@ -1,9 +1,6 @@
+import { func } from 'assert-plus';
 import Pagination from 'tui-pagination';
-import MoviesApiService from './apiService';
-import renderPopularMoviesGrid from '../index';
-// import fetchPopularMovies from '../index';
-
-const moviesApiService = new MoviesApiService();
+import { renderPopularMoviesGrid } from './renderMovies';
 
 const container = document.getElementById('pagination');
 const options = {
@@ -16,21 +13,30 @@ const options = {
   lastItemClassName: 'tui-last-child',
 };
 
-const smoothScrool = function () {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};
+// const smoothScrool = function () {
+//   window.scrollTo({ top: 0, behavior: 'smooth' });
+// };
 
-const pagination = new Pagination(container, options);
+function pagination(totalResults, currentPage) {
+  if (!totalResults || totalResults < 20) {
+    container.innerHTML = '';
+    return;
+  }
+  const pagination = new Pagination(container, options);
 
-function showPopularMovies(currentPage) {
-  moviesApiService.setPage(currentPage);
-  renderPopularMoviesGrid();
+  pagination.setTotalItems(totalResults);
+  pagination.movePageTo(currentPage);
+
+  pagination.on('afterMove', renderPopularMoviesGrid);
 }
 
-pagination.on('afterMove', function (evt) {
-  smoothScrool();
-  let currentPage = evt.page;
-  showPopularMovies(currentPage);
-});
+// function showPopularMovies(currentPage) {
+//   moviesApiService.setPage(currentPage);
+//   renderPopularMoviesGrid();
+// }
 
-export { pagination };
+// pagination.on('afterMove', function (evt) {
+//   smoothScrool();
+//   let currentPage = evt.page;
+//   showPopularMovies(currentPage);
+// });

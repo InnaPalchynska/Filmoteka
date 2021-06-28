@@ -1,9 +1,12 @@
 import getRefs from './get-refs';
 import MovieApiService from './apiService';
 import libraryMovieCardTpl from '../templates/library-movie-card.hbs';
+import * as pagination from './renderMovies';
 
 const movieApiService = new MovieApiService();
 const refs = getRefs();
+
+let totalItems = 1;
 
 async function renderLibraryMovies(filterName = 'watched') {
   const isLibraryPage = refs.myLibrary.classList.contains('site-nav__button--active');
@@ -17,7 +20,8 @@ async function renderLibraryMovies(filterName = 'watched') {
   const allWatchedMoviesIds = getDataFromLocalStorage(filterName);
   if (!allWatchedMoviesIds || allWatchedMoviesIds.length === 0) {
     refs.moviesList.innerHTML = '';
-    refs.divPagination.innerHTML = '';
+    // refs.divPagination.innerHTML = '';
+    refs.divPagination.classList.add('hidden-tui');
     refs.notify.classList.remove('visually-hidden');
     refs.notify.textContent = `There are no ${filterName} films yet :(`;
     return;
@@ -25,9 +29,18 @@ async function renderLibraryMovies(filterName = 'watched') {
 
   const watchedMoviesIds = getMoviesIdsByMediaQuery(allWatchedMoviesIds, 0);
 
+  refs.divPagination.classList.remove('hidden-tui');
+
   const watchedMovies = await Promise.all(
     watchedMoviesIds.map(async id => await movieApiService.fetchFullInfoOfMovie(id)),
   );
+
+  // пагинация
+  totalItems = Number(allWatchedMoviesIds.length);
+  console.log(totalItems);
+  const totalPages = Math.ceil(totalItems / 9);
+  console.log(totalPages);
+  pagination.setTotalItems(totalPages);
 
   renderMovies(watchedMovies);
 }
