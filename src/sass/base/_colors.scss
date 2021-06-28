@@ -27,6 +27,8 @@ $svgColor: (
   'heart': #ff6b08,
   'close-cross': #000000,
   'close-cross-hover': #ff6b08,
+  'github-hover': #ff6b08,
+  'github-icon': #ffffff,
 );
 
 @function get-svgColor($key) {
