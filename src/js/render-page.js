@@ -3,7 +3,9 @@ import getRefs from './get-refs';
 import searchFieldTpl from '../templates/search-field.hbs';
 import headerBtnsTpl from '../templates/header-btns.hbs';
 import renderLibrary from './renderLibrary';
-
+import debounce from 'lodash.debounce';
+import {onSearch} from './renderMovies'
+// console.log(onSearch);
 // console.log(searchFieldTpl());
 // console.log(headerBtnsTpl());
 
@@ -12,7 +14,11 @@ const refs = getRefs();
 refs.home.addEventListener('click', onHomeClick);
 refs.myLibrary.addEventListener('click', onMyLibraryClick);
 
-insertContent(refs.headerDynamicContainer, searchFieldTpl);
+
+insertContentTpl(refs.headerDynamicContainer, searchFieldTpl);
+const searchInputRef = document.querySelector('.js-search-field__input');
+  // console.log(searchInputRef);
+searchInputRef.addEventListener('input', debounce(onSearch, 500));
   // console.log(refs.home);
   // console.log(refs.myLibrary);
   // console.log(refs.headerDynamicContainer);
@@ -23,19 +29,24 @@ function onHomeClick(event) {
   toggleActivClassOnMainPage(event);
   changeOnMainBg();
   clearContainer(refs.headerDynamicContainer);
-  insertContent(refs.headerDynamicContainer, searchFieldTpl);
+  insertContentTpl(refs.headerDynamicContainer, searchFieldTpl);
+  const searchInputRef = document.querySelector('.js-search-field__input');
+  searchInputRef.addEventListener('input', debounce(onSearch, 500));
+  
 }
 
 function onMyLibraryClick(event) {
   // console.log(event.target);
   toggleActivClassOnSecondPage(event);
   changeOnSecondaryBg();
+  searchInputRef.removeEventListener('input', debounce(onSearch, 500));
   clearContainer(refs.headerDynamicContainer);
-  insertContent(refs.headerDynamicContainer, headerBtnsTpl);
+  insertContentTpl(refs.headerDynamicContainer, headerBtnsTpl);
   // renderLibrary();
+  
 }
 
-function insertContent(nameContainer, fnTemplates) {
+function insertContentTpl(nameContainer, fnTemplates) {
   nameContainer.insertAdjacentHTML('beforeend', fnTemplates());
 }
 

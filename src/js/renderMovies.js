@@ -1,23 +1,27 @@
 import Pagination from 'tui-pagination';
 import MoviesApiService from '../js/apiService.js';
 import smoothScrool from './smoothScrool.js';
-import debounce from 'lodash.debounce';
+// import debounce from 'lodash.debounce';
+
 
 import movieCardTpl from '../templates/movie-card.hbs';
 import getRefs from '../js/get-refs.js';
+import { showTextError, insertContentTpl } from './notification';
+import errorTpl from '../templates/error-not-found-film.hbs';
+// console.log(errorTpl);
 
 const refs = getRefs();
 
 const moviesApiService = new MoviesApiService();
 
-refs.searchInput.addEventListener('input', debounce(onSearch, 500));
+// refs.searchInput.addEventListener('input', debounce(onSearch, 500));
 refs.home.addEventListener('click', onLogoAndHomeClikc);
 refs.logoLink.addEventListener('click', onLogoAndHomeClikc);
 
 let searchQuery = '';
 function onSearch(event) {
   // event.preventDefault();
-
+  // console.log(event.target.value);
   pagination.movePageTo(1);
   refs.moviesList.innerHTML = '';
 
@@ -67,6 +71,8 @@ async function renderPopularMoviesGrid(searchQuery) {
 
   const { results: movies, page, total_pages, total_results } = await fetchMovies;
 
+  
+
   //genresList - array of objects [{id: 23, name: "Drama"}, {id: 17, name: "Action"} ...]
   const genresListObj = await moviesApiService.fetchGenresList();
   const genresList = genresListObj.genres;
@@ -79,9 +85,26 @@ async function renderPopularMoviesGrid(searchQuery) {
     refs.divPagination.classList.remove('hidden-tui');
     pagination.setTotalItems(total_pages);
   }
+
+  if (movies.length === 0) {
+    const headerErrorTextRef = document.querySelector('.js-header-error-text');
+    // console.dir(headerErrorTextRef);
+    showTextError(
+      headerErrorTextRef,
+      'Search result not successful. Enter the correct movie name and ',
+    );
+    setTimeout(() => (headerErrorTextRef.textContent = ''), 3000);
+    refs.moviesList.innerHTML = '';
+    refs.moviesList.insertAdjacentHTML('beforeend', errorTpl());
+    // // insertContentTpl(refs.moviesList, errorTpl);
+    // console.log(refs.moviesList);
+    // console.log(errorTpl());
+    return;
+  }
   refs.moviesList.innerHTML = '';
   const popularMoviesMarkup = movieCardTpl(movies);
   refs.moviesList.insertAdjacentHTML('beforeend', popularMoviesMarkup);
+ 
 }
 
 function transformMoviesObjectFields(movies, genresList) {
@@ -130,3 +153,5 @@ function onLogoAndHomeClikc() {
   localStorage.setItem('currentPage', currentPage);
   showPopularMovies(currentPage);  
 }
+
+export {onSearch}

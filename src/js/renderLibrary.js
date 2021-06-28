@@ -14,7 +14,7 @@ export default function renderLibrary() {
   }
 
   async function renderPopularMoviesGrid(iterator) {
-    console.log(iterator);
+    // console.log(iterator);
     //   const fetchMovies = searchQuery
     //     ? moviesApiService.fetchMoviesBySearch()
     //     : moviesApiService.fetchPopularMovies();

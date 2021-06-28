@@ -71,8 +71,8 @@ function transformMovieObjectFields(movie) {
     movie.poster_path = `https://image.tmdb.org/t/p/original/${movie.poster_path}`;
     movie.placeholder = false;
   }
-  console.log(movie.placeholder);
-  console.log(movie);
+  // console.log(movie.placeholder);
+  // console.log(movie);
 
   let genresList = [];
   movie.genres.map(genre => {
