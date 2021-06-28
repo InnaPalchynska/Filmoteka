@@ -2,8 +2,13 @@
   height: 100vh;
   display: flex;
   justify-content: center;
-  margin-top: 50vh;
+  margin-top: 30vh;
   z-index: 1001;
+}
+
+.js-preloader.visually-hidden {
+  height: 1px;
+  margin-top: 0;
 }
 
 .lds-ellipsis {
