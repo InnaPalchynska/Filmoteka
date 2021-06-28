@@ -1,8 +1,8 @@
 import getRefs from './get-refs';
-import MovieApiService from './apiService';
+import MoviesApiService from './apiService';
 import libraryMovieCardTpl from '../templates/library-movie-card.hbs';
 
-const movieApiService = new MovieApiService();
+const moviesApiService = new MoviesApiService();
 const refs = getRefs();
 
 async function renderLibraryMovies(filterName = 'watched') {
@@ -14,8 +14,8 @@ async function renderLibraryMovies(filterName = 'watched') {
   if (!isNotifyHidden) {
     refs.notify.classList.add('visually-hidden');
   }
-  const allWatchedMoviesIds = getDataFromLocalStorage(filterName);
-  if (!allWatchedMoviesIds || allWatchedMoviesIds.length === 0) {
+  const allMoviesIds = getDataFromLocalStorage(filterName);
+  if (!allMoviesIds || allMoviesIds.length === 0) {
     refs.moviesList.innerHTML = '';
     refs.divPagination.innerHTML = '';
     refs.notify.classList.remove('visually-hidden');
@@ -23,13 +23,13 @@ async function renderLibraryMovies(filterName = 'watched') {
     return;
   }
 
-  const watchedMoviesIds = getMoviesIdsByMediaQuery(allWatchedMoviesIds, 0);
+  const moviesIds = getMoviesIdsByMediaQuery(allMoviesIds, 0);
 
-  const watchedMovies = await Promise.all(
-    watchedMoviesIds.map(async id => await movieApiService.fetchFullInfoOfMovie(id)),
+  const movies = await Promise.all(
+    moviesIds.map(async id => await moviesApiService.fetchFullInfoOfMovie(id)),
   );
 
-  renderMovies(watchedMovies);
+  renderMovies(movies);
 }
 
 function getDataFromLocalStorage(itemName) {
@@ -56,8 +56,8 @@ function getMoviesIdsByMediaQuery(moviesIds, startIndex) {
 
 function renderMovies(movies) {
   movies.map(transformMovieObjectFields);
-  const watchedMoviesMarkup = libraryMovieCardTpl(movies);
-  refs.moviesList.innerHTML = watchedMoviesMarkup;
+  const moviesMarkup = libraryMovieCardTpl(movies);
+  refs.moviesList.innerHTML = moviesMarkup;
 }
 
 function transformMovieObjectFields(movie) {
