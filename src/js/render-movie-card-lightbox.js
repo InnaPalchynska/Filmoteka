@@ -40,6 +40,7 @@ async function getFullInfoOfMovie(currentMovieCard) {
 async function renderMovieCardLightbox(fullInfo) {
   getMovieGenres(fullInfo);
   getMoviePopularity(fullInfo);
+  getMoviePoster(fullInfo);
 
   const lightbox = basicLightbox.create(movieCardLightboxTpl(fullInfo), {
     onShow() {
@@ -143,3 +144,7 @@ function getMoviePopularity(fullInfo) {
 
   return moviePopularity;
 }
+
+function getMoviePoster(fullInfo) {
+  fullInfo.placeholder = !fullInfo.poster_path ? true : false; 
+ }

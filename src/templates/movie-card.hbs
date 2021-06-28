@@ -1,17 +1,17 @@
 {{#each this}}
   <li class='movies-list__item'>
-    <div class='poster-thumb {{#if placeholder}}placeholder{{/if}}'>
-      {{#if placeholder}}
-        <i class='material-icons-outlined'>image_not_supported</i>
-      {{else}}
-        <img
-        src='https://image.tmdb.org/t/p/original/{{ poster_path }}'
+    <div class='poster-thumb'>
+      <img
+        {{#if placeholder}}
+          src='./optimized-png/image-not-found.png'
+        {{else}}
+          src='https://image.tmdb.org/t/p/original/{{ poster_path }}'
+        {{/if}}
         width="274"
         height="398"
         alt='{{ original_title }}'
         data-id='{{ id }}'
       />  
-    {{/if}}
     </div>
     <div class='movie-data'>
       <h2 class='movie-data__title'>{{ original_title }}</h2>

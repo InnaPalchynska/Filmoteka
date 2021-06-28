@@ -6,7 +6,11 @@
   <div class='lightbox__poster'>
     <img
       class='lightbox__img'
+      {{#if placeholder}}
+      src='./optimized-png/image-not-found.png'
+      {{else}}
       src='https://image.tmdb.org/t/p/original/{{poster_path}}'
+      {{/if}}
       alt='{{original_title}}'
     />
   </div>
