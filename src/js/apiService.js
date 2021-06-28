@@ -1,6 +1,10 @@
 const BASE_URL = 'https://api.themoviedb.org/3/';
 const API_KEY = 'c27b75f2098a52933ae8847a9b55ad4e';
 
+// Youtube trailer
+const Youtube_URL = 'https://youtube.googleapis.com/youtube/v3/search?part=snippet&q=';
+const Youtube_KEY = 'AIzaSyD8inqGUO-SK_dHM6arGzHjgxpIuIBLIy0';
+
 export default class MoviesApiService {
   constructor() {
     this.searchQuery = '';
@@ -65,5 +69,14 @@ export default class MoviesApiService {
 
   set query(newQuery) {
     this.searchQuery = newQuery;
+  }
+
+  getTrailer(movie) {
+    const url = `${Youtube_URL}${movie} + "trailer"&key=${Youtube_KEY}`;
+    return fetch(url)
+      .then(r => r.json())
+      .then(d => {
+        return d.items[0].id.videoId;
+      });
   }
 }
