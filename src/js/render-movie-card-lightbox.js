@@ -7,7 +7,6 @@ import * as basicLightbox from 'basiclightbox';
 import {
   onWatchedButton,
   onQueueButton,
-  updateBtnTextContent,
   getLibraryMovies,
 } from './fireBase-dataBase.js';
 
@@ -24,15 +23,42 @@ async function onMovieCardClick(e) {
   }
 
   getFullInfoOfMovie(currentMovieCard).then(fullInfo => {
-    const isLibraryPage = refs.myLibrary.classList.contains(
-      'site-nav__button--active',
-    );
-    if (isLibraryPage) {
-      const isWatchedBtn = refs.myLibrary;
-      console.dir(isWatchedPage);
-    }
     renderMovieCardLightbox(fullInfo);
+    console.dir(currentMovieCard);
+    // updateBtnTextContentFromFireBase(currentMovieCard.dataset.id);
   });
+}
+
+function updateBtnTextContentFromFireBase(movieId) {
+  const isLibraryPage = refs.myLibrary.classList.contains(
+    'site-nav__button--active',
+  );
+  if (isLibraryPage) {
+    const watchedMoviesBtn = document.querySelector("[data-header='watched']");
+    const isWatchedBtn = watchedMoviesBtn.classList.contains(
+      'header-buttons__btn--active',
+    );
+    let libraryType = '';
+    if (isWatchedBtn) {
+      libraryType = 'watched';
+    } else {
+      libraryType = 'queue';
+    }
+    getLibraryMovies(libraryType).then(watchedMovies => {
+      const modalBtnWatched = document.querySelector(
+        '.lightbox__button--watched',
+      );
+      const modalBtnQueue = document.querySelector('.lightbox__button--queue');
+      if (!watchedMovies.includes(movieId)) {
+        console.dir(modalBtnWatched);
+        modalBtnWatched.textContent = `Remove from ${libraryType}`;
+        modalBtnWatched.classList.add('active');
+      } else {
+        modalBtnWatched.textContent = `Add to ${libraryType}`;
+        modalBtnWatched.classList.remove('active');
+      }
+    });
+  }
 }
 
 async function getFullInfoOfMovie(currentMovieCard) {
@@ -64,6 +90,8 @@ async function renderMovieCardLightbox(fullInfo) {
 
   const modalBtnWatched = document.querySelector('.lightbox__button--watched');
   const modalBtnQueue = document.querySelector('.lightbox__button--queue');
+  console.log(fullInfo.id);
+  updateBtnTextContentFromFireBase(fullInfo.id);
 
   modalBtnWatched.addEventListener('click', onWatchedButton);
   modalBtnQueue.addEventListener('click', onQueueButton);

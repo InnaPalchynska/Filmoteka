@@ -48,9 +48,9 @@ async function getWatchedMovies(watchedMoviesIds) {
   return watchedMovies;
 }
 
-function getDataFromLocalStorage(itemName) {
-  return JSON.parse(localStorage.getItem(itemName));
-}
+// function getDataFromLocalStorage(itemName) {
+//   return JSON.parse(localStorage.getItem(itemName));
+// }
 
 function getMoviesIdsByMediaQuery(moviesIds, startIndex) {
   const mobileMediaQuery = window.matchMedia('(max-width: 767px)');
