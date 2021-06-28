@@ -1,14 +1,15 @@
 .lightbox__card {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: relative;
   width: 280px;
   padding-top: 48px;
   padding-bottom: 40px;
   padding-left: 20px;
   padding-right: 20px;
   background-color: get-bgColor('main');
+
+  @media screen and(max-width: 767px) {
+    margin-top: 10px;
+  }
 
   @media screen and(min-width: $tablet) {
     display: flex;
@@ -38,14 +39,14 @@
 
   border: none;
   border-radius: 50px;
-  color: get-svgColor('close-cross');
+  color: get-svgColor('dark-color');
   background-color: transparent;
   cursor: pointer;
 
   &:hover,
   &:focus {
     box-shadow: 0 5px 40px 5px rgb(220 51 24 / 40%);
-    color: get-svgColor('close-cross-hover');
+    color: get-svgColor('accent-color');
   }
 }
 
