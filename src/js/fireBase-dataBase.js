@@ -24,6 +24,7 @@ if (!initializeApp.length) {
     appId: '1:904812622933:web:c5ae777769ec7ec58490dc',
   });
 }
+
 const db = getFirestore();
 const auth = getAuth();
 

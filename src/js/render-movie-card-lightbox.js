@@ -4,11 +4,7 @@ import movieCardLightboxTpl from '../templates/movie-card-lightbox.hbs';
 
 import 'basiclightbox/src/styles/main.scss';
 import * as basicLightbox from 'basiclightbox';
-// import // initialSaveToLocalStorage,
-// checkBtnTextContent,
-// onWatchedButton,
-// onQueueButton,
-// './fireBase-dataBase.js';
+// import { onQueueButton } from './fireBase-dataBase.js';
 
 const refs = getRefs();
 const moviesApiService = new MoviesApiService();
