@@ -17,7 +17,7 @@ async function renderLibraryMovies(filterName = 'watched') {
   const allWatchedMoviesIds = getDataFromLocalStorage(filterName);
   if (!allWatchedMoviesIds || allWatchedMoviesIds.length === 0) {
     refs.moviesList.innerHTML = '';
-    refs.divPagination.innerHTML = '';
+    refs.divPagination.classList.add('hidden-tui');
     refs.notify.classList.remove('visually-hidden');
     refs.notify.textContent = `There are no ${filterName} films yet :(`;
     return;
