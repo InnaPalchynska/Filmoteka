@@ -1,7 +1,7 @@
 import getRefs from './get-refs';
 import MovieApiService from './apiService';
 import libraryMovieCardTpl from '../templates/library-movie-card.hbs';
-import * as pagination from './renderMovies';
+// import * as pagination from './renderMovies';
 
 const movieApiService = new MovieApiService();
 const refs = getRefs();
