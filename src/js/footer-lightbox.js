@@ -2,7 +2,7 @@ import getRefs from '../js/get-refs';
 import teamMembers from './team';
 import footerLightboxTpl from '../templates/footer-lightbox.hbs';
 
-import 'basiclightbox/src/styles/main.scss';
+import '../sass/components/_basic-lightbox.scss';
 import * as basicLightbox from 'basiclightbox';
 
 const refs = getRefs();
