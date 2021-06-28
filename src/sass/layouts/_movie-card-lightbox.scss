@@ -1,10 +1,15 @@
 .lightbox__card {
+  position: relative;
   width: 280px;
   padding-top: 48px;
   padding-bottom: 40px;
   padding-left: 20px;
   padding-right: 20px;
   background-color: get-bgColor('main');
+
+  @media screen and(max-width: 767px) {
+    margin-top: 10px;
+  }
 
   @media screen and(min-width: $tablet) {
     display: flex;
@@ -33,25 +38,21 @@
   padding: 0;
 
   border: none;
-  border-radius: 50%;
-  color: get-svgColor('close-cross');
+  border-radius: 50px;
+  color: get-svgColor('dark-color');
   background-color: transparent;
   cursor: pointer;
 
   &:hover,
   &:focus {
-    color: get-svgColor('close-cross-hover');
+    box-shadow: 0 5px 40px 5px rgb(220 51 24 / 40%);
+    color: get-svgColor('accent-color');
   }
 }
 
 .lightbox__poster {
   width: 240px;
   margin-bottom: 30px;
-
-  background-image: url(../images/SVG/image-off-outline.svg);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 200px;
 
   @media screen and(min-width: $tablet) {
     min-width: 264px;
@@ -100,12 +101,12 @@
   }
 }
 
-.movie-info {
+.film-info {
   padding-top: 0px;
   padding-bottom: 0px;
 }
 
-.movie-info__item {
+.film-info__item {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
@@ -120,7 +121,7 @@
   }
 }
 
-.movie-info__param {
+.film-info__param {
   font-weight: 500;
   font-size: getFont-size__mob('text-modal');
   line-height: 1.33;
@@ -134,19 +135,19 @@
   }
 }
 
-.movie-info__text {
+.film-info__text {
   font-size: getFont-size__mob('text-modal');
   font-weight: 500;
   color: get-textColor('main');
-  line-height: 1.16;
+  line-height: 1.67;
   text-transform: uppercase;
 }
 
-.movie-info__votes {
+.film-info__votes {
   margin-left: 41px;
 }
 
-.movie-info__votes--average {
+.film-info__votes--average {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -157,7 +158,7 @@
   border-radius: 5px;
 }
 
-.movie-info__votes--count {
+.film-info__votes--count {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -168,22 +169,22 @@
   border-radius: 5px;
 }
 
-.movie-info__popularity {
+.film-info__popularity {
   margin-left: 53px;
 }
 
-.movie-info__orig-title {
+.film-info__orig-title {
   margin-left: 39px;
   line-height: 1.33;
 }
 
-.movie-info__genre {
+.film-info__genre {
   margin-left: 76px;
   line-height: 1.33;
   text-transform: unset;
 }
 
-.movie-info__descr {
+.film-info__descr {
   text-transform: initial;
   line-height: 1.67;
 }

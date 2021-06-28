@@ -30,6 +30,10 @@ $basicLightbox__timing: ease !default;
   }
 
   &__placeholder {
+    @media screen and(max-width: 767px) {
+      align-items: flex-start;
+    }
+
     // max-width: 100%;
     // transform: scale(0.9);
     //transition: transform $basicLightbox__duration $basicLightbox__timing;
