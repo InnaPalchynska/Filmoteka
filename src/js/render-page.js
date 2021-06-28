@@ -4,33 +4,44 @@ import { renderLibraryMovies } from './render-library-movies';
 import searchFieldTpl from '../templates/search-field.hbs';
 import headerBtnsTpl from '../templates/header-btns.hbs';
 // import renderLibrary from './renderLibrary';
+import debounce from 'lodash.debounce';
+import { onSearch } from './renderMovies';
 
 const refs = getRefs();
 
 refs.home.addEventListener('click', onHomeClick);
 refs.myLibrary.addEventListener('click', onMyLibraryClick);
 
-insertContent(refs.headerDynamicContainer, searchFieldTpl);
+
+insertContentTpl(refs.headerDynamicContainer, searchFieldTpl);
+const searchInput = document.querySelector('.js-search-field__input');
+searchInput.addEventListener('input', debounce(onSearch, 500));
+
 // console.log(refs.home);
 // console.log(refs.myLibrary);
 // console.log(refs.headerDynamicContainer);
 
 function onHomeClick(event) {
   // console.log(event.target);
-
-  toggleActivClassOnMainPage(event);
+  toggleActiveClassOnMainPage(event);
   changeOnMainBg();
+  const watchedMoviesBtn = document.querySelector("[data-header='watched']");
+  const queueMoviesBtn = document.querySelector("[data-header='queue']");
+  watchedMoviesBtn.removeEventListener('click', onHeaderBtnsClick);
+  queueMoviesBtn.removeEventListener('click', onHeaderBtnsClick);
   clearContainer(refs.headerDynamicContainer);
-  insertContent(refs.headerDynamicContainer, searchFieldTpl);
+  insertContentTpl(refs.headerDynamicContainer, searchFieldTpl);
+  const searchInput = document.querySelector('.js-search-field__input');
+  searchInput.addEventListener('input', debounce(onSearch, 500));  
 }
 
 function onMyLibraryClick(event) {
   // console.log(event.target);
-  toggleActivClassOnSecondPage(event);
+  toggleActiveClassOnSecondPage(event);
   changeOnSecondaryBg();
+  searchInput.removeEventListener('input', debounce(onSearch, 500));
   clearContainer(refs.headerDynamicContainer);
-  insertContent(refs.headerDynamicContainer, headerBtnsTpl);
-
+  insertContentTpl(refs.headerDynamicContainer, headerBtnsTpl);
   const watchedMoviesBtn = document.querySelector("[data-header='watched']");
   const queueMoviesBtn = document.querySelector("[data-header='queue']");
   watchedMoviesBtn.addEventListener('click', onHeaderBtnsClick);
@@ -49,7 +60,7 @@ function switchActiveClass(e, className) {
   e.target.classList.add(className);
 }
 
-function insertContent(nameContainer, fnTemplates) {
+function insertContentTpl(nameContainer, fnTemplates) {
   nameContainer.insertAdjacentHTML('beforeend', fnTemplates());
 }
 
@@ -58,36 +69,36 @@ function clearContainer(nameContainer) {
 }
 
 function changeOnMainBg() {
-  const activBgClass = refs.headerBackgroundContainer.classList.contains(
+  const activeBgClass = refs.headerBackgroundContainer.classList.contains(
     'header__container--home-bg',
   );
-  if (!activBgClass) {
+  if (!activeBgClass) {
     refs.headerBackgroundContainer.classList.add('header__container--home-bg');
   }
   refs.headerBackgroundContainer.classList.remove('header__container--my-library-bg');
 }
 
-function toggleActivClassOnMainPage(e) {
-  const activClass = e.target.classList.contains('site-nav__button--active');
-  if (!activClass) {
+function toggleActiveClassOnMainPage(e) {
+  const activeClass = e.target.classList.contains('site-nav__button--active');
+  if (!activeClass) {
     e.target.classList.add('site-nav__button--active');
   }
   refs.myLibrary.classList.remove('site-nav__button--active');
 }
 
 function changeOnSecondaryBg() {
-  const activBgClass = refs.headerBackgroundContainer.classList.contains(
+  const activeBgClass = refs.headerBackgroundContainer.classList.contains(
     'header__container--my-library-bg',
   );
-  if (!activBgClass) {
+  if (!activeBgClass) {
     refs.headerBackgroundContainer.classList.add('header__container--my-library-bg');
   }
   refs.headerBackgroundContainer.classList.remove('header__container--home-bg');
 }
 
-function toggleActivClassOnSecondPage(e) {
-  const activClass = e.target.classList.contains('site-nav__button--active');
-  if (!activClass) {
+function toggleActiveClassOnSecondPage(e) {
+  const activeClass = e.target.classList.contains('site-nav__button--active');
+  if (!activeClass) {
     e.target.classList.add('site-nav__button--active');
   }
   refs.home.classList.remove('site-nav__button--active');

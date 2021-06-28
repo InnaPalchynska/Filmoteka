@@ -1,7 +1,7 @@
 import Pagination from 'tui-pagination';
 import MoviesApiService from '../js/apiService.js';
 import smoothScrool from './smoothScrool.js';
-import debounce from 'lodash.debounce';
+
 
 import movieCardTpl from '../templates/movie-card.hbs';
 import getRefs from '../js/get-refs.js';
@@ -10,9 +10,9 @@ const refs = getRefs();
 
 const moviesApiService = new MoviesApiService();
 
-refs.searchInput.addEventListener('input', debounce(onSearch, 500));
-refs.home.addEventListener('click', onLogoAndHomeClikc);
-refs.logoLink.addEventListener('click', onLogoAndHomeClikc);
+
+refs.home.addEventListener('click', onLogoAndHomeClick);
+refs.logoLink.addEventListener('click', onLogoAndHomeClick);
 
 let searchQuery = '';
 function onSearch(event) {
@@ -110,7 +110,7 @@ function showPopularMovies(currentPage) {
   renderPopularMoviesGrid(searchQuery).catch(error => console.log(error));
 }
 
-function onLogoAndHomeClikc() {
+function onLogoAndHomeClick() {
   searchQuery = '';
   moviesApiService.query = searchQuery;
   currentPage = 1;
@@ -137,3 +137,5 @@ if (currentPage === null) {
   showPopularMovies(currentPage);
   // renderPopularMoviesGrid().catch(error => console.log(error));
 }
+
+export { onSearch };
