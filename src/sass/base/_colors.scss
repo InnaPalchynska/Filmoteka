@@ -24,11 +24,9 @@ $textColor: (
 $svgColor: (
   'cinefilm': #818181,
   'loupe': #ffffff,
-  'heart': #ff6b08,
-  'close-cross': #000000,
-  'close-cross-hover': #ff6b08,
-  'github-hover': #ff6b08,
-  'github-icon': #ffffff,
+  'dark-color': #000000,
+  'light-color': #ffffff,
+  'accent-color': #ff6b08,
 );
 
 @function get-svgColor($key) {
