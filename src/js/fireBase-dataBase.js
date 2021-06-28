@@ -110,10 +110,10 @@ function onWatchedButton(e) {
   getLibraryMovies(libraryType).then(watchedMovies => {
     if (!watchedMovies.includes(movieId)) {
       addMoviesToLibrary(libraryType, movieId);
-      // updateBtnTextContent(e, watchedMovies, movieId, libraryType);
+      updateBtnTextContent(e, watchedMovies, movieId, libraryType);
     } else {
       removeMoviesFromLibrary(libraryType, movieId);
-      // updateBtnTextContent(e, watchedMovies, movieId, libraryType);
+      updateBtnTextContent(e, watchedMovies, movieId, libraryType);
     }
   });
   // console.log(watchedMovies);

@@ -30,35 +30,47 @@ async function onMovieCardClick(e) {
 }
 
 function updateBtnTextContentFromFireBase(movieId) {
-  const isLibraryPage = refs.myLibrary.classList.contains(
-    'site-nav__button--active',
-  );
-  if (isLibraryPage) {
-    const watchedMoviesBtn = document.querySelector("[data-header='watched']");
-    const isWatchedBtn = watchedMoviesBtn.classList.contains(
-      'header-buttons__btn--active',
+  // const isLibraryPage = refs.myLibrary.classList.contains(
+  //   'site-nav__button--active',
+  // );
+  // if (isLibraryPage) {
+  //   const watchedMoviesBtn = document.querySelector("[data-header='watched']");
+  //   const isWatchedBtn = watchedMoviesBtn.classList.contains(
+  //     'header-buttons__btn--active',
+  //   );
+  // let libraryType = '';
+  // if (isWatchedBtn) {
+  //   libraryType = 'watched';
+  // } else {
+  //   libraryType = 'queue';
+  // }
+  // watched
+  getLibraryMovies('watched').then(watchedMovies => {
+    const modalBtnWatched = document.querySelector(
+      '.lightbox__button--watched',
     );
-    let libraryType = '';
-    if (isWatchedBtn) {
-      libraryType = 'watched';
+    if (!watchedMovies.includes(movieId)) {
+      console.log(!watchedMovies.includes(movieId));
+      console.log('btn1', modalBtnWatched.textContent);
+      modalBtnWatched.textContent = `Remove from ${'watched'}`;
+      modalBtnWatched.classList.add('active');
     } else {
-      libraryType = 'queue';
+      modalBtnWatched.textContent = `Add to ${'watched'}`;
+      modalBtnWatched.classList.remove('active');
     }
-    getLibraryMovies(libraryType).then(watchedMovies => {
-      const modalBtnWatched = document.querySelector(
-        '.lightbox__button--watched',
-      );
-      const modalBtnQueue = document.querySelector('.lightbox__button--queue');
-      if (!watchedMovies.includes(movieId)) {
-        console.dir(modalBtnWatched);
-        modalBtnWatched.textContent = `Remove from ${libraryType}`;
-        modalBtnWatched.classList.add('active');
-      } else {
-        modalBtnWatched.textContent = `Add to ${libraryType}`;
-        modalBtnWatched.classList.remove('active');
-      }
-    });
-  }
+  });
+  // queue
+  getLibraryMovies('queue').then(watchedMovies => {
+    const modalBtnQueue = document.querySelector('.lightbox__button--queue');
+    if (!watchedMovies.includes(movieId)) {
+      modalBtnQueue.textContent = `Remove from ${'queue'}`;
+      modalBtnQueue.classList.add('active');
+    } else {
+      modalBtnQueue.textContent = `Add to ${'queue'}`;
+      modalBtnQueue.classList.remove('active');
+    }
+  });
+  // }
 }
 
 async function getFullInfoOfMovie(currentMovieCard) {
