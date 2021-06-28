@@ -27,22 +27,22 @@ function onQueueButton(e) {
   renderLibraryMovies('queue');
 }
 
-function updateLocalStorage(e, itemName) {
-  const filmsStorage = localStorage.getItem(itemName);
-  const filmsStorageArray = JSON.parse(filmsStorage);
-  if (!filmsStorageArray.includes(e.target.id)) {
-    filmsStorageArray.push(e.target.id);
-    e.target.textContent = `Remove from ${itemName}`;
-    e.target.classList.add('active');
-    localStorage.setItem(itemName, JSON.stringify(filmsStorageArray));
-  } else {
-    e.target.textContent = `Add to ${itemName}`;
-    e.target.classList.remove('active');
-    const index = filmsStorageArray.indexOf(e.target.id);
-    filmsStorageArray.splice(index, 1);
-    localStorage.setItem(itemName, JSON.stringify(filmsStorageArray));
-  }
-}
+// function updateLocalStorage(e, itemName) {
+//   const filmsStorage = localStorage.getItem(itemName);
+//   const filmsStorageArray = JSON.parse(filmsStorage);
+//   if (!filmsStorageArray.includes(e.target.id)) {
+//     filmsStorageArray.push(e.target.id);
+//     e.target.textContent = `Remove from ${itemName}`;
+//     e.target.classList.add('active');
+//     localStorage.setItem(itemName, JSON.stringify(filmsStorageArray));
+//   } else {
+//     e.target.textContent = `Add to ${itemName}`;
+//     e.target.classList.remove('active');
+//     const index = filmsStorageArray.indexOf(e.target.id);
+//     filmsStorageArray.splice(index, 1);
+//     localStorage.setItem(itemName, JSON.stringify(filmsStorageArray));
+//   }
+// }
 
 export {
   initialSaveToLocalStorage,

@@ -1,12 +1,15 @@
 import getRefs from './get-refs';
 import MovieApiService from './apiService';
 import libraryMovieCardTpl from '../templates/library-movie-card.hbs';
+import { getLibraryMovies } from './fireBase-dataBase.js';
 
 const movieApiService = new MovieApiService();
 const refs = getRefs();
 
 async function renderLibraryMovies(filterName = 'watched') {
-  const isLibraryPage = refs.myLibrary.classList.contains('site-nav__button--active');
+  const isLibraryPage = refs.myLibrary.classList.contains(
+    'site-nav__button--active',
+  );
   if (!isLibraryPage) {
     return;
   }
@@ -14,22 +17,35 @@ async function renderLibraryMovies(filterName = 'watched') {
   if (!isNotifyHidden) {
     refs.notify.classList.add('visually-hidden');
   }
-  const allWatchedMoviesIds = getDataFromLocalStorage(filterName);
-  if (!allWatchedMoviesIds || allWatchedMoviesIds.length === 0) {
-    refs.moviesList.innerHTML = '';
-    refs.divPagination.innerHTML = '';
-    refs.notify.classList.remove('visually-hidden');
-    refs.notify.textContent = `There are no ${filterName} films yet :(`;
-    return;
-  }
+  getLibraryMovies(filterName).then(allWatchedMoviesIds => {
+    if (!allWatchedMoviesIds || allWatchedMoviesIds.length === 0) {
+      refs.moviesList.innerHTML = '';
+      refs.divPagination.innerHTML = '';
+      refs.notify.classList.remove('visually-hidden');
+      refs.notify.textContent = `There are no ${filterName} films yet :(`;
+      return;
+    }
 
-  const watchedMoviesIds = getMoviesIdsByMediaQuery(allWatchedMoviesIds, 0);
+    const watchedMoviesIds = getMoviesIdsByMediaQuery(allWatchedMoviesIds, 0);
 
+    const watchedMovies = getWatchedMovies(watchedMoviesIds);
+
+    watchedMovies.then(watchedMovies => {
+      renderMovies(watchedMovies);
+    });
+    // renderMovies(watchedMovies);
+  });
+}
+
+async function getWatchedMovies(watchedMoviesIds) {
+  console.log(watchedMoviesIds);
   const watchedMovies = await Promise.all(
-    watchedMoviesIds.map(async id => await movieApiService.fetchFullInfoOfMovie(id)),
+    watchedMoviesIds.map(
+      async id => await movieApiService.fetchFullInfoOfMovie(id),
+    ),
   );
-
-  renderMovies(watchedMovies);
+  // console.log(watchedMovies);
+  return watchedMovies;
 }
 
 function getDataFromLocalStorage(itemName) {
@@ -38,7 +54,9 @@ function getDataFromLocalStorage(itemName) {
 
 function getMoviesIdsByMediaQuery(moviesIds, startIndex) {
   const mobileMediaQuery = window.matchMedia('(max-width: 767px)');
-  const tabletMediaQuery = window.matchMedia('(min-width: 768px) and (max-width: 1023px)');
+  const tabletMediaQuery = window.matchMedia(
+    '(min-width: 768px) and (max-width: 1023px)',
+  );
   const desktopMediaQuery = window.matchMedia('(min-width: 1024px)');
 
   if (mobileMediaQuery.matches) {

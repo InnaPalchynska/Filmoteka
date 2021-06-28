@@ -4,7 +4,12 @@ import movieCardLightboxTpl from '../templates/movie-card-lightbox.hbs';
 
 import 'basiclightbox/src/styles/main.scss';
 import * as basicLightbox from 'basiclightbox';
-// import { onQueueButton } from './fireBase-dataBase.js';
+import {
+  onWatchedButton,
+  onQueueButton,
+  updateBtnTextContent,
+  getLibraryMovies,
+} from './fireBase-dataBase.js';
 
 const refs = getRefs();
 const moviesApiService = new MoviesApiService();
@@ -19,6 +24,13 @@ async function onMovieCardClick(e) {
   }
 
   getFullInfoOfMovie(currentMovieCard).then(fullInfo => {
+    const isLibraryPage = refs.myLibrary.classList.contains(
+      'site-nav__button--active',
+    );
+    if (isLibraryPage) {
+      const isWatchedBtn = refs.myLibrary;
+      console.dir(isWatchedPage);
+    }
     renderMovieCardLightbox(fullInfo);
   });
 }
@@ -48,14 +60,10 @@ async function renderMovieCardLightbox(fullInfo) {
 
   lightbox.show();
 
-  initialSaveToLocalStorage('watched');
-  initialSaveToLocalStorage('queue');
+  console.log(fullInfo);
 
   const modalBtnWatched = document.querySelector('.lightbox__button--watched');
   const modalBtnQueue = document.querySelector('.lightbox__button--queue');
-
-  checkBtnTextContent(modalBtnWatched, 'watched');
-  checkBtnTextContent(modalBtnQueue, 'queue');
 
   modalBtnWatched.addEventListener('click', onWatchedButton);
   modalBtnQueue.addEventListener('click', onQueueButton);
