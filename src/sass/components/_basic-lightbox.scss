@@ -7,9 +7,9 @@ $basicLightbox__timing: ease !default;
 // basicLightbox ------------------------------------------------------- //
 .basicLightbox {
   position: fixed;
-  //   display: flex;
-  //   justify-content: center;
-  //   align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   top: 0;
   left: 0;
   width: 100%;
@@ -20,6 +20,10 @@ $basicLightbox__timing: ease !default;
   z-index: $basicLightbox__zIndex;
   will-change: opacity;
   overflow-y: scroll;
+
+  @media screen and(max-width: 767px) {
+    align-items: flex-start;
+  }
 
   &--visible {
     opacity: 1;
