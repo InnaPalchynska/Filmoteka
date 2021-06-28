@@ -14,6 +14,8 @@ import {
 const refs = getRefs();
 const moviesApiService = new MoviesApiService();
 
+let trailerLightbox;
+
 refs.moviesList.addEventListener('click', onMovieCardClick);
 
 async function onMovieCardClick(e) {
@@ -38,6 +40,7 @@ async function getFullInfoOfMovie(currentMovieCard) {
 async function renderMovieCardLightbox(fullInfo) {
   getMovieGenres(fullInfo);
   getMoviePopularity(fullInfo);
+  getMoviePoster(fullInfo);
 
   const lightbox = basicLightbox.create(movieCardLightboxTpl(fullInfo), {
     onShow() {
@@ -81,6 +84,47 @@ async function renderMovieCardLightbox(fullInfo) {
 
     window.removeEventListener('keydown', onEscBtnPress);
   }
+
+  // youtube trailer
+  const trailerBtn = document.querySelector('.trailer');
+  trailerBtn.addEventListener('click', showTrailer);
+
+  function showTrailer(event) {
+    event.preventDefault();
+    const movieName = fullInfo.original_title;
+    // console.log(movieName);
+
+    moviesApiService.getTrailer(movieName).then(YouTube_MovieID => {
+      openTrailerLightbox(YouTube_MovieID);
+    });
+  }
+  window.addEventListener('keydown', onEscBtnPress);
+
+  function openTrailerLightbox(YouTube_MovieID) {
+    trailerLightbox = basicLightbox.create(
+      `<iframe width="70%" height="70%" src="https://www.youtube.com/embed/${YouTube_MovieID}"></iframe>`,
+      {
+        onShow() {
+          refs.body.classList.add('inactive');
+        },
+
+        onClose() {
+          refs.body.classList.remove('inactive');
+        },
+      },
+    );
+    window.removeEventListener('keydown', onEscBtnPress);
+    trailerLightbox.show();
+    window.addEventListener('keydown', onTrailerClose);
+  }
+}
+
+function onTrailerClose(e) {
+  if (e.code === 'Escape') {
+    trailerLightbox.close();
+  }
+
+  window.removeEventListener('keydown', onTrailerClose);
 }
 
 function getMovieGenres(fullInfo) {
@@ -100,3 +144,7 @@ function getMoviePopularity(fullInfo) {
 
   return moviePopularity;
 }
+
+function getMoviePoster(fullInfo) {
+  fullInfo.placeholder = !fullInfo.poster_path ? true : false; 
+ }
