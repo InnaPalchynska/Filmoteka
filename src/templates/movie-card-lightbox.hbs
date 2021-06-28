@@ -5,7 +5,7 @@
 
   <div class='lightbox__poster'>
     <img
-      class='lightbox__img'
+      class='lightbox__img {{#if placeholder}}placeholder{{/if}}'
       {{#if placeholder}}
       src='./optimized-png/image-not-found.png'
       {{else}}
