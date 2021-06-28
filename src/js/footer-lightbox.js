@@ -1,7 +1,7 @@
 import getRefs from '../js/get-refs';
 import footerLightboxTpl from '../templates/footer-lightbox.hbs';
 
-import '../sass/components/_basic-lightbox.scss';
+import 'basiclightbox/src/styles/main.scss';
 import * as basicLightbox from 'basiclightbox';
 
 const refs = getRefs();

@@ -1,13 +1,20 @@
-import getRefs from '../js/get-refs';
-import MoviesApiService from '../js/apiService.js';
+import getRefs from './get-refs';
+import MoviesApiService from './apiService';
 import movieCardLightboxTpl from '../templates/movie-card-lightbox.hbs';
 
-import '../sass/components/_basic-lightbox';
+import 'basiclightbox/src/styles/main.scss';
 import * as basicLightbox from 'basiclightbox';
-import {addsToLibrary, onWatchedButton, onQueueButton} from './localStorage'
+import {
+  initialSaveToLocalStorage,
+  checkBtnTextContent,
+  onWatchedButton,
+  onQueueButton,
+} from './local-storage';
 
 const refs = getRefs();
 const moviesApiService = new MoviesApiService();
+
+let trailerLightbox;
 
 refs.moviesList.addEventListener('click', onMovieCardClick);
 
@@ -33,6 +40,7 @@ async function getFullInfoOfMovie(currentMovieCard) {
 async function renderMovieCardLightbox(fullInfo) {
   getMovieGenres(fullInfo);
   getMoviePopularity(fullInfo);
+  getMoviePoster(fullInfo);
 
   const lightbox = basicLightbox.create(movieCardLightboxTpl(fullInfo), {
     onShow() {
@@ -46,20 +54,19 @@ async function renderMovieCardLightbox(fullInfo) {
 
   lightbox.show();
 
-  const modalButtonWatched = document.querySelector('.lightbox__button--watched');
-  const modalButtonQueue = document.querySelector('.lightbox__button--queue');
-  addsToLibrary();
+  initialSaveToLocalStorage('watched');
+  initialSaveToLocalStorage('queue');
 
+  const modalBtnWatched = document.querySelector('.lightbox__button--watched');
+  const modalBtnQueue = document.querySelector('.lightbox__button--queue');
 
-  modalButtonWatched.addEventListener('click', onWatchedButton);
-  modalButtonQueue.addEventListener('click', onQueueButton);
-  
- 
+  checkBtnTextContent(modalBtnWatched, 'watched');
+  checkBtnTextContent(modalBtnQueue, 'queue');
 
- 
+  modalBtnWatched.addEventListener('click', onWatchedButton);
+  modalBtnQueue.addEventListener('click', onQueueButton);
 
-
-  const closeBtn = document.querySelector('.lightbox__close-button');
+  const closeBtn = document.querySelector('.lightbox__close-btn');
 
   closeBtn.addEventListener('click', onLightboxClose);
   window.addEventListener('keydown', onEscBtnPress);
@@ -77,6 +84,47 @@ async function renderMovieCardLightbox(fullInfo) {
 
     window.removeEventListener('keydown', onEscBtnPress);
   }
+
+  // youtube trailer
+  const trailerBtn = document.querySelector('.trailer');
+  trailerBtn.addEventListener('click', showTrailer);
+
+  function showTrailer(event) {
+    event.preventDefault();
+    const movieName = fullInfo.original_title;
+    // console.log(movieName);
+
+    moviesApiService.getTrailer(movieName).then(YouTube_MovieID => {
+      openTrailerLightbox(YouTube_MovieID);
+    });
+  }
+  window.addEventListener('keydown', onEscBtnPress);
+
+  function openTrailerLightbox(YouTube_MovieID) {
+    trailerLightbox = basicLightbox.create(
+      `<iframe width="70%" height="70%" src="https://www.youtube.com/embed/${YouTube_MovieID}"></iframe>`,
+      {
+        onShow() {
+          refs.body.classList.add('inactive');
+        },
+
+        onClose() {
+          refs.body.classList.remove('inactive');
+        },
+      },
+    );
+    window.removeEventListener('keydown', onEscBtnPress);
+    trailerLightbox.show();
+    window.addEventListener('keydown', onTrailerClose);
+  }
+}
+
+function onTrailerClose(e) {
+  if (e.code === 'Escape') {
+    trailerLightbox.close();
+  }
+
+  window.removeEventListener('keydown', onTrailerClose);
 }
 
 function getMovieGenres(fullInfo) {
@@ -97,21 +145,6 @@ function getMoviePopularity(fullInfo) {
   return moviePopularity;
 }
 
-// function getMovieOverview(fullInfo) {
-//   const movieOverview = fullInfo.overview;
-//   console.log(typeof movieOverview);
-
-//   // const length =
-//   // console.log(length);
-
-//   if (movieOverview.length > 500) {
-//     movieOverview.slice(500);
-//     console.log(movieOverview);
-//   }
-
-//   console.log(movieOverview);
-//   fullInfo.overview = movieOverview;
-
-//   return movieOverview;
-// }
-
+function getMoviePoster(fullInfo) {
+  fullInfo.placeholder = !fullInfo.poster_path ? true : false; 
+ }

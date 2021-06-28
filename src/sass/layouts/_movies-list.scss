@@ -1,8 +1,10 @@
-// .movies {
-//   @media screen and (min-width: 768px) {
-//     padding-top: 60px;
-//   }
-// }
+.movies {
+  padding-top: 20px;
+
+  @media screen and (min-width: 768px) {
+    padding-top: 60px;
+  }
+}
 
 .movies-list {
   @media screen and (min-width: $tablet) {
@@ -41,26 +43,15 @@
   overflow: hidden;
   cursor: pointer;
   transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+  box-shadow: 0px -1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
     0px 2px 1px rgba(0, 0, 0, 0.2);
 
   &:hover,
   &:focus {
     transform: scale(1.04);
-    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.1),
+    box-shadow: 0px -1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.1),
       1px 4px 6px rgba(0, 0, 0, 0.2);
   }
-}
-
-.poster-thumb.placeholder {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.placeholder .material-icons-outlined {
-  font-size: 48px;
-  box-shadow: none;
 }
 
 .poster-thumb img {

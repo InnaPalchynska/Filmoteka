@@ -18,6 +18,10 @@
   "bugs": {
     "url": "https://github.com/InnaPalchynska/Filmoteka/issues"
   },
+  "staticFiles": {
+    "staticPath": "src/images",
+    "watcherGlob": "**"
+  },
   "devDependencies": {
     "parcel-bundler": "^1.12.5",
     "parcel-plugin-handlebars-precompile": "^1.0.2",
@@ -33,6 +37,7 @@
     "material-design-icons": "^3.0.1",
     "material-icons": "^0.7.4",
     "modern-normalize": "^1.1.0",
+    "parcel-plugin-static-files-copy": "^2.6.0",
     "tui-pagination": "^3.4.1"
   }
 }

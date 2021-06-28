@@ -1,10 +1,5 @@
 .lightbox__card {
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
   width: 280px;
-  max-height: 958px;
   padding-top: 48px;
   padding-bottom: 40px;
   padding-left: 20px;
@@ -12,20 +7,16 @@
   background-color: get-bgColor('main');
 
   @media screen and(min-width: $tablet) {
-    top: 230px;
     display: flex;
     align-items: flex-start;
     width: 618px;
-    height: 562px;
     padding-top: 42px;
     padding-left: 30px;
     padding-right: 30px;
   }
 
   @media screen and(min-width: $desktop) {
-    top: 100px;
     width: 822px;
-    height: 568px;
     padding-top: 50px;
   }
 }
@@ -72,15 +63,8 @@
   }
 }
 
-.lightbox__contant-overlay {
-  @media screen and(min-width: $tablet) {
-    display: flex;
-  }
-}
-
 .lightbox__content {
   @media screen and(min-width: $tablet) {
-    // width: 50%;
     min-width: 264px;
     margin-left: 30px;
   }
@@ -240,4 +224,51 @@
 .lightbox__buttons-overlay {
   display: flex;
   align-items: center;
+}
+
+.about-trailer {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+}
+
+.align-item__trailer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-left: 5px;
+}
+
+.trailer {
+  margin-left: 65px;
+  width: 80px;
+  height: 24px;
+  background-color: transparent;
+  border: 1px solid get-navElColor('button-lightbox');
+  border-radius: 5px;
+
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.33;
+  text-transform: uppercase;
+  color: get-textColor('main');
+
+  @media screen and(min-width: $tablet) {
+    width: 85px;
+  }
+
+  @media screen and(min-width: $desktop) {
+    width: 105px;
+  }
+
+  &:focus,
+  &:hover {
+    background-color: get-navElColor('button-primary');
+    border: none;
+    color: get-textColor('light');
+  }
+}
+
+.trailer-play__icon {
+  fill: red;
 }

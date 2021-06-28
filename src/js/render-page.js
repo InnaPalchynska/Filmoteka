@@ -1,5 +1,6 @@
 // import helperSvg from 'handlebars-helper-svg';
 import getRefs from './get-refs';
+import { renderLibraryMovies } from './render-library-movies';
 import searchFieldTpl from '../templates/search-field.hbs';
 import headerBtnsTpl from '../templates/header-btns.hbs';
 import renderLibrary from './renderLibrary';
@@ -61,9 +62,7 @@ function changeOnMainBg() {
   if (!activBgClass) {
     refs.headerBackgroundContainer.classList.add('header__container--home-bg');
   }
-  refs.headerBackgroundContainer.classList.remove(
-    'header__container--my-library-bg',
-  );
+  refs.headerBackgroundContainer.classList.remove('header__container--my-library-bg');
 }
 
 function toggleActivClassOnMainPage(e) {
@@ -79,9 +78,7 @@ function changeOnSecondaryBg() {
     'header__container--my-library-bg',
   );
   if (!activBgClass) {
-    refs.headerBackgroundContainer.classList.add(
-      'header__container--my-library-bg',
-    );
+    refs.headerBackgroundContainer.classList.add('header__container--my-library-bg');
   }
   refs.headerBackgroundContainer.classList.remove('header__container--home-bg');
 }
