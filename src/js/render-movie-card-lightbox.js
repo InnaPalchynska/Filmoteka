@@ -4,12 +4,11 @@ import movieCardLightboxTpl from '../templates/movie-card-lightbox.hbs';
 
 import 'basiclightbox/src/styles/main.scss';
 import * as basicLightbox from 'basiclightbox';
-import {
-  initialSaveToLocalStorage,
-  checkBtnTextContent,
-  onWatchedButton,
-  onQueueButton,
-} from './local-storage';
+// import // initialSaveToLocalStorage,
+// checkBtnTextContent,
+// onWatchedButton,
+// onQueueButton,
+// './fireBase-dataBase.js';
 
 const refs = getRefs();
 const moviesApiService = new MoviesApiService();
@@ -30,7 +29,9 @@ async function onMovieCardClick(e) {
 
 async function getFullInfoOfMovie(currentMovieCard) {
   const currentMovieCardId = currentMovieCard.dataset.id;
-  const fullInfoOfMovie = await moviesApiService.fetchFullInfoOfMovie(currentMovieCardId);
+  const fullInfoOfMovie = await moviesApiService.fetchFullInfoOfMovie(
+    currentMovieCardId,
+  );
 
   return fullInfoOfMovie;
 }
