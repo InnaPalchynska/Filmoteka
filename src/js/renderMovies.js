@@ -27,6 +27,11 @@ function onSearch(event) {
 
 let currentPage = localStorage.getItem('currentPage');
 
+options = {
+  page: parseInt(currentPage, 10) || 1,
+  currentPage: '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
+};
+
 // const container = document.getElementById('pagination');
 // const options = {
 //   totalItems: 500,
