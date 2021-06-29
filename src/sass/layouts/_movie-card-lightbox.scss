@@ -9,6 +9,7 @@
 
   @media screen and(max-width: 767px) {
     margin-top: 10px;
+    margin-bottom: 10px;
   }
 
   @media screen and(min-width: $tablet) {
@@ -82,6 +83,22 @@
 
   @media screen and(min-width: $desktop) {
     height: 478px;
+  }
+}
+
+.lightbox__img.placeholder {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  border: 1px solid #cdc8c8;
+  border-radius: 5px;
+
+  @media screen and (min-width: $tablet) {
+    width: 90%;
+  }
+
+  @media screen and (min-width: $desktop) {
+    width: 80%;
   }
 }
 
