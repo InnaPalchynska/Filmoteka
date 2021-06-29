@@ -2,7 +2,7 @@ import getRefs from './get-refs';
 import MoviesApiService from './apiService';
 import movieCardLightboxTpl from '../templates/movie-card-lightbox.hbs';
 
-import 'basiclightbox/src/styles/main.scss';
+import '../sass/components/_basic-lightbox.scss';
 import * as basicLightbox from 'basiclightbox';
 import {
   initialSaveToLocalStorage,
@@ -146,5 +146,5 @@ function getMoviePopularity(fullInfo) {
 }
 
 function getMoviePoster(fullInfo) {
-  fullInfo.placeholder = !fullInfo.poster_path ? true : false; 
- }
+  fullInfo.placeholder = !fullInfo.poster_path ? true : false;
+}

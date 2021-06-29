@@ -1,7 +1,8 @@
 import getRefs from '../js/get-refs';
+import teamMembers from './team';
 import footerLightboxTpl from '../templates/footer-lightbox.hbs';
 
-import 'basiclightbox/src/styles/main.scss';
+import '../sass/components/_basic-lightbox.scss';
 import * as basicLightbox from 'basiclightbox';
 
 const refs = getRefs();
@@ -18,7 +19,7 @@ function onFooterBtnClick(e) {
 }
 
 function onLightboxOpen(e) {
-  const lightbox = basicLightbox.create(footerLightboxTpl(), {
+  const lightbox = basicLightbox.create(footerLightboxTpl(teamMembers), {
     onShow() {
       refs.body.classList.add('inactive');
     },
@@ -29,17 +30,6 @@ function onLightboxOpen(e) {
   });
 
   lightbox.show();
-
-  const photo1 = document.querySelector('[data-photo="photo--Inna"]');
-  const photo2 = document.querySelector('[data-photo="photo--Anastasia"]');
-  const photo3 = document.querySelector('[data-photo="photo--Halyna"]');
-  const photo4 = document.querySelector('[data-photo="photo--Dariia"]');
-  const photo5 = document.querySelector('[data-photo="photo--Kateryna"]');
-  const photo6 = document.querySelector('[data-photo="photo--Sergiy"]');
-
-  console.log(photo1);
-  photo1.src = '../images/team/team__2__mob.jpg';
-  console.log(photo1.src);
 
   const closeBtn = document.querySelector('.footer-lightbox__close-btn');
 
