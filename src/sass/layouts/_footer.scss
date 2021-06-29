@@ -131,6 +131,8 @@
   background-color: transparent;
   color: get-svgColor('light-color');
   transform: scale(1.1);
+  transition: transform $duration $timing-function, color $duration $timing-function,
+    box-sizing $duration $timing-function;
 
   &:hover,
   &:focus {

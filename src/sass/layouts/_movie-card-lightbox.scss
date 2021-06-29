@@ -7,7 +7,7 @@
   padding-right: 20px;
   background-color: get-bgColor('main');
 
-  @media screen and(max-width: 767px) {
+  @media screen and(max-width: $max-mobile) {
     margin-top: 10px;
     margin-bottom: 10px;
   }
@@ -43,6 +43,7 @@
   color: get-svgColor('dark-color');
   background-color: transparent;
   cursor: pointer;
+  transition: color $duration $timing-function, box-shadow $duration $timing-function;
 
   &:hover,
   &:focus {
@@ -218,6 +219,9 @@
   line-height: 1.33;
   text-transform: uppercase;
   color: get-textColor('main');
+  cursor: pointer;
+  transition: color $btn-duration $timing-function, border $btn-duration $timing-function,
+    background-color $btn-duration $timing-function;
 
   @media screen and(min-width: $tablet) {
     width: 125px;
@@ -270,6 +274,9 @@
   line-height: 1.33;
   text-transform: uppercase;
   color: get-textColor('main');
+  cursor: pointer;
+  transition: color $btn-duration $timing-function, border $btn-duration $timing-function,
+    background-color $btn-duration $timing-function;
 
   @media screen and(min-width: $tablet) {
     width: 85px;
