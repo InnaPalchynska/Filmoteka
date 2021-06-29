@@ -1,6 +1,8 @@
 import getRefs from './get-refs';
 import { moviesApiService } from './moviesApiService.js';
 import libraryMovieCardTpl from '../templates/library-movie-card.hbs';
+import { insertContentTpl } from './notification';
+import noFilmsTpl from '../templates/no-films-in-lib.hbs';
 
 const refs = getRefs();
 
@@ -9,16 +11,17 @@ async function renderLibraryMovies(filterName = 'watched') {
   if (!isLibraryPage) {
     return;
   }
-  const isNotifyHidden = refs.notify.classList.contains('visually-hidden');
-  if (!isNotifyHidden) {
-    refs.notify.classList.add('visually-hidden');
-  }
+
   const allMoviesIds = getDataFromLocalStorage(filterName);
   if (!allMoviesIds || allMoviesIds.length === 0) {
+    // const isNotifyHidden = refs.notify.classList.contains('visually-hidden');
+    // if (!isNotifyHidden) {
+    //   refs.notify.classList.add('visually-hidden');
+    // }
+
     refs.moviesList.innerHTML = '';
     refs.divPagination.classList.add('hidden-tui');
-    refs.notify.classList.remove('visually-hidden');
-    refs.notify.textContent = `There are no ${filterName} films yet :(`;
+    insertContentTpl(refs.moviesList, noFilmsTpl);
     return;
   }
 

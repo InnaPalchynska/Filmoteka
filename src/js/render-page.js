@@ -6,6 +6,7 @@ import headerBtnsTpl from '../templates/header-btns.hbs';
 import debounce from 'lodash.debounce';
 import { onSearch } from './renderMovies';
 import { addFilterListeners, removeFilterListeners } from './render-genres-filter';
+import { insertContentTpl, clearContainer } from './notification';
 
 const refs = getRefs();
 
@@ -64,13 +65,13 @@ function switchActiveClass(e, className) {
   e.target.classList.add(className);
 }
 
-function insertContentTpl(nameContainer, fnTemplates) {
-  nameContainer.insertAdjacentHTML('beforeend', fnTemplates());
-}
+// function insertContentTpl(nameContainer, fnTemplates) {
+//   nameContainer.insertAdjacentHTML('beforeend', fnTemplates());
+// }
 
-function clearContainer(nameContainer) {
-  nameContainer.innerHTML = '';
-}
+// function clearContainer(nameContainer) {
+//   nameContainer.innerHTML = '';
+// }
 
 function changeOnMainBg() {
   const activeBgClass = refs.headerBackgroundContainer.classList.contains(

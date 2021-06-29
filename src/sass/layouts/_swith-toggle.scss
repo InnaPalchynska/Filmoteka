@@ -67,6 +67,8 @@ body.dark-theme {
   border-radius: inherit;
   z-index: 1;
   cursor: pointer;
+
+  transition: box-shadow $duration $timing-function, background-color $duration $timing-function;
 }
 
 .theme-switch__marker {
@@ -79,7 +81,8 @@ body.dark-theme {
   pointer-events: none;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
   transform: translateX(3px);
-  transition: transform 250ms;
+
+  transition: transform $duration $timing-function;
 }
 
 .theme-switch__toggle:checked + .theme-switch__track {

@@ -10,7 +10,6 @@ export default function getRefs() {
     goTopBtn: document.querySelector('.back_to_top'),
     headerBackgroundContainer: document.querySelector('.js-container-header-bg'),
     footerBtn: document.querySelector('.footer__button'),
-    notify: document.querySelector('.js-notify'),
     logoLink: document.querySelector('[data-header="logo"]'),
     filterWrapper: document.querySelector('.js-filter-wrapper'),
   };
