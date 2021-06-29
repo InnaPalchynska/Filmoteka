@@ -2,14 +2,11 @@ import Pagination from 'tui-pagination';
 import MoviesApiService from '../js/apiService.js';
 import smoothScrool from './smoothScrool.js';
 
-
 import movieCardTpl from '../templates/movie-card.hbs';
 import getRefs from '../js/get-refs.js';
 
 const refs = getRefs();
-
 const moviesApiService = new MoviesApiService();
-
 
 refs.home.addEventListener('click', onLogoAndHomeClick);
 refs.logoLink.addEventListener('click', onLogoAndHomeClick);
@@ -43,7 +40,8 @@ const options = {
   lastItemClassName: 'tui-last-child',
   template: {
     page: '<a href="#" class="tui-page-btn">{{page}}</a>',
-    currentPage: '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
+    currentPage:
+      '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
     moveButton:
       '<a href="#" class="tui-page-btn tui-{{type}}">' +
       '<span class="tui-ico-{{type}}">{{type}}</span>' +
@@ -66,7 +64,12 @@ async function renderPopularMoviesGrid(searchQuery) {
     ? moviesApiService.fetchMoviesBySearch()
     : moviesApiService.fetchPopularMovies();
 
-  const { results: movies, page, total_pages, total_results } = await fetchMovies;
+  const {
+    results: movies,
+    page,
+    total_pages,
+    total_results,
+  } = await fetchMovies;
 
   //genresList - array of objects [{id: 23, name: "Drama"}, {id: 17, name: "Action"} ...]
   const genresListObj = await moviesApiService.fetchGenresList();
