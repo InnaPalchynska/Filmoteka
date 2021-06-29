@@ -7,13 +7,13 @@ import debounce from 'lodash.debounce';
 import { onSearch } from './renderMovies';
 
 const refs = getRefs();
-const searchInput = document.querySelector('.js-search-field__input');
-searchInput.addEventListener('input', debounce(onSearch, 500));
 
 refs.home.addEventListener('click', onHomeClick);
 refs.myLibrary.addEventListener('click', onMyLibraryClick);
 
 insertContentTpl(refs.headerDynamicContainer, searchFieldTpl);
+const searchInput = document.querySelector('.js-search-field__input');
+searchInput.addEventListener('input', debounce(onSearch, 500));
 
 function onHomeClick(event) {
   toggleActiveClassOnMainPage(event);
