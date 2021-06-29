@@ -1,13 +1,10 @@
-import Pagination from 'tui-pagination';
-import MoviesApiService from '../js/apiService.js';
-import smoothScrool from './smoothScrool.js';
-
-import movieCardTpl from '../templates/movie-card.hbs';
 import getRefs from '../js/get-refs.js';
+import { moviesApiService } from './moviesApiService.js';
+import smoothScrool from './smoothScrool.js';
+import movieCardTpl from '../templates/movie-card.hbs';
+import Pagination from 'tui-pagination';
 
 const refs = getRefs();
-const moviesApiService = new MoviesApiService();
-
 refs.home.addEventListener('click', onLogoAndHomeClick);
 refs.logoLink.addEventListener('click', onLogoAndHomeClick);
 

@@ -1,12 +1,13 @@
 import getRefs from './get-refs';
-import MovieApiService from './apiService';
+import { moviesApiService } from './moviesApiService.js';
 import libraryMovieCardTpl from '../templates/library-movie-card.hbs';
 
-const movieApiService = new MovieApiService();
 const refs = getRefs();
 
 async function renderLibraryMovies(filterName = 'watched') {
-  const isLibraryPage = refs.myLibrary.classList.contains('site-nav__button--active');
+  const isLibraryPage = refs.myLibrary.classList.contains(
+    'site-nav__button--active',
+  );
   if (!isLibraryPage) {
     return;
   }
@@ -26,7 +27,9 @@ async function renderLibraryMovies(filterName = 'watched') {
   const watchedMoviesIds = getMoviesIdsByMediaQuery(allWatchedMoviesIds, 0);
 
   const watchedMovies = await Promise.all(
-    watchedMoviesIds.map(async id => await movieApiService.fetchFullInfoOfMovie(id)),
+    watchedMoviesIds.map(
+      async id => await moviesApiService.fetchFullInfoOfMovie(id),
+    ),
   );
 
   renderMovies(watchedMovies);
@@ -38,7 +41,9 @@ function getDataFromLocalStorage(itemName) {
 
 function getMoviesIdsByMediaQuery(moviesIds, startIndex) {
   const mobileMediaQuery = window.matchMedia('(max-width: 767px)');
-  const tabletMediaQuery = window.matchMedia('(min-width: 768px) and (max-width: 1023px)');
+  const tabletMediaQuery = window.matchMedia(
+    '(min-width: 768px) and (max-width: 1023px)',
+  );
   const desktopMediaQuery = window.matchMedia('(min-width: 1024px)');
 
   if (mobileMediaQuery.matches) {
