@@ -15,11 +15,11 @@ function addOverlayListeners(e) {
     checkBtnTextContent(overlayBtnWatched, 'watched');
     checkBtnTextContent(overlayBtnQueue, 'queue');
   
-    overlayBtnWatched.addEventListener('click', onoverlayWatchedButton);
-    overlayBtnQueue.addEventListener('click', onoverlayQueueButton);
+    // overlayBtnWatched.addEventListener('click', onoverlayWatchedButton);
+    // overlayBtnQueue.addEventListener('click', onoverlayQueueButton);
       
-    console.log(overlayBtnWatched.addEventListener('click', onoverlayWatchedButton))
-    console.log(overlayBtnQueue.addEventListener('click', onoverlayQueueButton));
+    // console.log(overlayBtnWatched.addEventListener('click', onoverlayWatchedButton))
+    // console.log(overlayBtnQueue.addEventListener('click', onoverlayQueueButton));
 
     refs.moviesList.addEventListener('click', onMovieBtnClick);
 
