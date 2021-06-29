@@ -3,26 +3,20 @@ import getRefs from './get-refs';
 import { renderLibraryMovies } from './render-library-movies';
 import searchFieldTpl from '../templates/search-field.hbs';
 import headerBtnsTpl from '../templates/header-btns.hbs';
-// import renderLibrary from './renderLibrary';
 import debounce from 'lodash.debounce';
 import { onSearch } from './renderMovies';
+import {insertContentTpl, clearContainer} from './notification'
 
 const refs = getRefs();
 
 refs.home.addEventListener('click', onHomeClick);
 refs.myLibrary.addEventListener('click', onMyLibraryClick);
 
-
 insertContentTpl(refs.headerDynamicContainer, searchFieldTpl);
 const searchInput = document.querySelector('.js-search-field__input');
 searchInput.addEventListener('input', debounce(onSearch, 500));
 
-// console.log(refs.home);
-// console.log(refs.myLibrary);
-// console.log(refs.headerDynamicContainer);
-
 function onHomeClick(event) {
-  // console.log(event.target);
   toggleActiveClassOnMainPage(event);
   changeOnMainBg();
   const watchedMoviesBtn = document.querySelector("[data-header='watched']");
@@ -32,11 +26,10 @@ function onHomeClick(event) {
   clearContainer(refs.headerDynamicContainer);
   insertContentTpl(refs.headerDynamicContainer, searchFieldTpl);
   const searchInput = document.querySelector('.js-search-field__input');
-  searchInput.addEventListener('input', debounce(onSearch, 500));  
+  searchInput.addEventListener('input', debounce(onSearch, 500));
 }
 
 function onMyLibraryClick(event) {
-  // console.log(event.target);
   toggleActiveClassOnSecondPage(event);
   changeOnSecondaryBg();
   searchInput.removeEventListener('input', debounce(onSearch, 500));
@@ -60,13 +53,13 @@ function switchActiveClass(e, className) {
   e.target.classList.add(className);
 }
 
-function insertContentTpl(nameContainer, fnTemplates) {
-  nameContainer.insertAdjacentHTML('beforeend', fnTemplates());
-}
+// function insertContentTpl(nameContainer, fnTemplates) {
+//   nameContainer.insertAdjacentHTML('beforeend', fnTemplates());
+// }
 
-function clearContainer(nameContainer) {
-  nameContainer.innerHTML = '';
-}
+// function clearContainer(nameContainer) {
+//   nameContainer.innerHTML = '';
+// }
 
 function changeOnMainBg() {
   const activeBgClass = refs.headerBackgroundContainer.classList.contains(
@@ -75,7 +68,9 @@ function changeOnMainBg() {
   if (!activeBgClass) {
     refs.headerBackgroundContainer.classList.add('header__container--home-bg');
   }
-  refs.headerBackgroundContainer.classList.remove('header__container--my-library-bg');
+  refs.headerBackgroundContainer.classList.remove(
+    'header__container--my-library-bg',
+  );
 }
 
 function toggleActiveClassOnMainPage(e) {
@@ -91,7 +86,9 @@ function changeOnSecondaryBg() {
     'header__container--my-library-bg',
   );
   if (!activeBgClass) {
-    refs.headerBackgroundContainer.classList.add('header__container--my-library-bg');
+    refs.headerBackgroundContainer.classList.add(
+      'header__container--my-library-bg',
+    );
   }
   refs.headerBackgroundContainer.classList.remove('header__container--home-bg');
 }

@@ -7,6 +7,7 @@ $font-size__desk: (
   'text-modal': 12px,
   'text-footer': 16px,
   'team-heading': 22px,
+  'error-text':30px,
 );
 
 @function getFont-size__desk($key) {
@@ -20,7 +21,7 @@ $font-size__tab: (
   'name-film': 12px,
   'text-modal': 12px,
   'text-footer': 16px,
-  'team-heading': 19px,
+  'team-heading': 22px,
 );
 
 @function getFont-size__tab($key) {
@@ -34,6 +35,7 @@ $font-size__mob: (
   'name-film-modal': 20px,
   'text-modal': 12px,
   'text-footer': 14px,
+  'error-text':20px,
 );
 
 @function getFont-size__mob($key) {

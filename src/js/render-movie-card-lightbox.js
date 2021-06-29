@@ -1,5 +1,5 @@
 import getRefs from './get-refs';
-import MoviesApiService from './apiService';
+import { moviesApiService } from './moviesApiService.js';
 import movieCardLightboxTpl from '../templates/movie-card-lightbox.hbs';
 
 import '../sass/components/_basic-lightbox.scss';
@@ -12,7 +12,7 @@ import {
 } from './local-storage';
 
 const refs = getRefs();
-const moviesApiService = new MoviesApiService();
+// const moviesApiService = new MoviesApiService();
 
 let trailerLightbox;
 
@@ -32,7 +32,9 @@ async function onMovieCardClick(e) {
 
 async function getFullInfoOfMovie(currentMovieCard) {
   const currentMovieCardId = currentMovieCard.dataset.id;
-  const fullInfoOfMovie = await moviesApiService.fetchFullInfoOfMovie(currentMovieCardId);
+  const fullInfoOfMovie = await moviesApiService.fetchFullInfoOfMovie(
+    currentMovieCardId,
+  );
 
   return fullInfoOfMovie;
 }

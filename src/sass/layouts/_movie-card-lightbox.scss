@@ -7,8 +7,9 @@
   padding-right: 20px;
   background-color: get-bgColor('main');
 
-  @media screen and(max-width: 767px) {
+  @media screen and(max-width: $max-mobile) {
     margin-top: 10px;
+    margin-bottom: 10px;
   }
 
   @media screen and(min-width: $tablet) {
@@ -42,6 +43,7 @@
   color: get-svgColor('dark-color');
   background-color: transparent;
   cursor: pointer;
+  transition: color $duration $timing-function, box-shadow $duration $timing-function;
 
   &:hover,
   &:focus {
@@ -82,6 +84,22 @@
 
   @media screen and(min-width: $desktop) {
     height: 478px;
+  }
+}
+
+.lightbox__img.placeholder {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  border: 1px solid #cdc8c8;
+  border-radius: 5px;
+
+  @media screen and (min-width: $tablet) {
+    width: 90%;
+  }
+
+  @media screen and (min-width: $desktop) {
+    width: 80%;
   }
 }
 
@@ -201,6 +219,9 @@
   line-height: 1.33;
   text-transform: uppercase;
   color: get-textColor('main');
+  cursor: pointer;
+  transition: color $btn-duration $timing-function, border $btn-duration $timing-function,
+    background-color $btn-duration $timing-function;
 
   @media screen and(min-width: $tablet) {
     width: 125px;
@@ -253,6 +274,9 @@
   line-height: 1.33;
   text-transform: uppercase;
   color: get-textColor('main');
+  cursor: pointer;
+  transition: color $btn-duration $timing-function, border $btn-duration $timing-function,
+    background-color $btn-duration $timing-function;
 
   @media screen and(min-width: $tablet) {
     width: 85px;
