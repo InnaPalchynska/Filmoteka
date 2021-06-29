@@ -8,8 +8,6 @@ import { pagination } from './pagination';
 import smoothScrool from './smoothScrool';
 
 const refs = getRefs();
-let currentPage = localStorage.getItem('currentPage');
-let totalPages = null;
 
 async function renderLibraryMovies(filterName = 'watched') {
   const isLibraryPage = refs.myLibrary.classList.contains('site-nav__button--active');
