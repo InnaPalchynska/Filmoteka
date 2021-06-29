@@ -63,4 +63,4 @@ var e,n=arguments[3];!function(t){"object"==typeof exports&&"undefined"!=typeof 
 },{"../js/get-refs":"EGsz","./team":"ZxpD","../templates/footer-lightbox.hbs":"b2rs","../sass/components/_basic-lightbox.scss":"Y5dV","basiclightbox":"BNjD"}],"Focm":[function(require,module,exports) {
 "use strict";require("modern-normalize"),require("./sass/main.scss"),require("./sass/components/_basic-lightbox.scss"),require("material-icons"),require("./js/dark-theme"),require("./js/back_to_top.js"),require("./js/preloader.js"),require("./js/render-page.js"),require("./js/render-movie-card-lightbox.js"),require("./js/renderMovies.js"),require("./js/footer-lightbox.js");
 },{"modern-normalize":"Y5dV","./sass/main.scss":"clu1","./sass/components/_basic-lightbox.scss":"Y5dV","material-icons":"VyAM","./js/dark-theme":"Pt97","./js/back_to_top.js":"aQ0b","./js/preloader.js":"BeZ8","./js/render-page.js":"fO4B","./js/render-movie-card-lightbox.js":"ssio","./js/renderMovies.js":"P608","./js/footer-lightbox.js":"LmlW"}]},{},["Focm"], null)
-//# sourceMappingURL=/Filmoteka/src.889deea3.js.map
+//# sourceMappingURL=/Filmoteka/src.21b5720a.js.map
