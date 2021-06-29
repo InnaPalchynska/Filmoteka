@@ -15,7 +15,7 @@ console.log(layerService);
 
 let searchQuery = '';
 function onSearch(event) {
-  // event.preventDefault();
+  event.preventDefault();
 
   pagination.movePageTo(1);
   refs.moviesList.innerHTML = '';
