@@ -4,13 +4,14 @@ import smoothScrool from './smoothScrool.js';
 import movieCardTpl from '../templates/movie-card.hbs';
 // import Pagination from 'tui-pagination';
 import { pagination, options } from './pagination.js';
-
+import { layerService } from './layerService.js';
 import { showTextError, insertContentTpl, clearContainer } from './notification';
-import errorTpl from '../templates/error-not-found-film.hbs'
+import errorTpl from '../templates/error-not-found-film.hbs';
 
 const refs = getRefs();
 refs.home.addEventListener('click', onLogoAndHomeClick);
 refs.logoLink.addEventListener('click', onLogoAndHomeClick);
+console.log(layerService);
 
 let searchQuery = '';
 function onSearch(event) {
@@ -66,16 +67,12 @@ let currentPage = localStorage.getItem('currentPage');
 // const pagination = new Pagination(container, options);
 
 async function renderPopularMoviesGrid(searchQuery) {
-  const fetchMovies = searchQuery
+  const query = searchQuery || moviesApiService.query;
+  const fetchMovies = query
     ? moviesApiService.fetchMoviesBySearch()
     : moviesApiService.fetchPopularMovies();
 
-  const {
-    results: movies,
-    page,
-    total_pages,
-    total_results,
-  } = await fetchMovies;
+  const { results: movies, page, total_pages, total_results } = await fetchMovies;
 
   if (movies.length === 0) {
     const notifyErrorHeader = document.querySelector('.js-search-field__error-text');
@@ -85,9 +82,9 @@ async function renderPopularMoviesGrid(searchQuery) {
     );
     setTimeout(() => (notifyErrorHeader.innerHTML = ''), 3500);
     clearContainer(refs.moviesList);
-    insertContentTpl(refs.moviesList,errorTpl);
+    insertContentTpl(refs.moviesList, errorTpl);
     refs.divPagination.classList.add('hidden-tui');
-    return
+    return;
   }
 
   //genresList - array of objects [{id: 23, name: "Drama"}, {id: 17, name: "Action"} ...]
@@ -129,7 +126,7 @@ function transformMoviesObjectFields(movies, genresList) {
 function showPopularMovies(currentPage) {
   moviesApiService.setPage(currentPage);
   refs.moviesList.innerHTML = '';
-  renderPopularMoviesGrid( ).catch(error => console.log(error));
+  renderPopularMoviesGrid().catch(error => console.log(error));
 }
 
 function onLogoAndHomeClick() {
@@ -141,7 +138,12 @@ function onLogoAndHomeClick() {
 }
 
 pagination.on('afterMove', function (evt) {
+  console.log(layerService.getName());
+  if (layerService.getName() != 'home') {
+    return;
+  }
   smoothScrool();
+  console.log('AFTER_MOVE', evt);
   currentPage = evt.page;
   localStorage.setItem('currentPage', currentPage);
   showPopularMovies(currentPage);

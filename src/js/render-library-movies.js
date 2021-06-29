@@ -2,14 +2,15 @@ import getRefs from './get-refs';
 import { moviesApiService } from './moviesApiService.js';
 import libraryMovieCardTpl from '../templates/library-movie-card.hbs';
 import { insertContentTpl } from './notification';
+import { layerService } from './layerService.js';
 import noFilmsTpl from '../templates/no-films-in-lib.hbs';
+import { pagination } from './pagination';
 
 const refs = getRefs();
 
-async function renderLibraryMovies(filterName = 'watched') {
-  const isLibraryPage = refs.myLibrary.classList.contains(
-    'site-nav__button--active',
-  );
+async function renderLibraryMovies(startIndex, filterName = 'watched') {
+  startIndex = startIndex ? startIndex : 1;
+  const isLibraryPage = refs.myLibrary.classList.contains('site-nav__button--active');
   if (!isLibraryPage) {
     return;
   }
@@ -25,14 +26,10 @@ async function renderLibraryMovies(filterName = 'watched') {
     return;
   }
 
-  const watchedMoviesIds = getMoviesIdsByMediaQuery(allWatchedMoviesIds, 0);
-
+  const watchedMoviesIds = getMoviesIdsByMediaQuery(allWatchedMoviesIds, startIndex);
   const watchedMovies = await Promise.all(
-    watchedMoviesIds.map(
-      async id => await moviesApiService.fetchFullInfoOfMovie(id),
-    ),
+    watchedMoviesIds.map(async id => await moviesApiService.fetchFullInfoOfMovie(id)),
   );
-
   renderMovies(watchedMovies);
 }
 
@@ -42,11 +39,9 @@ function getDataFromLocalStorage(itemName) {
 
 function getMoviesIdsByMediaQuery(moviesIds, startIndex) {
   const mobileMediaQuery = window.matchMedia('(max-width: 767px)');
-  const tabletMediaQuery = window.matchMedia(
-    '(min-width: 768px) and (max-width: 1023px)',
-  );
+  const tabletMediaQuery = window.matchMedia('(min-width: 768px) and (max-width: 1023px)');
   const desktopMediaQuery = window.matchMedia('(min-width: 1024px)');
-
+  console.log('MediaQuery', moviesIds, startIndex);
   if (mobileMediaQuery.matches) {
     return moviesIds.slice(startIndex, 4);
   }
@@ -56,11 +51,13 @@ function getMoviesIdsByMediaQuery(moviesIds, startIndex) {
   }
 
   if (desktopMediaQuery.matches) {
+    console.log('startIndexQuery', startIndex);
     return moviesIds.slice(startIndex, 9);
   }
 }
 
 function renderMovies(movies) {
+  console.log('renderMovies', movies);
   movies.map(transformMovieObjectFields);
   const watchedMoviesMarkup = libraryMovieCardTpl(movies);
   refs.moviesList.innerHTML = watchedMoviesMarkup;
@@ -78,5 +75,13 @@ function transformMovieObjectFields(movie) {
   movie.release_date = null ? '' : movie.release_date.slice(0, 4);
   movie.vote_average = movie.vote_average.toFixed(1);
 }
+
+pagination.on('afterMove', function (eventData) {
+  if (layerService.getName() != 'library') {
+    return;
+  }
+  console.log('page', eventData.page);
+  renderLibraryMovies(eventData.page);
+});
 
 export { renderLibraryMovies };

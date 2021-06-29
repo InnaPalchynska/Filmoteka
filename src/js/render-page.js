@@ -4,8 +4,9 @@ import { renderLibraryMovies } from './render-library-movies';
 import searchFieldTpl from '../templates/search-field.hbs';
 import headerBtnsTpl from '../templates/header-btns.hbs';
 import debounce from 'lodash.debounce';
+import { layerService } from './layerService.js';
 import { onSearch } from './renderMovies';
-import {insertContentTpl, clearContainer} from './notification'
+import { insertContentTpl, clearContainer } from './notification';
 
 const refs = getRefs();
 
@@ -17,6 +18,7 @@ const searchInput = document.querySelector('.js-search-field__input');
 searchInput.addEventListener('input', debounce(onSearch, 500));
 
 function onHomeClick(event) {
+  layerService.setName('home');
   toggleActiveClassOnMainPage(event);
   changeOnMainBg();
   const watchedMoviesBtn = document.querySelector("[data-header='watched']");
@@ -30,6 +32,7 @@ function onHomeClick(event) {
 }
 
 function onMyLibraryClick(event) {
+  layerService.setName('library');
   toggleActiveClassOnSecondPage(event);
   changeOnSecondaryBg();
   searchInput.removeEventListener('input', debounce(onSearch, 500));
@@ -68,9 +71,7 @@ function changeOnMainBg() {
   if (!activeBgClass) {
     refs.headerBackgroundContainer.classList.add('header__container--home-bg');
   }
-  refs.headerBackgroundContainer.classList.remove(
-    'header__container--my-library-bg',
-  );
+  refs.headerBackgroundContainer.classList.remove('header__container--my-library-bg');
 }
 
 function toggleActiveClassOnMainPage(e) {
@@ -86,9 +87,7 @@ function changeOnSecondaryBg() {
     'header__container--my-library-bg',
   );
   if (!activeBgClass) {
-    refs.headerBackgroundContainer.classList.add(
-      'header__container--my-library-bg',
-    );
+    refs.headerBackgroundContainer.classList.add('header__container--my-library-bg');
   }
   refs.headerBackgroundContainer.classList.remove('header__container--home-bg');
 }
