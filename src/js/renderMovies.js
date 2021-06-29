@@ -3,13 +3,11 @@ import { moviesApiService } from './moviesApiService.js';
 import smoothScrool from './smoothScrool.js';
 import movieCardTpl from '../templates/movie-card.hbs';
 import { pagination, options } from './pagination.js';
-import { renderGenresFilters, onFilterClick } from './render-genres-filter';
+import { addFilterListeners, removeFilterListeners } from './render-genres-filter';
 
 const refs = getRefs();
-renderGenresFilters();
-refs.genresFilter.addEventListener('click', onFilterClick);
+addFilterListeners();
 
-refs.searchInput.addEventListener('input', debounce(onSearch, 500));
 refs.home.addEventListener('click', onLogoAndHomeClick);
 refs.logoLink.addEventListener('click', onLogoAndHomeClick);
 let searchQuery = '';
@@ -26,6 +24,9 @@ function onSearch(event) {
   }
   moviesApiService.query = searchQuery;
   renderPopularMoviesGrid(searchQuery).catch(error => console.log(error));
+
+  refs.filterWrapper.classList.add('visually-hidden');
+  removeFilterListeners();
 }
 
 let currentPage = localStorage.getItem('currentPage');
@@ -70,12 +71,7 @@ async function renderPopularMoviesGrid(searchQuery) {
     ? moviesApiService.fetchMoviesBySearch()
     : moviesApiService.fetchPopularMovies();
 
-  const {
-    results: movies,
-    page,
-    total_pages,
-    total_results,
-  } = await fetchMovies;
+  const { results: movies, page, total_pages, total_results } = await fetchMovies;
 
   //genresList - array of objects [{id: 23, name: "Drama"}, {id: 17, name: "Action"} ...]
   const genresListObj = await moviesApiService.fetchGenresList();
@@ -149,4 +145,3 @@ if (currentPage === null) {
 }
 
 export { onSearch };
-

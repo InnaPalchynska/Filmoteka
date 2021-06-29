@@ -5,11 +5,13 @@ import searchFieldTpl from '../templates/search-field.hbs';
 import headerBtnsTpl from '../templates/header-btns.hbs';
 import debounce from 'lodash.debounce';
 import { onSearch } from './renderMovies';
+import { addFilterListeners, removeFilterListeners } from './render-genres-filter';
 
 const refs = getRefs();
 
 refs.home.addEventListener('click', onHomeClick);
 refs.myLibrary.addEventListener('click', onMyLibraryClick);
+addFilterListeners();
 
 insertContentTpl(refs.headerDynamicContainer, searchFieldTpl);
 const searchInput = document.querySelector('.js-search-field__input');
@@ -20,12 +22,20 @@ function onHomeClick(event) {
   changeOnMainBg();
   const watchedMoviesBtn = document.querySelector("[data-header='watched']");
   const queueMoviesBtn = document.querySelector("[data-header='queue']");
-  watchedMoviesBtn.removeEventListener('click', onHeaderBtnsClick);
-  queueMoviesBtn.removeEventListener('click', onHeaderBtnsClick);
+  if (watchedMoviesBtn) {
+    watchedMoviesBtn.removeEventListener('click', onHeaderBtnsClick);
+  }
+  if (queueMoviesBtn) {
+    queueMoviesBtn.removeEventListener('click', onHeaderBtnsClick);
+  }
   clearContainer(refs.headerDynamicContainer);
   insertContentTpl(refs.headerDynamicContainer, searchFieldTpl);
   const searchInput = document.querySelector('.js-search-field__input');
   searchInput.addEventListener('input', debounce(onSearch, 500));
+  if (refs.filterWrapper.classList.contains('visually-hidden')) {
+    refs.filterWrapper.classList.remove('visually-hidden');
+    addFilterListeners();
+  }
 }
 
 function onMyLibraryClick(event) {
@@ -39,6 +49,8 @@ function onMyLibraryClick(event) {
   watchedMoviesBtn.addEventListener('click', onHeaderBtnsClick);
   queueMoviesBtn.addEventListener('click', onHeaderBtnsClick);
   renderLibraryMovies();
+  refs.filterWrapper.classList.add('visually-hidden');
+  removeFilterListeners();
 }
 
 function onHeaderBtnsClick(e) {
@@ -67,9 +79,7 @@ function changeOnMainBg() {
   if (!activeBgClass) {
     refs.headerBackgroundContainer.classList.add('header__container--home-bg');
   }
-  refs.headerBackgroundContainer.classList.remove(
-    'header__container--my-library-bg',
-  );
+  refs.headerBackgroundContainer.classList.remove('header__container--my-library-bg');
 }
 
 function toggleActiveClassOnMainPage(e) {
@@ -85,9 +95,7 @@ function changeOnSecondaryBg() {
     'header__container--my-library-bg',
   );
   if (!activeBgClass) {
-    refs.headerBackgroundContainer.classList.add(
-      'header__container--my-library-bg',
-    );
+    refs.headerBackgroundContainer.classList.add('header__container--my-library-bg');
   }
   refs.headerBackgroundContainer.classList.remove('header__container--home-bg');
 }
