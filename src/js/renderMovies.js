@@ -138,4 +138,4 @@ if (currentPage === null) {
   // renderPopularMoviesGrid().catch(error => console.log(error));
 }
 
-export { onSearch, moviesApiService };
+export { onSearch };
