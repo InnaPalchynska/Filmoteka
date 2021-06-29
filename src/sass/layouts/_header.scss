@@ -22,21 +22,21 @@ header {
   display: flex;
   align-items: center;
   outline: none;
-  transform: scale(1, 1);
+  // transform: scale(1, 1);
 
   @media screen and (min-width: $tablet) {
     align-items: baseline;
   }
-  @include transition(transform);
+  // @include transition(transform);
 }
 
 .logo:focus {
   outline: 1px solid get-navElColor('line-activ-link');
 }
 
-.logo:hover {
-  transform: scale(1.1, 1.1);
-}
+// .logo:hover {
+//   // transform: scale(1.1, 1.1);
+// }
 
 .logo__icon {
   display: block;
