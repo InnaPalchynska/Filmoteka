@@ -34,7 +34,7 @@ $basicLightbox__timing: ease !default;
       align-items: flex-start;
     }
 
-    // max-width: 100%;
+    max-width: 100%;
     // transform: scale(0.9);
     //transition: transform $basicLightbox__duration $basicLightbox__timing;
     //z-index: 1;
@@ -42,17 +42,17 @@ $basicLightbox__timing: ease !default;
 
     // > img:first-child:last-child,
     // > video:first-child:last-child,
-    // > iframe:first-child:last-child {
-    //   display: block;
-    //   position: absolute;
-    //   top: 0;
-    //   right: 0;
-    //   bottom: 0;
-    //   left: 0;
-    //   margin: auto;
-    //   max-width: 95%;
-    //   max-height: 95%;
-    // }
+    > iframe:first-child:last-child {
+      display: block;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      max-width: 95%;
+      max-height: 95%;
+    }
 
     // > video:first-child:last-child,
     // > iframe:first-child:last-child {

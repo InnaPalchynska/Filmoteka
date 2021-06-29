@@ -1,16 +1,14 @@
-import Pagination from 'tui-pagination';
-import MoviesApiService from '../js/apiService.js';
-import smoothScrool from './smoothScrool.js';
-
-import movieCardTpl from '../templates/movie-card.hbs';
 import getRefs from '../js/get-refs.js';
+import { moviesApiService } from './moviesApiService.js';
+import smoothScrool from './smoothScrool.js';
+import movieCardTpl from '../templates/movie-card.hbs';
+// import Pagination from 'tui-pagination';
+import { pagination, options } from './pagination.js';
 
 import { showTextError, insertContentTpl, clearContainer } from './notification';
 import errorTpl from '../templates/error-not-found-film.hbs'
 
 const refs = getRefs();
-const moviesApiService = new MoviesApiService();
-
 refs.home.addEventListener('click', onLogoAndHomeClick);
 refs.logoLink.addEventListener('click', onLogoAndHomeClick);
 
@@ -32,35 +30,40 @@ function onSearch(event) {
 
 let currentPage = localStorage.getItem('currentPage');
 
-const container = document.getElementById('pagination');
-const options = {
-  totalItems: 500,
-  itemsPerPage: 1,
-  visiblePages: 5,
-  page: parseInt(currentPage, 10) || 1,
-  centerAlign: true,
-  firstItemClassName: 'tui-first-child',
-  lastItemClassName: 'tui-last-child',
-  template: {
-    page: '<a href="#" class="tui-page-btn">{{page}}</a>',
-    currentPage:
-      '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
-    moveButton:
-      '<a href="#" class="tui-page-btn tui-{{type}}">' +
-      '<span class="tui-ico-{{type}}">{{type}}</span>' +
-      '</a>',
-    disabledMoveButton:
-      '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
-      '<span class="tui-ico-{{type}}">{{type}}</span>' +
-      '</span>',
-    moreButton:
-      '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
-      '<span class="tui-ico-ellip">...</span>' +
-      '</a>',
-  },
-};
+// options = {
+//   page: parseInt(currentPage, 10) || 1,
+//   currentPage: '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
+// };
 
-const pagination = new Pagination(container, options);
+// const container = document.getElementById('pagination');
+// const options = {
+//   totalItems: 500,
+//   itemsPerPage: 1,
+//   visiblePages: 5,
+//   page: parseInt(currentPage, 10) || 1,
+//   centerAlign: true,
+//   firstItemClassName: 'tui-first-child',
+//   lastItemClassName: 'tui-last-child',
+//   template: {
+//     page: '<a href="#" class="tui-page-btn">{{page}}</a>',
+//     currentPage:
+//       '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
+//     moveButton:
+//       '<a href="#" class="tui-page-btn tui-{{type}}">' +
+//       '<span class="tui-ico-{{type}}">{{type}}</span>' +
+//       '</a>',
+//     disabledMoveButton:
+//       '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
+//       '<span class="tui-ico-{{type}}">{{type}}</span>' +
+//       '</span>',
+//     moreButton:
+//       '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
+//       '<span class="tui-ico-ellip">...</span>' +
+//       '</a>',
+//   },
+// };
+
+// const pagination = new Pagination(container, options);
 
 async function renderPopularMoviesGrid(searchQuery) {
   const fetchMovies = searchQuery

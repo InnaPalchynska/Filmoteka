@@ -82,6 +82,7 @@ header {
   background-color: transparent;
   cursor: pointer;
   outline: none;
+  transition: outline $btn-duration $timing-function;
 }
 
 .site-nav__button:focus {
@@ -127,6 +128,7 @@ header {
 
   background-color: transparent;
   outline: none;
+  transition: outline $duration $timing-function, border-color $duration $timing-function;
 
   @media screen and (min-width: $tablet) {
     width: 336px;
@@ -202,6 +204,9 @@ header {
   color: get-textColor('light');
   border: 1px solid get-navElColor('button-secondary');
   background-color: transparent;
+
+  transition: color $btn-duration $timing-function, border $btn-duration $timing-function,
+    background-color $btn-duration $timing-function, box-shadow $btn-duration $timing-function;
 
   @media screen and (min-width: $tablet) {
     width: 136px;
