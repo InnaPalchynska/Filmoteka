@@ -7,6 +7,7 @@ import { pagination, options } from './pagination.js';
 
 import { showTextError, insertContentTpl, clearContainer } from './notification';
 import errorTpl from '../templates/error-not-found-film.hbs'
+import { addOverlayListeners } from './local-storage-overlay';
 
 const refs = getRefs();
 refs.home.addEventListener('click', onLogoAndHomeClick);
@@ -105,6 +106,7 @@ async function renderPopularMoviesGrid(searchQuery) {
   refs.moviesList.innerHTML = '';
   const popularMoviesMarkup = movieCardTpl(movies);
   refs.moviesList.insertAdjacentHTML('beforeend', popularMoviesMarkup);
+  addOverlayListeners()
 }
 
 function transformMoviesObjectFields(movies, genresList) {
@@ -159,5 +161,5 @@ if (currentPage === null) {
   showPopularMovies(currentPage);
   // renderPopularMoviesGrid().catch(error => console.log(error));
 }
-
+//addLibrary()
 export { onSearch };
