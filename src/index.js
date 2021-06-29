@@ -1,6 +1,6 @@
 import 'modern-normalize';
 import './sass/main.scss';
-import 'basiclightbox/src/styles/main.scss';
+import './sass/components/_basic-lightbox.scss';
 import 'material-icons';
 
 import './js/dark-theme';
