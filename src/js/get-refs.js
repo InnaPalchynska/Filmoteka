@@ -13,5 +13,6 @@ export default function getRefs() {
     footerBtn: document.querySelector('.footer__button'),
     notify: document.querySelector('.js-notify'),
     logoLink: document.querySelector('[data-header="logo"]'),
+    genresFilter: document.querySelector('.genres-filters'),
   };
 }
