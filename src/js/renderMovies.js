@@ -5,6 +5,9 @@ import movieCardTpl from '../templates/movie-card.hbs';
 // import Pagination from 'tui-pagination';
 import { pagination, options } from './pagination.js';
 
+import { showTextError, insertContentTpl, clearContainer } from './notification';
+import errorTpl from '../templates/error-not-found-film.hbs'
+
 const refs = getRefs();
 refs.home.addEventListener('click', onLogoAndHomeClick);
 refs.logoLink.addEventListener('click', onLogoAndHomeClick);
@@ -74,6 +77,19 @@ async function renderPopularMoviesGrid(searchQuery) {
     total_results,
   } = await fetchMovies;
 
+  if (movies.length === 0) {
+    const notifyErrorHeader = document.querySelector('.js-search-field__error-text');
+    showTextError(
+      notifyErrorHeader,
+      'Search result not successful. Enter the correct movie name and',
+    );
+    setTimeout(() => (notifyErrorHeader.innerHTML = ''), 3500);
+    clearContainer(refs.moviesList);
+    insertContentTpl(refs.moviesList,errorTpl);
+    refs.divPagination.classList.add('hidden-tui');
+    return
+  }
+
   //genresList - array of objects [{id: 23, name: "Drama"}, {id: 17, name: "Action"} ...]
   const genresListObj = await moviesApiService.fetchGenresList();
   const genresList = genresListObj.genres;
@@ -113,7 +129,7 @@ function transformMoviesObjectFields(movies, genresList) {
 function showPopularMovies(currentPage) {
   moviesApiService.setPage(currentPage);
   refs.moviesList.innerHTML = '';
-  renderPopularMoviesGrid(searchQuery).catch(error => console.log(error));
+  renderPopularMoviesGrid( ).catch(error => console.log(error));
 }
 
 function onLogoAndHomeClick() {
