@@ -18,6 +18,7 @@ function checkBtnTextContent(btnEl, itemName) {
 }
 
 function onWatchedButton(e) {
+  console.log(e.target);
   updateLocalStorage(e, 'watched');
   renderLibraryMovies('watched');
 }
@@ -44,4 +45,9 @@ function updateLocalStorage(e, itemName) {
   }
 }
 
-export { initialSaveToLocalStorage, checkBtnTextContent, onWatchedButton, onQueueButton };
+export {
+  initialSaveToLocalStorage,
+  checkBtnTextContent,
+  onWatchedButton,
+  onQueueButton,
+};
