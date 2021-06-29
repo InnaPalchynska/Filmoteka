@@ -1,10 +1,8 @@
 import getRefs from './get-refs';
-// import MoviesApiService from './apiService';
-import { moviesApiService } from './renderMovies';
+import { moviesApiService } from './moviesApiService';
 import genresFiltersTpl from '../templates/genres-filters.hbs';
 
 const refs = getRefs();
-// const moviesApiService = new MoviesApiService();
 
 async function renderGenresFilters() {
   const genres = await moviesApiService.fetchGenresList();
