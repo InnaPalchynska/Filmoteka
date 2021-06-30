@@ -8,6 +8,8 @@ import { pagination } from './pagination';
 import smoothScrool from './smoothScrool';
 
 const refs = getRefs();
+let startIndex = 0;
+let endIndex = 0;
 
 async function renderLibraryMovies(filterName = 'watched') {
   const isLibraryPage = refs.myLibrary.classList.contains('site-nav__button--active');
@@ -26,7 +28,7 @@ async function renderLibraryMovies(filterName = 'watched') {
     return;
   }
 
-  const watchedMoviesIds = getMoviesIdsByMediaQuery(allWatchedMoviesIds, 0);
+  const watchedMoviesIds = getMoviesIdsByMediaQuery(allWatchedMoviesIds, startIndex);
 
   const watchedMovies = await Promise.all(
     watchedMoviesIds.map(async id => await moviesApiService.fetchFullInfoOfMovie(id)),
@@ -39,22 +41,22 @@ function getDataFromLocalStorage(itemName) {
   return JSON.parse(localStorage.getItem(itemName));
 }
 
-function getMoviesIdsByMediaQuery(moviesIds, startIndex) {
+function getMoviesIdsByMediaQuery(moviesIds, startIndex, endIndex) {
   console.log(moviesIds);
   const mobileMediaQuery = window.matchMedia('(max-width: 767px)');
   const tabletMediaQuery = window.matchMedia('(min-width: 768px) and (max-width: 1023px)');
   const desktopMediaQuery = window.matchMedia('(min-width: 1024px)');
 
   if (mobileMediaQuery.matches) {
-    return moviesIds.slice(startIndex, 4);
+    return moviesIds.slice(startIndex, endIndex);
   }
 
   if (tabletMediaQuery.matches) {
-    return moviesIds.slice(startIndex, 8);
+    return moviesIds.slice(startIndex, endIndex);
   }
 
   if (desktopMediaQuery.matches) {
-    return moviesIds.slice(startIndex, 9);
+    return moviesIds.slice(startIndex, endIndex);
   }
 }
 
@@ -83,6 +85,12 @@ pagination.on('afterMove', function (evt) {
     return;
   }
   smoothScrool();
+  console.log('page', evt.page);
+  startIndex = (evt.page - 1) * 4;
+  endIndex = evt.page * 4 - 1;
+  console.log('startIndex', startIndex);
+  console.log('endIndex', endIndex);
+
   renderLibraryMovies();
 });
 
