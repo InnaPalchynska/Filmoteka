@@ -1,0 +1,79 @@
+.header-lightbox__open-btn {
+  position: absolute;
+  top: -30px;
+  right: 75px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 25px;
+
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.6;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  color: get-textColor('light');
+  background-color: get-navElColor('button-primary');
+
+  transition: box-shadow $btn-duration $timing-function, transform $btn-duration $timing-function;
+
+  &:hover,
+  &:focus {
+    transform: scale(1.05);
+    box-shadow: (0px 8px 43px rgba(255, 107, 1, 0.6));
+  }
+}
+
+.header-lightbox__card {
+  display: block;
+}
+
+.header-lightbox__text-overlay {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.header-lightbox__text {
+  font-size: getFont-size__mob('text-modal');
+  font-weight: 500;
+  line-height: 1.33;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.header-lightbox__heading {
+  font-size: getFont-size__mob('text-modal-secondary');
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.header-lightbox__inputs-overlay {
+  margin-bottom: 20px;
+}
+
+.header-lightbox__input {
+  width: 100%;
+
+  &:not(last-child) {
+    margin-bottom: 10px;
+  }
+}
+
+.header-lightbox__btns-overlay {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.header-lightbox__btn-forgot-password {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  color: get-textColor('accent');
+  cursor: pointer;
+}

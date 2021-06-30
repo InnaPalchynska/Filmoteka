@@ -1,0 +1,73 @@
+<div class='header-lightbox__card lightbox__card'>
+  <button
+    type='button'
+    class='header-lightbox__close-btn lightbox__close-btn'
+    data-action='close-lightbox'
+  >
+    <i class='material-icons-outlined'>close</i>
+  </button>
+
+  <h2 class='header-lightbox__heading'>Welcome to Filmoteka</h2>
+
+  {{! <div class='mdl-card__supporting-text header-lightbox__text-overlay'> }}
+  <p class='mdl-card__supporting-text header-lightbox__text'>Sign in if you have an account or Sign
+    up to experience all of benefits
+  </p>
+  {{! </div> }}
+
+  <div class='header-lightbox__inputs-overlay'>
+    <input
+      class='mdl-textfield__input header-lightbox__input'
+      type='text'
+      id='email'
+      name='email'
+      placeholder='Email'
+    />
+
+    <input
+      class='mdl-textfield__input header-lightbox__input'
+      type='password'
+      id='password'
+      name='password'
+      placeholder='Password'
+    />
+  </div>
+
+  <div class='header-lightbox__btns-overlay'>
+    <button
+      disabled
+      class='mdl-button mdl-js-button mdl-button--raised lightbox__button'
+      id='quickstart-sign-in'
+      name='signin'
+    >
+      Sign In
+    </button>
+
+    <button
+      class='mdl-button mdl-js-button mdl-button--raised lightbox__button'
+      id='quickstart-sign-up'
+      name='signup'
+    >
+      Sign Up
+    </button>
+  </div>
+
+  <button
+    class='mdl-button mdl-js-button mdl-button--raised header-lightbox__btn-forgot-password header-lightbox__text'
+    id='quickstart-password-reset'
+    name='verify-email'
+  >
+    {{! Send Password Reset Email }}
+    Click here
+  </button>
+  <span class='header-lightbox__text'>if you forgot your password!</span>
+
+  <!-- Container where we'll display the user details -->
+  <!-- <div class="quickstart-user-details-container">
+                Firebase sign-in status:
+                <span id="quickstart-sign-in-status">Unknown</span>
+                <div>Firebase auth <code>currentUser</code> object value:</div>
+                <pre><code id="quickstart-account-details">null</code></pre>
+              </div> -->
+
+</div>
