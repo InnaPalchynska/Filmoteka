@@ -5,14 +5,19 @@ import movieCardTpl from '../templates/movie-card.hbs';
 // import Pagination from 'tui-pagination';
 import { pagination, options, setPaginationPages } from './pagination.js';
 import { layerService } from './layerService.js';
+import { addFilterListeners, removeFilterListeners } from './render-genres-filter';
+
 import { showTextError, insertContentTpl, clearContainer } from './notification';
 import errorTpl from '../templates/error-not-found-film.hbs';
 
 const refs = getRefs();
+addFilterListeners();
+
 refs.home.addEventListener('click', onLogoAndHomeClick);
 refs.logoLink.addEventListener('click', onLogoAndHomeClick);
 
 let searchQuery = '';
+
 function onSearch(event) {
   event.preventDefault();
 
@@ -26,6 +31,9 @@ function onSearch(event) {
   }
   moviesApiService.query = searchQuery;
   renderPopularMoviesGrid(searchQuery).catch(error => console.log(error));
+
+  refs.filterWrapper.classList.add('visually-hidden');
+  removeFilterListeners();
 }
 
 let currentPage = localStorage.getItem('currentPage');

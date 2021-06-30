@@ -19,6 +19,11 @@ async function renderLibraryMovies(startIndex = 1, filterName = 'watched') {
   const allWatchedMoviesIds = getDataFromLocalStorage(filterName);
 
   if (!allWatchedMoviesIds || allWatchedMoviesIds.length === 0) {
+    // const isNotifyHidden = refs.notify.classList.contains('visually-hidden');
+    // if (!isNotifyHidden) {
+    //   refs.notify.classList.add('visually-hidden');
+    // }
+
     refs.moviesList.innerHTML = '';
     refs.divPagination.classList.add('hidden-tui');
     insertContentTpl(refs.moviesList, noFilmsTpl);
@@ -59,8 +64,8 @@ function getMoviesIdsByMediaQuery(moviesIds, startIndex) {
 
 function renderMovies(movies) {
   movies.map(transformMovieObjectFields);
-  const watchedMoviesMarkup = libraryMovieCardTpl(movies);
-  refs.moviesList.innerHTML = watchedMoviesMarkup;
+  const moviesMarkup = libraryMovieCardTpl(movies);
+  refs.moviesList.innerHTML = moviesMarkup;
 }
 
 function transformMovieObjectFields(movie) {
