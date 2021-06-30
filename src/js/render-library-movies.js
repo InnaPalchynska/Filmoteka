@@ -16,12 +16,14 @@ async function renderLibraryMovies(filterName = 'watched') {
   if (!isLibraryPage) {
     return;
   }
-  // const isNotifyHidden = refs.notify.classList.contains('visually-hidden');
-  // if (!isNotifyHidden) {
-  //   refs.notify.classList.add('visually-hidden');
-  // }
-  const allWatchedMoviesIds = getDataFromLocalStorage(filterName);
-  if (!allWatchedMoviesIds || allWatchedMoviesIds.length === 0) {
+
+  const allMoviesIds = getDataFromLocalStorage(filterName);
+  if (!allMoviesIds || allMoviesIds.length === 0) {
+    // const isNotifyHidden = refs.notify.classList.contains('visually-hidden');
+    // if (!isNotifyHidden) {
+    //   refs.notify.classList.add('visually-hidden');
+    // }
+
     refs.moviesList.innerHTML = '';
     refs.divPagination.classList.add('hidden-tui');
     insertContentTpl(refs.moviesList, noFilmsTpl);
@@ -34,7 +36,7 @@ async function renderLibraryMovies(filterName = 'watched') {
     watchedMoviesIds.map(async id => await moviesApiService.fetchFullInfoOfMovie(id)),
   );
 
-  renderMovies(watchedMovies);
+  renderMovies(movies);
 }
 
 function getDataFromLocalStorage(itemName) {
@@ -67,8 +69,8 @@ function getMoviesIdsByMediaQuery(moviesIds, startIndex) {
 function renderMovies(movies) {
   console.log(movies);
   movies.map(transformMovieObjectFields);
-  const watchedMoviesMarkup = libraryMovieCardTpl(movies);
-  refs.moviesList.innerHTML = watchedMoviesMarkup;
+  const moviesMarkup = libraryMovieCardTpl(movies);
+  refs.moviesList.innerHTML = moviesMarkup;
 }
 
 function transformMovieObjectFields(movie) {

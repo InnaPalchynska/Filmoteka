@@ -8,11 +8,13 @@ import { layerService } from './layerService.js';
 import { onSearch } from './renderMovies';
 import { insertContentTpl, clearContainer } from './notification';
 import { pagination } from './pagination';
+import { addFilterListeners, removeFilterListeners } from './render-genres-filter';
 
 const refs = getRefs();
 
 refs.home.addEventListener('click', onHomeClick);
 refs.myLibrary.addEventListener('click', onMyLibraryClick);
+addFilterListeners();
 
 insertContentTpl(refs.headerDynamicContainer, searchFieldTpl);
 const searchInput = document.querySelector('.js-search-field__input');
@@ -25,12 +27,20 @@ function onHomeClick(event) {
   changeOnMainBg();
   const watchedMoviesBtn = document.querySelector("[data-header='watched']");
   const queueMoviesBtn = document.querySelector("[data-header='queue']");
-  watchedMoviesBtn.removeEventListener('click', onHeaderBtnsClick);
-  queueMoviesBtn.removeEventListener('click', onHeaderBtnsClick);
+  if (watchedMoviesBtn) {
+    watchedMoviesBtn.removeEventListener('click', onHeaderBtnsClick);
+  }
+  if (queueMoviesBtn) {
+    queueMoviesBtn.removeEventListener('click', onHeaderBtnsClick);
+  }
   clearContainer(refs.headerDynamicContainer);
   insertContentTpl(refs.headerDynamicContainer, searchFieldTpl);
   const searchInput = document.querySelector('.js-search-field__input');
   searchInput.addEventListener('input', debounce(onSearch, 500));
+  if (refs.filterWrapper.classList.contains('visually-hidden')) {
+    refs.filterWrapper.classList.remove('visually-hidden');
+    addFilterListeners();
+  }
 }
 
 function onMyLibraryClick(event) {
@@ -46,6 +56,8 @@ function onMyLibraryClick(event) {
   queueMoviesBtn.addEventListener('click', onHeaderBtnsClick);
   renderLibraryMovies();
   pagination.movePageTo(1);
+  refs.filterWrapper.classList.add('visually-hidden');
+  removeFilterListeners();
 }
 
 function onHeaderBtnsClick(e) {

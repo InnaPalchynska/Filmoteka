@@ -2,18 +2,22 @@ import getRefs from '../js/get-refs.js';
 import { moviesApiService } from './moviesApiService.js';
 import smoothScrool from './smoothScrool.js';
 import movieCardTpl from '../templates/movie-card.hbs';
-// import Pagination from 'tui-pagination';
 import { pagination, options } from './pagination.js';
 import { layerService } from './layerService.js';
+import { addFilterListeners, removeFilterListeners } from './render-genres-filter';
+
 import { showTextError, insertContentTpl, clearContainer } from './notification';
 import errorTpl from '../templates/error-not-found-film.hbs';
 
 const refs = getRefs();
+addFilterListeners();
+
 refs.home.addEventListener('click', onLogoAndHomeClick);
 refs.logoLink.addEventListener('click', onLogoAndHomeClick);
 console.log(layerService);
 
 let searchQuery = '';
+
 function onSearch(event) {
   event.preventDefault();
 
@@ -27,6 +31,9 @@ function onSearch(event) {
   }
   moviesApiService.query = searchQuery;
   renderPopularMoviesGrid(searchQuery).catch(error => console.log(error));
+
+  refs.filterWrapper.classList.add('visually-hidden');
+  removeFilterListeners();
 }
 
 let currentPage = localStorage.getItem('currentPage');
@@ -99,9 +106,10 @@ async function renderPopularMoviesGrid(searchQuery) {
     refs.divPagination.classList.remove('hidden-tui');
     pagination.setTotalItems(total_pages);
   }
-  refs.moviesList.innerHTML = '';
+  // refs.moviesList.innerHTML = '';
   const popularMoviesMarkup = movieCardTpl(movies);
-  refs.moviesList.insertAdjacentHTML('beforeend', popularMoviesMarkup);
+  // refs.moviesList.insertAdjacentHTML('beforeend', popularMoviesMarkup);
+  refs.moviesList.innerHTML = popularMoviesMarkup;
 }
 
 function transformMoviesObjectFields(movies, genresList) {
@@ -152,12 +160,12 @@ pagination.on('afterMove', function (evt) {
 if (currentPage === null) {
   moviesApiService.setPage(1);
   // pagination.page = 1;
-  refs.moviesList.innerHTML = '';
+  // refs.moviesList.innerHTML = '';
   renderPopularMoviesGrid().catch(error => console.log(error));
 } else {
   moviesApiService.setPage(currentPage);
   // pagination.page = currentPage;
-  refs.moviesList.innerHTML = '';
+  // refs.moviesList.innerHTML = '';
   showPopularMovies(currentPage);
   // renderPopularMoviesGrid().catch(error => console.log(error));
 }
