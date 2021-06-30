@@ -20,6 +20,7 @@ searchInput.addEventListener('input', debounce(onSearch, 500));
 
 function onHomeClick(event) {
   layerService.setName('home');
+  pagination.reset();
   toggleActiveClassOnMainPage(event);
   changeOnMainBg();
   const watchedMoviesBtn = document.querySelector("[data-header='watched']");
