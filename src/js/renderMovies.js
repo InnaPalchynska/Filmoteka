@@ -5,7 +5,7 @@ import movieCardTpl from '../templates/movie-card.hbs';
 import { pagination, options } from './pagination.js';
 import { layerService } from './layerService.js';
 import { addFilterListeners, removeFilterListeners } from './render-genres-filter';
-
+import { addOverlayListener, removeOverlayListener } from './overlay-local-storage';
 import { showTextError, insertContentTpl, clearContainer } from './notification';
 import errorTpl from '../templates/error-not-found-film.hbs';
 
@@ -110,6 +110,7 @@ async function renderPopularMoviesGrid(searchQuery) {
   const popularMoviesMarkup = movieCardTpl(movies);
   // refs.moviesList.insertAdjacentHTML('beforeend', popularMoviesMarkup);
   refs.moviesList.innerHTML = popularMoviesMarkup;
+  addOverlayListener();
 }
 
 function transformMoviesObjectFields(movies, genresList) {
