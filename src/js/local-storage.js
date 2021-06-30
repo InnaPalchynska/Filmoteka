@@ -19,12 +19,12 @@ function checkBtnTextContent(btnEl, itemName) {
 
 function onWatchedButton(e) {
   updateLocalStorage(e, 'watched');
-  renderLibraryMovies('watched');
+  renderLibraryMovies(1, 'watched');
 }
 
 function onQueueButton(e) {
   updateLocalStorage(e, 'queue');
-  renderLibraryMovies('queue');
+  renderLibraryMovies(1, 'queue');
 }
 
 function updateLocalStorage(e, itemName) {
