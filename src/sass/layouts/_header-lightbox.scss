@@ -29,19 +29,33 @@
 
 .header-lightbox__card {
   display: block;
+
+  background-image: url(../images/SVG/login-lightbox-bg.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+
+  @media screen and(min-width: $tablet) {
+    width: 500px;
+  }
+
+  @media screen and(min-width: $desktop) {
+    width: 650px;
+  }
 }
 
 .header-lightbox__text-overlay {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin-bottom: 20px;
+
+  color: get-textColor('main');
+  margin-bottom: 40px;
 }
 
 .header-lightbox__text {
   font-size: getFont-size__mob('text-modal');
   font-weight: 500;
   line-height: 1.33;
-  margin-bottom: 20px;
   text-align: center;
 }
 
@@ -50,30 +64,77 @@
   font-weight: 700;
   margin-bottom: 10px;
   text-align: center;
+  color: get-textColor('accent');
+  letter-spacing: 0.04em;
+  text-shadow: 2px 2px 4px get-textColor('main');
+
+  @media screen and(min-width: $tablet) {
+    font-size: getFont-size__tab('text-modal-secondary');
+  }
+
+  @media screen and(min-width: $desktop) {
+    font-size: getFont-size__desk('text-modal-secondary');
+  }
 }
 
 .header-lightbox__inputs-overlay {
-  margin-bottom: 20px;
+  margin-bottom: 40px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .header-lightbox__input {
   width: 100%;
+  height: 25px;
+  cursor: pointer;
+  outline: 1px solid get-textColor('modal');
+  border: none;
+  line-heignt: 1.16;
+
+  @media screen and(min-width: $tablet) {
+    width: 400px;
+  }
 
   &:not(last-child) {
     margin-bottom: 10px;
   }
+
+  &:hover,
+  &:focus {
+    outline: 1px solid get-textColor('accent');
+  }
+}
+
+.header-lightbox__input::placeholder {
+  padding-left: 5px;
+  font-size: getFont-size__mob('text-modal');
 }
 
 .header-lightbox__btns-overlay {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   margin-bottom: 20px;
+}
+
+.header-lightbox__forgot-password-overlay {
+  display: flex;
+  justify-content: center;
 }
 
 .header-lightbox__btn-forgot-password {
   padding: 0;
+  margin-buttom: 0px;
+  margin-right: 5px;
   border: none;
   background-color: transparent;
   color: get-textColor('accent');
   cursor: pointer;
+  transition: transform $duration $timing-function, border-bottom $duration $timing-function;
+
+  &:hover,
+  &:focus {
+    transform: scale(1.06);
+    border-bottom: 1px solid get-textColor('accent');
+  }
 }
