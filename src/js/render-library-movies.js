@@ -42,20 +42,24 @@ function getDataFromLocalStorage(itemName) {
 }
 
 function getMoviesIdsByMediaQuery(moviesIds, startIndex) {
-  console.log(moviesIds);
+  console.log('moviedIds', moviesIds);
+  pagination.setTotalItems(moviesIds.length);
   const mobileMediaQuery = window.matchMedia('(max-width: 767px)');
   const tabletMediaQuery = window.matchMedia('(min-width: 768px) and (max-width: 1023px)');
   const desktopMediaQuery = window.matchMedia('(min-width: 1024px)');
 
   if (mobileMediaQuery.matches) {
+    pagination.setItemsPerPage(4);
     return moviesIds.slice(startIndex, endIndex);
   }
 
   if (tabletMediaQuery.matches) {
+    pagination.setItemsPerPage(8);
     return moviesIds.slice(startIndex, endIndex);
   }
 
   if (desktopMediaQuery.matches) {
+    pagination.setItemsPerPage(9);
     return moviesIds.slice(startIndex, endIndex);
   }
 }
@@ -86,8 +90,25 @@ pagination.on('afterMove', function (evt) {
   }
   smoothScrool();
   console.log('page', evt.page);
-  startIndex = (evt.page - 1) * 4;
-  endIndex = evt.page * 4;
+  const mobileMediaQuery = window.matchMedia('(max-width: 767px)');
+  const tabletMediaQuery = window.matchMedia('(min-width: 768px) and (max-width: 1023px)');
+  const desktopMediaQuery = window.matchMedia('(min-width: 1024px)');
+
+  if (mobileMediaQuery.matches) {
+    startIndex = (evt.page - 1) * 4;
+    endIndex = evt.page * 4;
+  }
+
+  if (tabletMediaQuery.matches) {
+    startIndex = (evt.page - 1) * 8;
+    endIndex = evt.page * 8;
+  }
+
+  if (desktopMediaQuery.matches) {
+    startIndex = (evt.page - 1) * 9;
+    endIndex = evt.page * 9;
+  }
+
   console.log('startIndex', startIndex);
   console.log('endIndex', endIndex);
 
