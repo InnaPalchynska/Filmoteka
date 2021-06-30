@@ -3,6 +3,7 @@ import { moviesApiService } from './moviesApiService.js';
 import smoothScrool from './smoothScrool.js';
 import movieCardTpl from '../templates/movie-card.hbs';
 import { pagination, options } from './pagination.js';
+import { layerService } from './layerService.js';
 import { addFilterListeners, removeFilterListeners } from './render-genres-filter';
 
 import { showTextError, insertContentTpl, clearContainer } from './notification';
@@ -13,10 +14,13 @@ addFilterListeners();
 
 refs.home.addEventListener('click', onLogoAndHomeClick);
 refs.logoLink.addEventListener('click', onLogoAndHomeClick);
+console.log(layerService);
+
 let searchQuery = '';
 
 function onSearch(event) {
-  // event.preventDefault();
+  event.preventDefault();
+
   pagination.movePageTo(1);
   refs.moviesList.innerHTML = '';
 
@@ -70,7 +74,8 @@ let currentPage = localStorage.getItem('currentPage');
 // const pagination = new Pagination(container, options);
 
 async function renderPopularMoviesGrid(searchQuery) {
-  const fetchMovies = searchQuery
+  const query = searchQuery || moviesApiService.query;
+  const fetchMovies = query
     ? moviesApiService.fetchMoviesBySearch()
     : moviesApiService.fetchPopularMovies();
 
@@ -141,7 +146,12 @@ function onLogoAndHomeClick() {
 }
 
 pagination.on('afterMove', function (evt) {
+  console.log(layerService.getName());
+  if (layerService.getName() != 'home') {
+    return;
+  }
   smoothScrool();
+  console.log('AFTER_MOVE', evt);
   currentPage = evt.page;
   localStorage.setItem('currentPage', currentPage);
   showPopularMovies(currentPage);

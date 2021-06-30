@@ -4,9 +4,11 @@ import { renderLibraryMovies } from './render-library-movies';
 import searchFieldTpl from '../templates/search-field.hbs';
 import headerBtnsTpl from '../templates/header-btns.hbs';
 import debounce from 'lodash.debounce';
+import { layerService } from './layerService.js';
 import { onSearch } from './renderMovies';
-import { addFilterListeners, removeFilterListeners } from './render-genres-filter';
 import { insertContentTpl, clearContainer } from './notification';
+import { pagination } from './pagination';
+import { addFilterListeners, removeFilterListeners } from './render-genres-filter';
 
 const refs = getRefs();
 
@@ -19,6 +21,8 @@ const searchInput = document.querySelector('.js-search-field__input');
 searchInput.addEventListener('input', debounce(onSearch, 500));
 
 function onHomeClick(event) {
+  layerService.setName('home');
+  pagination.reset();
   toggleActiveClassOnMainPage(event);
   changeOnMainBg();
   const watchedMoviesBtn = document.querySelector("[data-header='watched']");
@@ -40,6 +44,7 @@ function onHomeClick(event) {
 }
 
 function onMyLibraryClick(event) {
+  layerService.setName('library');
   toggleActiveClassOnSecondPage(event);
   changeOnSecondaryBg();
   searchInput.removeEventListener('input', debounce(onSearch, 500));
@@ -50,6 +55,7 @@ function onMyLibraryClick(event) {
   watchedMoviesBtn.addEventListener('click', onHeaderBtnsClick);
   queueMoviesBtn.addEventListener('click', onHeaderBtnsClick);
   renderLibraryMovies();
+  pagination.movePageTo(1);
   refs.filterWrapper.classList.add('visually-hidden');
   removeFilterListeners();
 }
