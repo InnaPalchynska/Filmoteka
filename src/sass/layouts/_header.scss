@@ -56,6 +56,7 @@ header {
   font-size: getFont-size__tab('logo-title');
   line-height: 1.17;
   color: get-textColor('light');
+
 }
 
 .site-nav {
@@ -117,6 +118,7 @@ header {
 
 .search-field__input {
   width: 280px;
+  padding-left: 5px;
   padding-bottom: 4px;
   margin-bottom: 21px;
   font-weight: 400;

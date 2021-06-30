@@ -81,7 +81,7 @@ async function renderPopularMoviesGrid(searchQuery) {
     const notifyErrorHeader = document.querySelector('.js-search-field__error-text');
     showTextError(
       notifyErrorHeader,
-      'Search result not successful. Enter the correct movie name and',
+      'Search result not successful. Enter the correct movie name.',
     );
     setTimeout(() => (notifyErrorHeader.innerHTML = ''), 3500);
     clearContainer(refs.moviesList);
