@@ -8,6 +8,7 @@ import { onSearch } from './renderMovies';
 import { pagination } from './pagination';
 import { insertContentTpl, clearContainer } from './notification';
 import { addFilterListeners, removeFilterListeners } from './render-genres-filter';
+import { addOverlayListener, removeOverlayListener } from './overlay-local-storage';
 
 const refs = getRefs();
 
@@ -39,6 +40,7 @@ function onHomeClick(event) {
   if (refs.filterWrapper.classList.contains('visually-hidden')) {
     refs.filterWrapper.classList.remove('visually-hidden');
     addFilterListeners();
+    addOverlayListener();
   }
 }
 
@@ -57,6 +59,7 @@ function onMyLibraryClick(event) {
   pagination.movePageTo(1);
   refs.filterWrapper.classList.add('visually-hidden');
   removeFilterListeners();
+  removeOverlayListener();
 }
 
 function onHeaderBtnsClick(e) {
