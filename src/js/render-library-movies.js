@@ -17,8 +17,8 @@ async function renderLibraryMovies(filterName = 'watched') {
     return;
   }
 
-  const allMoviesIds = getDataFromLocalStorage(filterName);
-  if (!allMoviesIds || allMoviesIds.length === 0) {
+  const allWatchedMoviesIds = getDataFromLocalStorage(filterName);
+  if (!allWatchedMoviesIds || allWatchedMoviesIds.length === 0) {
     // const isNotifyHidden = refs.notify.classList.contains('visually-hidden');
     // if (!isNotifyHidden) {
     //   refs.notify.classList.add('visually-hidden');
@@ -36,7 +36,7 @@ async function renderLibraryMovies(filterName = 'watched') {
     watchedMoviesIds.map(async id => await moviesApiService.fetchFullInfoOfMovie(id)),
   );
 
-  renderMovies(movies);
+  renderMovies(watchedMovies);
 }
 
 function getDataFromLocalStorage(itemName) {
