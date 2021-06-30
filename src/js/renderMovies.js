@@ -2,7 +2,8 @@ import getRefs from '../js/get-refs.js';
 import { moviesApiService } from './moviesApiService.js';
 import smoothScrool from './smoothScrool.js';
 import movieCardTpl from '../templates/movie-card.hbs';
-import { pagination, options } from './pagination.js';
+// import Pagination from 'tui-pagination';
+import { pagination, options, setPaginationPages } from './pagination.js';
 import { layerService } from './layerService.js';
 import { addFilterListeners, removeFilterListeners } from './render-genres-filter';
 
@@ -57,35 +58,29 @@ async function renderPopularMoviesGrid(searchQuery) {
     refs.divPagination.classList.add('hidden-tui');
     return;
   }
-
-  //genresList - array of objects [{id: 23, name: "Drama"}, {id: 17, name: "Action"} ...]
+  // genresList - array of objects [{id: 23, name: "Drama"}, {id: 17, name: "Action"} ...]
   const genresListObj = await moviesApiService.fetchGenresList();
   const genresList = genresListObj.genres;
 
   transformMoviesObjectFields(movies, genresList);
+  setPaginationPages(total_pages);
 
-  if (total_pages <= 1) {
-    refs.divPagination.classList.add('hidden-tui');
-  } else {
-    refs.divPagination.classList.remove('hidden-tui');
-    pagination.setTotalItems(total_pages);
-  }
-  // refs.moviesList.innerHTML = '';
   const popularMoviesMarkup = movieCardTpl(movies);
-  // refs.moviesList.insertAdjacentHTML('beforeend', popularMoviesMarkup);
-  refs.moviesList.innerHTML = popularMoviesMarkup;
+  refs.moviesList.innerHTML = '';
+  refs.moviesList.insertAdjacentHTML('beforeend', popularMoviesMarkup);
 }
 
 function transformMoviesObjectFields(movies, genresList) {
   movies.forEach(movie => {
     movie.placeholder = !movie.poster_path ? true : false;
 
-    if (movie.release_date != undefined) {
+    if (movie.release_date !== undefined) {
       movie.release_date = movie.release_date.slice(0, 4);
     }
-    //genresIdsList - array of genre's ids of one movie [23, 17]
+    // genresIdsList - array of genre's ids of one movie [23, 17]
     const genresIdsList = movie.genre_ids;
-    //in movies.genre_ids genres ids replace with genres names
+
+    // in movies.genre_ids genres ids replace with genres names
     genresIdsList.forEach((genreId, index, array) => {
       const genresListItem = genresList.find(genre => genre.id === genreId);
       const idx = genresList.indexOf(genresListItem);
@@ -110,11 +105,10 @@ function onLogoAndHomeClick() {
 }
 
 pagination.on('afterMove', function (evt) {
-  if (layerService.getName() != 'home') {
+  if (layerService.getName() !== 'home') {
     return;
   }
   smoothScrool();
-  console.log('AFTER_MOVE', evt);
   currentPage = evt.page;
   localStorage.setItem('currentPage', currentPage);
   showPopularMovies(currentPage);
@@ -122,15 +116,12 @@ pagination.on('afterMove', function (evt) {
 
 if (currentPage === null) {
   moviesApiService.setPage(1);
-  // pagination.page = 1;
-  // refs.moviesList.innerHTML = '';
+  refs.moviesList.innerHTML = '';
   renderPopularMoviesGrid().catch(error => console.log(error));
 } else {
   moviesApiService.setPage(currentPage);
-  // pagination.page = currentPage;
-  // refs.moviesList.innerHTML = '';
+  refs.moviesList.innerHTML = '';
   showPopularMovies(currentPage);
-  // renderPopularMoviesGrid().catch(error => console.log(error));
 }
 
 export { onSearch };

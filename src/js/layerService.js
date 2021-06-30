@@ -1,5 +1,7 @@
 export default class Layer {
-  constructor() {}
+  constructor() {
+    this.name = 'home';
+  }
   setName(name) {
     this.name = name;
   }
