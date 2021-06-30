@@ -7,6 +7,7 @@ import debounce from 'lodash.debounce';
 import { layerService } from './layerService.js';
 import { onSearch } from './renderMovies';
 import { insertContentTpl, clearContainer } from './notification';
+import { pagination } from './pagination';
 
 const refs = getRefs();
 
@@ -43,6 +44,7 @@ function onMyLibraryClick(event) {
   watchedMoviesBtn.addEventListener('click', onHeaderBtnsClick);
   queueMoviesBtn.addEventListener('click', onHeaderBtnsClick);
   renderLibraryMovies();
+  pagination.movePageTo(1);
 }
 
 function onHeaderBtnsClick(e) {
