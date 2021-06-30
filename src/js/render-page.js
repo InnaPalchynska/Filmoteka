@@ -1,4 +1,3 @@
-// import helperSvg from 'handlebars-helper-svg';
 import getRefs from './get-refs';
 import { renderLibraryMovies } from './render-library-movies';
 import searchFieldTpl from '../templates/search-field.hbs';
@@ -6,8 +5,8 @@ import headerBtnsTpl from '../templates/header-btns.hbs';
 import debounce from 'lodash.debounce';
 import { layerService } from './layerService.js';
 import { onSearch } from './renderMovies';
-import { insertContentTpl, clearContainer } from './notification';
 import { pagination } from './pagination';
+import { insertContentTpl, clearContainer } from './notification';
 import { addFilterListeners, removeFilterListeners } from './render-genres-filter';
 import { addOverlayListener, removeOverlayListener } from './overlay-local-storage';
 
@@ -66,7 +65,7 @@ function onMyLibraryClick(event) {
 function onHeaderBtnsClick(e) {
   switchActiveClass(e, 'header-buttons__btn--active');
   const itemName = e.target.dataset.header;
-  renderLibraryMovies(itemName);
+  renderLibraryMovies(1, itemName);
 }
 
 function switchActiveClass(e, className) {
