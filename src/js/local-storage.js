@@ -44,4 +44,10 @@ function updateLocalStorage(e, itemName) {
   }
 }
 
-export { initialSaveToLocalStorage, checkBtnTextContent, updateLocalStorage };
+export {
+  initialSaveToLocalStorage,
+  checkBtnTextContent,
+  updateLocalStorage,
+  onQueueButton,
+  onWatchedButton,
+};

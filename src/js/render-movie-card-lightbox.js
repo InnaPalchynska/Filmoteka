@@ -32,9 +32,7 @@ async function onMovieCardClick(e) {
 
 async function getFullInfoOfMovie(currentMovieCard) {
   const currentMovieCardId = currentMovieCard.dataset.id;
-  const fullInfoOfMovie = await moviesApiService.fetchFullInfoOfMovie(
-    currentMovieCardId,
-  );
+  const fullInfoOfMovie = await moviesApiService.fetchFullInfoOfMovie(currentMovieCardId);
 
   return fullInfoOfMovie;
 }
