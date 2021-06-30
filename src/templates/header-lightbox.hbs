@@ -9,11 +9,11 @@
 
   <h2 class='header-lightbox__heading'>Welcome to Filmoteka</h2>
 
-  {{! <div class='mdl-card__supporting-text header-lightbox__text-overlay'> }}
-  <p class='mdl-card__supporting-text header-lightbox__text'>Sign in if you have an account or Sign
-    up to experience all of benefits
-  </p>
-  {{! </div> }}
+  <div class='header-lightbox__text-overlay'>
+    <p class='mdl-card__supporting-text header-lightbox__text'>Sign in if you have an account or
+      Sign up to experience all of benefits
+    </p>
+  </div>
 
   <div class='header-lightbox__inputs-overlay'>
     <input
@@ -52,16 +52,18 @@
     </button>
   </div>
 
-  <button
-    class='mdl-button mdl-js-button mdl-button--raised header-lightbox__btn-forgot-password header-lightbox__text'
-    id='quickstart-password-reset'
-    name='verify-email'
-  >
-    {{! Send Password Reset Email }}
-    Click here
-  </button>
-  <span class='header-lightbox__text'>if you forgot your password!</span>
+  {{! Send Password Reset Email }}
+  <div class='header-lightbox__forgot-password-overlay'>
+    <button
+      class='mdl-button mdl-js-button mdl-button--raised header-lightbox__btn-forgot-password header-lightbox__text'
+      id='quickstart-password-reset'
+      name='verify-email'
+    >
 
+      Click here
+    </button>
+    <span class='header-lightbox__text'>if you forgot your password!</span>
+  </div>
   <!-- Container where we'll display the user details -->
   <!-- <div class="quickstart-user-details-container">
                 Firebase sign-in status:
