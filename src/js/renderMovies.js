@@ -6,8 +6,8 @@ import movieCardTpl from '../templates/movie-card.hbs';
 import { pagination, options } from './pagination.js';
 
 import { showTextError, insertContentTpl, clearContainer } from './notification';
-import errorTpl from '../templates/error-not-found-film.hbs'
-import { addOverlayListeners } from './local-storage-overlay';
+import errorTpl from '../templates/error-not-found-film.hbs';
+import { addOverlayListener } from './local-storage-overlay';
 
 const refs = getRefs();
 refs.home.addEventListener('click', onLogoAndHomeClick);
@@ -71,12 +71,7 @@ async function renderPopularMoviesGrid(searchQuery) {
     ? moviesApiService.fetchMoviesBySearch()
     : moviesApiService.fetchPopularMovies();
 
-  const {
-    results: movies,
-    page,
-    total_pages,
-    total_results,
-  } = await fetchMovies;
+  const { results: movies, page, total_pages, total_results } = await fetchMovies;
 
   if (movies.length === 0) {
     const notifyErrorHeader = document.querySelector('.js-search-field__error-text');
@@ -86,9 +81,9 @@ async function renderPopularMoviesGrid(searchQuery) {
     );
     setTimeout(() => (notifyErrorHeader.innerHTML = ''), 3500);
     clearContainer(refs.moviesList);
-    insertContentTpl(refs.moviesList,errorTpl);
+    insertContentTpl(refs.moviesList, errorTpl);
     refs.divPagination.classList.add('hidden-tui');
-    return
+    return;
   }
 
   //genresList - array of objects [{id: 23, name: "Drama"}, {id: 17, name: "Action"} ...]
@@ -106,7 +101,7 @@ async function renderPopularMoviesGrid(searchQuery) {
   refs.moviesList.innerHTML = '';
   const popularMoviesMarkup = movieCardTpl(movies);
   refs.moviesList.insertAdjacentHTML('beforeend', popularMoviesMarkup);
-  addOverlayListeners()
+  addOverlayListener();
 }
 
 function transformMoviesObjectFields(movies, genresList) {
@@ -131,7 +126,7 @@ function transformMoviesObjectFields(movies, genresList) {
 function showPopularMovies(currentPage) {
   moviesApiService.setPage(currentPage);
   refs.moviesList.innerHTML = '';
-  renderPopularMoviesGrid( ).catch(error => console.log(error));
+  renderPopularMoviesGrid().catch(error => console.log(error));
 }
 
 function onLogoAndHomeClick() {

@@ -2,8 +2,8 @@
   <li class='movies-list__item' id='{{ id }}'>
     <div class='poster-thumb'>
       <div class="overlay">
-        <button class='button--addLibrary overlay__button--watched'id='{{ id }}' >add to watched</button>
-        <button class='button--addLibrary overlay__button--queue' id='{{ id }}' >add to queue</button>
+        <button class='button--addLibrary overlay__button--watched' id='{{ id }}' data-name='watched' >add to watched</button>
+        <button class='button--addLibrary overlay__button--queue' id='{{ id }}' data-name='queue'>add to queue</button>
       </div> 
       <img
         {{#if placeholder}}
