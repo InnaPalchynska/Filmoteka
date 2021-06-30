@@ -7,33 +7,31 @@ import noFilmsTpl from '../templates/no-films-in-lib.hbs';
 const refs = getRefs();
 
 async function renderLibraryMovies(filterName = 'watched') {
-  const isLibraryPage = refs.myLibrary.classList.contains(
-    'site-nav__button--active',
-  );
+  const isLibraryPage = refs.myLibrary.classList.contains('site-nav__button--active');
   if (!isLibraryPage) {
     return;
   }
-  // const isNotifyHidden = refs.notify.classList.contains('visually-hidden');
-  // if (!isNotifyHidden) {
-  //   refs.notify.classList.add('visually-hidden');
-  // }
-  const allWatchedMoviesIds = getDataFromLocalStorage(filterName);
-  if (!allWatchedMoviesIds || allWatchedMoviesIds.length === 0) {
+
+  const allMoviesIds = getDataFromLocalStorage(filterName);
+  if (!allMoviesIds || allMoviesIds.length === 0) {
+    // const isNotifyHidden = refs.notify.classList.contains('visually-hidden');
+    // if (!isNotifyHidden) {
+    //   refs.notify.classList.add('visually-hidden');
+    // }
+
     refs.moviesList.innerHTML = '';
     refs.divPagination.classList.add('hidden-tui');
     insertContentTpl(refs.moviesList, noFilmsTpl);
     return;
   }
 
-  const watchedMoviesIds = getMoviesIdsByMediaQuery(allWatchedMoviesIds, 0);
+  const moviesIds = getMoviesIdsByMediaQuery(allMoviesIds, 0);
 
-  const watchedMovies = await Promise.all(
-    watchedMoviesIds.map(
-      async id => await moviesApiService.fetchFullInfoOfMovie(id),
-    ),
+  const movies = await Promise.all(
+    moviesIds.map(async id => await moviesApiService.fetchFullInfoOfMovie(id)),
   );
 
-  renderMovies(watchedMovies);
+  renderMovies(movies);
 }
 
 function getDataFromLocalStorage(itemName) {
@@ -42,9 +40,7 @@ function getDataFromLocalStorage(itemName) {
 
 function getMoviesIdsByMediaQuery(moviesIds, startIndex) {
   const mobileMediaQuery = window.matchMedia('(max-width: 767px)');
-  const tabletMediaQuery = window.matchMedia(
-    '(min-width: 768px) and (max-width: 1023px)',
-  );
+  const tabletMediaQuery = window.matchMedia('(min-width: 768px) and (max-width: 1023px)');
   const desktopMediaQuery = window.matchMedia('(min-width: 1024px)');
 
   if (mobileMediaQuery.matches) {
@@ -62,8 +58,8 @@ function getMoviesIdsByMediaQuery(moviesIds, startIndex) {
 
 function renderMovies(movies) {
   movies.map(transformMovieObjectFields);
-  const watchedMoviesMarkup = libraryMovieCardTpl(movies);
-  refs.moviesList.innerHTML = watchedMoviesMarkup;
+  const moviesMarkup = libraryMovieCardTpl(movies);
+  refs.moviesList.innerHTML = moviesMarkup;
 }
 
 function transformMovieObjectFields(movie) {
