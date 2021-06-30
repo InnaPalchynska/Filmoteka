@@ -9,7 +9,7 @@ import smoothScrool from './smoothScrool';
 
 const refs = getRefs();
 let startIndex = 0;
-let endIndex = 0;
+let endIndex = 4;
 
 async function renderLibraryMovies(filterName = 'watched') {
   const isLibraryPage = refs.myLibrary.classList.contains('site-nav__button--active');
@@ -41,7 +41,7 @@ function getDataFromLocalStorage(itemName) {
   return JSON.parse(localStorage.getItem(itemName));
 }
 
-function getMoviesIdsByMediaQuery(moviesIds, startIndex, endIndex) {
+function getMoviesIdsByMediaQuery(moviesIds, startIndex) {
   console.log(moviesIds);
   const mobileMediaQuery = window.matchMedia('(max-width: 767px)');
   const tabletMediaQuery = window.matchMedia('(min-width: 768px) and (max-width: 1023px)');
@@ -87,7 +87,7 @@ pagination.on('afterMove', function (evt) {
   smoothScrool();
   console.log('page', evt.page);
   startIndex = (evt.page - 1) * 4;
-  endIndex = evt.page * 4 - 1;
+  endIndex = evt.page * 4;
   console.log('startIndex', startIndex);
   console.log('endIndex', endIndex);
 
