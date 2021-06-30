@@ -3,7 +3,7 @@ import { moviesApiService } from './moviesApiService.js';
 import smoothScrool from './smoothScrool.js';
 import movieCardTpl from '../templates/movie-card.hbs';
 // import Pagination from 'tui-pagination';
-import { pagination, options } from './pagination.js';
+import { pagination, options, setPaginationPages } from './pagination.js';
 import { layerService } from './layerService.js';
 import { showTextError, insertContentTpl, clearContainer } from './notification';
 import errorTpl from '../templates/error-not-found-film.hbs';
@@ -11,7 +11,6 @@ import errorTpl from '../templates/error-not-found-film.hbs';
 const refs = getRefs();
 refs.home.addEventListener('click', onLogoAndHomeClick);
 refs.logoLink.addEventListener('click', onLogoAndHomeClick);
-console.log(layerService);
 
 let searchQuery = '';
 function onSearch(event) {
@@ -30,41 +29,6 @@ function onSearch(event) {
 }
 
 let currentPage = localStorage.getItem('currentPage');
-
-// options = {
-//   page: parseInt(currentPage, 10) || 1,
-//   currentPage: '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
-// };
-
-// const container = document.getElementById('pagination');
-// const options = {
-//   totalItems: 500,
-//   itemsPerPage: 1,
-//   visiblePages: 5,
-//   page: parseInt(currentPage, 10) || 1,
-//   centerAlign: true,
-//   firstItemClassName: 'tui-first-child',
-//   lastItemClassName: 'tui-last-child',
-//   template: {
-//     page: '<a href="#" class="tui-page-btn">{{page}}</a>',
-//     currentPage:
-//       '<strong class="tui-page-btn tui-is-selected">{{page}}</strong>',
-//     moveButton:
-//       '<a href="#" class="tui-page-btn tui-{{type}}">' +
-//       '<span class="tui-ico-{{type}}">{{type}}</span>' +
-//       '</a>',
-//     disabledMoveButton:
-//       '<span class="tui-page-btn tui-is-disabled tui-{{type}}">' +
-//       '<span class="tui-ico-{{type}}">{{type}}</span>' +
-//       '</span>',
-//     moreButton:
-//       '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip">' +
-//       '<span class="tui-ico-ellip">...</span>' +
-//       '</a>',
-//   },
-// };
-
-// const pagination = new Pagination(container, options);
 
 async function renderPopularMoviesGrid(searchQuery) {
   const query = searchQuery || moviesApiService.query;
@@ -87,20 +51,15 @@ async function renderPopularMoviesGrid(searchQuery) {
     return;
   }
 
-  //genresList - array of objects [{id: 23, name: "Drama"}, {id: 17, name: "Action"} ...]
+  // genresList - array of objects [{id: 23, name: "Drama"}, {id: 17, name: "Action"} ...]
   const genresListObj = await moviesApiService.fetchGenresList();
   const genresList = genresListObj.genres;
 
   transformMoviesObjectFields(movies, genresList);
+  setPaginationPages(total_pages);
 
-  if (total_pages <= 1) {
-    refs.divPagination.classList.add('hidden-tui');
-  } else {
-    refs.divPagination.classList.remove('hidden-tui');
-    pagination.setTotalItems(total_pages);
-  }
-  refs.moviesList.innerHTML = '';
   const popularMoviesMarkup = movieCardTpl(movies);
+  refs.moviesList.innerHTML = '';
   refs.moviesList.insertAdjacentHTML('beforeend', popularMoviesMarkup);
 }
 
@@ -108,12 +67,13 @@ function transformMoviesObjectFields(movies, genresList) {
   movies.forEach(movie => {
     movie.placeholder = !movie.poster_path ? true : false;
 
-    if (movie.release_date != undefined) {
+    if (movie.release_date !== undefined) {
       movie.release_date = movie.release_date.slice(0, 4);
     }
-    //genresIdsList - array of genre's ids of one movie [23, 17]
+    // genresIdsList - array of genre's ids of one movie [23, 17]
     const genresIdsList = movie.genre_ids;
-    //in movies.genre_ids genres ids replace with genres names
+
+    // in movies.genre_ids genres ids replace with genres names
     genresIdsList.forEach((genreId, index, array) => {
       const genresListItem = genresList.find(genre => genre.id === genreId);
       const idx = genresList.indexOf(genresListItem);
@@ -138,12 +98,10 @@ function onLogoAndHomeClick() {
 }
 
 pagination.on('afterMove', function (evt) {
-  console.log(layerService.getName());
-  if (layerService.getName() != 'home') {
+  if (layerService.getName() !== 'home') {
     return;
   }
   smoothScrool();
-  console.log('AFTER_MOVE', evt);
   currentPage = evt.page;
   localStorage.setItem('currentPage', currentPage);
   showPopularMovies(currentPage);
@@ -151,15 +109,12 @@ pagination.on('afterMove', function (evt) {
 
 if (currentPage === null) {
   moviesApiService.setPage(1);
-  // pagination.page = 1;
   refs.moviesList.innerHTML = '';
   renderPopularMoviesGrid().catch(error => console.log(error));
 } else {
   moviesApiService.setPage(currentPage);
-  // pagination.page = currentPage;
   refs.moviesList.innerHTML = '';
   showPopularMovies(currentPage);
-  // renderPopularMoviesGrid().catch(error => console.log(error));
 }
 
 export { onSearch };
