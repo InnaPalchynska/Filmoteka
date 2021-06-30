@@ -5,10 +5,11 @@ import { insertContentTpl } from './notification';
 import { layerService } from './layerService.js';
 import noFilmsTpl from '../templates/no-films-in-lib.hbs';
 import { pagination, setPaginationPages } from './pagination';
+import smoothScrool from './smoothScrool';
 
 const refs = getRefs();
 
-async function renderLibraryMovies(startIndex, filterName = 'watched') {
+async function renderLibraryMovies(startIndex = 1, filterName = 'watched') {
   startIndex = startIndex ? startIndex : 1;
   const isLibraryPage = refs.myLibrary.classList.contains('site-nav__button--active');
   if (!isLibraryPage) {
@@ -79,6 +80,7 @@ pagination.on('afterMove', function (eventData) {
   if (layerService.getName() !== 'library') {
     return;
   }
+  smoothScrool();
   localStorage.setItem('currentPage', eventData.page);
   renderLibraryMovies(eventData.page);
 });

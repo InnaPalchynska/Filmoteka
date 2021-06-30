@@ -50,7 +50,6 @@ async function renderPopularMoviesGrid(searchQuery) {
     refs.divPagination.classList.add('hidden-tui');
     return;
   }
-
   // genresList - array of objects [{id: 23, name: "Drama"}, {id: 17, name: "Action"} ...]
   const genresListObj = await moviesApiService.fetchGenresList();
   const genresList = genresListObj.genres;

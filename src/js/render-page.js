@@ -5,6 +5,7 @@ import headerBtnsTpl from '../templates/header-btns.hbs';
 import debounce from 'lodash.debounce';
 import { layerService } from './layerService.js';
 import { onSearch } from './renderMovies';
+import { pagination } from './pagination';
 import { insertContentTpl, clearContainer } from './notification';
 
 const refs = getRefs();
@@ -18,6 +19,7 @@ searchInput.addEventListener('input', debounce(onSearch, 500));
 
 function onHomeClick(event) {
   layerService.setName('home');
+  pagination.reset();
   toggleActiveClassOnMainPage(event);
   changeOnMainBg();
   const watchedMoviesBtn = document.querySelector("[data-header='watched']");
@@ -47,7 +49,7 @@ function onMyLibraryClick(event) {
 function onHeaderBtnsClick(e) {
   switchActiveClass(e, 'header-buttons__btn--active');
   const itemName = e.target.dataset.header;
-  renderLibraryMovies(itemName);
+  renderLibraryMovies(1, itemName);
 }
 
 function switchActiveClass(e, className) {
