@@ -44,7 +44,6 @@ function getDataFromLocalStorage(itemName) {
 }
 
 function getMoviesIdsByMediaQuery(moviesIds, startIndex) {
-  console.log('moviedIds', moviesIds);
   pagination.setTotalItems(moviesIds.length);
   const mobileMediaQuery = window.matchMedia('(max-width: 767px)');
   const tabletMediaQuery = window.matchMedia('(min-width: 768px) and (max-width: 1023px)');
@@ -67,7 +66,6 @@ function getMoviesIdsByMediaQuery(moviesIds, startIndex) {
 }
 
 function renderMovies(movies) {
-  console.log(movies);
   movies.map(transformMovieObjectFields);
   const moviesMarkup = libraryMovieCardTpl(movies);
   refs.moviesList.innerHTML = moviesMarkup;
@@ -91,7 +89,6 @@ pagination.on('afterMove', function (evt) {
     return;
   }
   smoothScrool();
-  console.log('page', evt.page);
   const mobileMediaQuery = window.matchMedia('(max-width: 767px)');
   const tabletMediaQuery = window.matchMedia('(min-width: 768px) and (max-width: 1023px)');
   const desktopMediaQuery = window.matchMedia('(min-width: 1024px)');
@@ -110,10 +107,6 @@ pagination.on('afterMove', function (evt) {
     startIndex = (evt.page - 1) * 9;
     endIndex = evt.page * 9;
   }
-
-  console.log('startIndex', startIndex);
-  console.log('endIndex', endIndex);
-
   renderLibraryMovies();
 });
 
