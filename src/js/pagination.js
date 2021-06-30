@@ -3,7 +3,7 @@ import getRefs from './get-refs';
 const container = document.getElementById('pagination');
 
 const options = {
-  totalItems: 500,
+  // totalItems: 500,
   itemsPerPage: 1,
   visiblePages: 5,
   centerAlign: true,
