@@ -126,4 +126,6 @@ if (currentPage === null) {
   showPopularMovies(currentPage);
 }
 
+ renderPopularMoviesGrid().catch(error => console.log(error));
+
 export { onSearch };
